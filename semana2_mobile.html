@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Semana 2 · Maratona Lisboa 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --card: #161921;
+    --card2: #1c2030;
+    --border: rgba(255,255,255,0.08);
+    --text: #e8eaf0;
+    --muted: #6b7390;
+    --blue: #3b82f6;
+    --amber: #f59e0b;
+    --green: #22c55e;
+    --red: #ef4444;
+    --purple: #a855f7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 480px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 28px 20px 20px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .week-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    line-height: 1;
+    letter-spacing: 0.03em;
+  }
+
+  header h1 span { color: var(--amber); }
+
+  .vol-chip {
+    background: rgba(245,158,11,0.12);
+    border: 1px solid rgba(245,158,11,0.25);
+    border-radius: 10px;
+    padding: 8px 14px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .vol-chip .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--amber);
+    line-height: 1;
+  }
+
+  .vol-chip .unit {
+    font-size: 10px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+  }
+
+  /* ── WEEK STRIP ── */
+  .week-strip {
+    display: flex;
+    gap: 6px;
+    padding: 16px 20px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .week-strip::-webkit-scrollbar { display: none; }
+
+  .day-btn {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    min-width: 54px;
+  }
+
+  .day-btn .dname {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .day-btn .dnum {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    line-height: 1.1;
+  }
+
+  .day-btn .ddot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    margin: 4px auto 0;
+    background: transparent;
+  }
+
+  .day-btn.has-run .ddot { background: var(--blue); }
+  .day-btn.has-gym .ddot { background: var(--green); }
+  .day-btn.has-both .ddot { background: var(--amber); }
+  .day-btn.rest { opacity: 0.4; }
+
+  .day-btn.active {
+    background: var(--blue);
+    border-color: var(--blue);
+  }
+
+  .day-btn.active .dname,
+  .day-btn.active .dnum { color: white; }
+  .day-btn.active .ddot { background: rgba(255,255,255,0.5); }
+
+  /* ── DAY DETAIL ── */
+  .day-detail {
+    padding: 20px;
+  }
+
+  .detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .detail-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+
+  .detail-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  .tipo-badge {
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── METRIC CARDS ── */
+  .metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .metrics.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  .metric {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+  }
+
+  .metric.span2 { grid-column: span 2; }
+
+  .metric .m-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 6px;
+  }
+
+  .metric .m-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .metric .m-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  .metric.blue  { border-color: rgba(59,130,246,0.3);  background: rgba(59,130,246,0.07);  }
+  .metric.amber { border-color: rgba(245,158,11,0.3);  background: rgba(245,158,11,0.07);  }
+  .metric.green { border-color: rgba(34,197,94,0.3);   background: rgba(34,197,94,0.07);   }
+  .metric.red   { border-color: rgba(239,68,68,0.3);   background: rgba(239,68,68,0.07);   }
+
+  .metric.blue  .m-val { color: #60a5fa; }
+  .metric.amber .m-val { color: #fbbf24; }
+  .metric.green .m-val { color: #4ade80; }
+  .metric.red   .m-val { color: #f87171; }
+
+  /* ── STRUCTURE BLOCK ── */
+  .structure {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+
+  .structure h3 {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 14px;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 10px;
+    align-items: start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .step:last-child { border-bottom: none; padding-bottom: 0; }
+  .step:first-child { padding-top: 0; }
+
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-body .step-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .step-body .step-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .step-pace {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--muted);
+    white-space: nowrap;
+    text-align: right;
+    margin-top: 2px;
+    line-height: 1;
+  }
+
+  .step-pace small {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── GYM EXERCISES ── */
+  .gym-group {
+    margin-bottom: 14px;
+  }
+
+  .gym-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+    padding-left: 2px;
+  }
+
+  .gym-ex {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 13px 14px;
+    margin-bottom: 6px;
+  }
+
+  .gym-ex-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .gym-ex .ex-name {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .gym-ex .ex-sets {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    white-space: nowrap;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .gym-ex .ex-load {
+    font-size: 11px;
+    color: var(--amber);
+    margin-bottom: 4px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .gym-ex .ex-tip {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* ── NOTES ── */
+  .notes {
+    background: var(--card2);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+
+  .notes .n-title {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 10px;
+  }
+
+  .note-item {
+    display: flex;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .note-item:last-child { border-bottom: none; }
+  .note-item .ni { flex-shrink: 0; }
+  .note-item strong { color: var(--text); }
+
+  /* ── REST DAY ── */
+  .rest-screen {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .rest-screen .icon { font-size: 48px; margin-bottom: 16px; }
+  .rest-screen h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: var(--muted);
+  }
+
+  .rest-screen p { font-size: 14px; color: var(--muted); }
+
+  /* ── TODAY INDICATOR ── */
+  .today-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+    margin-left: 6px;
+    vertical-align: middle;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* ── PROGRESS BAR ── */
+  .week-progress {
+    padding: 12px 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .prog-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--card2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .prog-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--amber));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .prog-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <div class="week-label">Semana 2 · Maratona Lisboa 2026</div>
+      <h1>11–18 <span>Maio</span></h1>
+    </div>
+    <div class="vol-chip">
+      <div class="num">44</div>
+      <div class="unit">km total</div>
+    </div>
+  </div>
+</header>
+
+<div class="week-strip" id="weekStrip"></div>
+<div class="week-progress">
+  <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="prog-label" id="progLabel">0 / 44 km</div>
+</div>
+
+<div class="day-detail" id="dayDetail"></div>
+
+<script>
+const days = [
+  {
+    id: 0, name: "SEG", date: "12", full: "Segunda, 12 Mai",
+    type: "rest", label: "Descanso", color: null,
+    km: 0,
+  },
+  {
+    id: 1, name: "TER", date: "13", full: "Terça, 13 Mai",
+    type: "run", label: "Fácil", color: "blue",
+    km: 8,
+    metrics: [
+      { label: "Distância", val: "8", unit: "km", color: "blue" },
+      { label: "Ritmo alvo", val: "6:40–6:55", unit: "/km", color: "amber" },
+      { label: "FC máx", val: "145", unit: "bpm", color: "red" },
+      { label: "Tipo", val: "Fácil", unit: "aeróbico", color: "green" },
+    ],
+    structure: [
+      { n:"1", label:"Aquecimento", desc:"1km muito leve, soltar as pernas", pace:"6:55+", paceUnit:"/km",  color:"#4ade80", bg:"rgba(34,197,94,0.12)" },
+      { n:"2", label:"Corrida fácil", desc:"6km conversacional — deves conseguir falar frases completas", pace:"6:40–6:55", paceUnit:"/km", color:"#60a5fa", bg:"rgba(59,130,246,0.12)" },
+      { n:"3", label:"Arrefecimento", desc:"1km a travar gradualmente", pace:"7:00+", paceUnit:"/km", color:"#4ade80", bg:"rgba(34,197,94,0.12)" },
+    ],
+    notes: [
+      { icon:"❤️", text:"<strong>FC < 145 bpm</strong> durante toda a corrida. Se subir, abranda — sem drama." },
+      { icon:"💬", text:"Teste da conversa: se não consegues falar, vais rápido de mais." },
+      { icon:"💧", text:"Hidrata antes de sair. Corrida curta mas o hábito conta." },
+    ]
+  },
+  {
+    id: 2, name: "QUA", date: "14", full: "Quarta, 14 Mai",
+    type: "both", label: "Corrida + Ginásio", color: "amber",
+    km: 6,
+    metrics: [
+      { label: "Corrida", val: "6", unit: "km", color: "blue" },
+      { label: "Ritmo alvo", val: "6:50–7:05", unit: "/km", color: "amber" },
+      { label: "FC máx", val: "145", unit: "bpm", color: "red" },
+      { label: "Ginásio", val: "Força", unit: "corredor", color: "green" },
+    ],
+    structure: [
+      { n:"1", label:"Corrida leve (ANTES do ginásio)", desc:"6km muito fáceis para ativar sem fatigar. FC < 145 bpm. Depois desta corrida segue para o tracker de ginásio.", pace:"6:50–7:05", paceUnit:"/km", color:"#60a5fa", bg:"rgba(59,130,246,0.12)" },
+    ],
+    notes: [
+      { icon:"⚡", text:"<strong>Corrida SEMPRE antes do ginásio.</strong> Pernas frescas para correr, fatigadas para a força — é esse o estímulo." },
+      { icon:"❤️", text:"FC < 145 bpm. É um dia duplo — a corrida não é treino, é ativação." },
+      { icon:"📱", text:"Abre o <strong>tracker de ginásio</strong> depois da corrida para registar os pesos e séries." },
+    ]
+  },
+  {
+    id: 3, name: "QUI", date: "15", full: "Quinta, 15 Mai",
+    type: "run", label: "Progressivo ⚡", color: "amber",
+    km: 8,
+    metrics: [
+      { label: "Distância", val: "8", unit: "km", color: "blue" },
+      { label: "Início", val: "6:45", unit: "/km", color: "green" },
+      { label: "Final", val: "6:10", unit: "/km", color: "amber" },
+      { label: "Tipo", val: "Progressivo", unit: "base→objetivo", color: "amber" },
+    ],
+    structure: [
+      { n:"1", label:"Bloco fácil", desc:"4km a ritmo completamente fácil, conversacional", pace:"6:45–6:55", paceUnit:"/km", color:"#4ade80", bg:"rgba(34,197,94,0.12)" },
+      { n:"2", label:"Bloco progressivo", desc:"4km a descer gradualmente. ~20 seg/km por km. Esforço controlado — podes falar, mas já com esforço.", pace:"6:45→6:10", paceUnit:"/km", color:"#fbbf24", bg:"rgba(245,158,11,0.12)" },
+    ],
+    notes: [
+      { icon:"⚡", text:"Novidade desta semana. O objetivo é <strong>sentir</strong> o ritmo baixar — não forçar ao máximo." },
+      { icon:"🧘", text:"Se as pernas estiverem pesadas por acaso, faz tudo fácil. Ainda é semana 2 — sem pressão." },
+      { icon:"📉", text:"Descida de ritmo <strong>gradual</strong>: km 5 → 6:40, km 6 → 6:30, km 7 → 6:20, km 8 → 6:10." },
+      { icon:"❤️", text:"FC pode subir nos últimos km. Normal. Objetivo é que esteja controlada, não < 145." },
+    ]
+  },
+  {
+    id: 4, name: "SEX", date: "16", full: "Sexta, 16 Mai",
+    type: "run", label: "Fácil", color: "blue",
+    km: 6,
+    metrics: [
+      { label: "Distância", val: "6", unit: "km", color: "blue" },
+      { label: "Ritmo alvo", val: "6:40–6:55", unit: "/km", color: "amber" },
+      { label: "FC máx", val: "145", unit: "bpm", color: "red" },
+      { label: "Amanhã", val: "Long", unit: "run 16km", color: "green" },
+    ],
+    structure: [
+      { n:"1", label:"Corrida de recuperação", desc:"6km sem pressão. Objetivo: pernas soltas para o long run de amanhã.", pace:"6:40–6:55", paceUnit:"/km", color:"#60a5fa", bg:"rgba(59,130,246,0.12)" },
+    ],
+    notes: [
+      { icon:"🎯", text:"Dia de <strong>recuperação ativa</strong>. Não é treino — é preparação para sábado." },
+      { icon:"❤️", text:"FC < 145 bpm durante toda a corrida. Se subir, abranda sem hesitar." },
+      { icon:"🍝", text:"<strong>Esta noite:</strong> jantar rico em hidratos (massa, arroz, batata). Hidrata bem." },
+      { icon:"😴", text:"Dorme cedo. O long run agradece." },
+    ]
+  },
+  {
+    id: 5, name: "SÁB", date: "17", full: "Sábado, 17 Mai",
+    type: "run", label: "Long Run 🏃", color: "amber",
+    km: 16,
+    metrics: [
+      { label: "Distância", val: "16", unit: "km", color: "amber" },
+      { label: "Ritmo alvo", val: "6:40–6:55", unit: "/km", color: "blue" },
+      { label: "FC alvo", val: "135–145", unit: "bpm", color: "green" },
+      { label: "Duração", val: "~1h50", unit: "estimado", color: "blue" },
+    ],
+    structure: [
+      { n:"1", label:"Arranque lento", desc:"Primeiros 3km: mais lento do que achas necessário. FC a subir gradualmente.", pace:"6:55–7:05", paceUnit:"/km", color:"#4ade80", bg:"rgba(34,197,94,0.12)" },
+      { n:"2", label:"Bloco principal", desc:"10km ao ritmo alvo. FC estável. Conversa possível.", pace:"6:40–6:55", paceUnit:"/km", color:"#fbbf24", bg:"rgba(245,158,11,0.12)" },
+      { n:"3", label:"Chegada", desc:"Últimos 3km: mantém ou abranda ligeiramente. Sem sprints finais.", pace:"6:45–7:00", paceUnit:"/km", color:"#60a5fa", bg:"rgba(59,130,246,0.12)" },
+    ],
+    notes: [
+      { icon:"💧", text:"<strong>Hidratação:</strong> bebe água antes de sair. Leva água ou planeia pontos de paragem a cada ~5km." },
+      { icon:"⚡", text:"<strong>Nutrição:</strong> se passar 1h30 a correr, leva gel ou datas para o km 8–9." },
+      { icon:"❤️", text:"FC alvo <strong>135–145 bpm</strong>. Se subir acima de 150, abranda — ainda é base, não é prova." },
+      { icon:"🧠", text:"Regra de ouro: começa sempre mais lento do que achas certo. Os primeiros 5km pagam-se nos últimos." },
+      { icon:"📱", text:"Liga o Strava/Garmin antes de sair — precisamos dos splits para a revisão quinzenal." },
+    ]
+  },
+  {
+    id: 6, name: "DOM", date: "18", full: "Domingo, 18 Mai",
+    type: "gym", label: "Upper Body", color: "green",
+    km: 0,
+
+    notes: [
+      { icon:"🦵", text:"<strong>Zero pernas</strong> — estão a recuperar do long run. Qualquer DOMS é normal." },
+      { icon:"📱", text:"Abre o <strong>tracker de ginásio</strong> para registar os pesos e séries de upper body." },
+      { icon:"💆", text:"Semana 2 concluída. 5 min de mobilidade no final — ombros, pescoço, torácica." },
+    ]
+  },
+];
+
+// Detect today's day index (Mon=0 ... Sun=6)
+const today = new Date();
+const todayDow = today.getDay(); // 0=Sun
+// Map JS day (0=Sun) to our array index (0=Mon)
+const dayMap = { 1:0, 2:1, 3:2, 4:3, 5:4, 6:5, 0:6 };
+const todayIdx = dayMap[todayDow];
+
+// Week dates: Mon 12 May 2026 to Sun 18 May 2026
+const weekStart = new Date(2026, 4, 12); // May 12
+const weekEnd   = new Date(2026, 4, 18);
+const isThisWeek = today >= weekStart && today <= weekEnd;
+const activeDay  = isThisWeek ? todayIdx : 1; // default Terça
+
+let current = activeDay;
+
+// Render strip
+const strip = document.getElementById('weekStrip');
+days.forEach((d, i) => {
+  const btn = document.createElement('div');
+  const cls = d.type === 'rest' ? 'rest' : d.type === 'both' ? 'has-both' : d.type === 'gym' ? 'has-gym' : 'has-run';
+  btn.className = `day-btn ${cls}${i === activeDay ? ' active' : ''}`;
+  const isToday = isThisWeek && i === todayIdx;
+  btn.innerHTML = `
+    <div class="dname">${d.name}</div>
+    <div class="dnum">${d.date}${isToday ? '<span class="today-dot"></span>' : ''}</div>
+    <div class="ddot"></div>
+  `;
+  btn.addEventListener('click', () => selectDay(i));
+  strip.appendChild(btn);
+});
+
+// Progress bar
+const kmDone = days.slice(0, isThisWeek ? todayIdx : 0).reduce((a,d) => a+d.km, 0);
+document.getElementById('progFill').style.width = `${(kmDone/44)*100}%`;
+document.getElementById('progLabel').textContent = `${kmDone} / 44 km`;
+
+function selectDay(i) {
+  current = i;
+  document.querySelectorAll('.day-btn').forEach((b,j) => {
+    b.classList.toggle('active', j === i);
+  });
+  renderDay(days[i]);
+}
+
+function renderDay(d) {
+  const el = document.getElementById('dayDetail');
+
+  if (d.type === 'rest') {
+    el.innerHTML = `
+      <div class="rest-screen">
+        <div class="icon">😴</div>
+        <h2>Descanso Activo</h2>
+        <p>Caminhada leve, mobilidade ou simplesmente descanso.<br>O corpo cresce quando recupera.</p>
+      </div>`;
+    return;
+  }
+
+  const typeColors = { run:'#3b82f6', gym:'#22c55e', both:'#f59e0b' };
+  const typeBg     = { run:'rgba(59,130,246,0.15)', gym:'rgba(34,197,94,0.15)', both:'rgba(245,158,11,0.15)' };
+
+  let html = `
+    <div class="detail-header">
+      <div>
+        <h2>${d.label}</h2>
+        <div class="detail-date">${d.full}</div>
+      </div>
+      <div class="tipo-badge" style="background:${typeBg[d.type]};color:${typeColors[d.type]};border:1px solid ${typeColors[d.type]}40">
+        ${d.km > 0 ? d.km+'km' : 'Ginásio'}
+      </div>
+    </div>
+  `;
+
+  // Metrics
+  if (d.metrics) {
+    html += `<div class="metrics">`;
+    d.metrics.forEach(m => {
+      html += `<div class="metric ${m.color}">
+        <div class="m-label">${m.label}</div>
+        <div class="m-val">${m.val}</div>
+        <div class="m-sub">${m.unit}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Structure
+  if (d.structure) {
+    html += `<div class="structure">
+      <h3>Estrutura do treino</h3>
+      <div class="steps">`;
+    d.structure.forEach(s => {
+      html += `<div class="step">
+        <div class="step-num" style="background:${s.bg};color:${s.color}">${s.n}</div>
+        <div class="step-body">
+          <div class="step-title">${s.label}</div>
+          <div class="step-desc">${s.desc}</div>
+        </div>
+        <div class="step-pace">${s.pace}<small>${s.paceUnit}</small></div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Gym exercises
+  if (d.gym) {
+    d.gym.forEach(group => {
+      html += `<div class="gym-group">
+        <div class="gym-group-title">${group.group}</div>`;
+      group.exercises.forEach(ex => {
+        html += `<div class="gym-ex">
+          <div class="gym-ex-header">
+            <div class="ex-name">${ex.name}</div>
+            <div class="ex-sets">${ex.sets}</div>
+          </div>
+          <div class="ex-load">📦 ${ex.load}</div>
+          <div class="ex-tip">${ex.tip}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+  }
+
+  // Notes
+  if (d.notes) {
+    html += `<div class="notes">
+      <div class="n-title">A ter em conta</div>`;
+    d.notes.forEach(n => {
+      html += `<div class="note-item"><span class="ni">${n.icon}</span><span>${n.text}</span></div>`;
+    });
+    html += `</div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+selectDay(activeDay);
+</script>
+</body>
+</html>

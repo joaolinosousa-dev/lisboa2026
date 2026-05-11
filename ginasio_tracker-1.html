@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Ginásio · Semana 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --card: #161921;
+    --card2: #1c2030;
+    --border: rgba(255,255,255,0.08);
+    --border-active: rgba(255,255,255,0.2);
+    --text: #e8eaf0;
+    --muted: #6b7390;
+    --blue: #3b82f6;
+    --amber: #f59e0b;
+    --green: #22c55e;
+    --red: #ef4444;
+    --purple: #a855f7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 480px;
+    margin: 0 auto;
+    padding-bottom: 80px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 28px 20px 16px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 20;
+  }
+
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .week-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  header h1 span { color: var(--amber); }
+
+  .reset-btn {
+    background: rgba(239,68,68,0.1);
+    border: 1px solid rgba(239,68,68,0.25);
+    color: var(--red);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    cursor: pointer;
+    margin-top: 4px;
+  }
+
+  /* ── SESSION TABS ── */
+  .tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tab {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .tab.active {
+    border-color: var(--green);
+    background: rgba(34,197,94,0.07);
+  }
+
+  .tab .t-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 4px;
+  }
+
+  .tab .t-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .tab.active .t-name { color: var(--green); }
+
+  .tab .t-date {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* ── PROGRESS ── */
+  .session-progress {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .prog-bar {
+    flex: 1;
+    height: 5px;
+    background: var(--card2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .prog-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--amber));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .prog-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ── CONTENT ── */
+  .content { padding: 0 20px; }
+
+  /* ── GROUP ── */
+  .group-block {
+    margin-top: 24px;
+  }
+
+  .group-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .group-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .group-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+
+  .group-sub {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-left: auto;
+  }
+
+  /* ── EXERCISE CARD ── */
+  .ex-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .ex-card.done { border-color: rgba(34,197,94,0.4); }
+
+  .ex-header {
+    padding: 14px 16px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .ex-check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border-active);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.2s;
+  }
+
+  .ex-card.done .ex-check {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .ex-info { flex: 1; }
+
+  .ex-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    line-height: 1.3;
+  }
+
+  .ex-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .ex-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+
+  .ex-badge.sets { background: rgba(59,130,246,0.12); color: #60a5fa; }
+  .ex-badge.tip-toggle {
+    background: rgba(107,115,144,0.15);
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  /* ── TIP ── */
+  .ex-tip {
+    padding: 0 16px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease, padding 0.25s;
+  }
+
+  .ex-tip.open {
+    max-height: 200px;
+    padding: 0 16px 12px;
+  }
+
+  .ex-tip-inner {
+    background: var(--card2);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── SERIES ── */
+  .series-block {
+    padding: 0 14px 14px;
+  }
+
+  .series-header {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 8px;
+    padding-top: 2px;
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+  }
+
+  .serie-row {
+    display: grid;
+    grid-template-columns: 28px 1fr 1fr auto;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .serie-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  .serie-input {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+  }
+
+  .serie-input:focus { border-color: var(--blue); }
+  .serie-input.filled { border-color: rgba(34,197,94,0.4); background: rgba(34,197,94,0.05); }
+
+  .serie-input::placeholder { color: var(--muted); font-size: 11px; }
+
+  .serie-done-btn {
+    width: 32px; height: 32px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+
+  .serie-done-btn.done {
+    background: rgba(34,197,94,0.15);
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .serie-note {
+    grid-column: 2 / -1;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    width: 100%;
+    outline: none;
+    resize: none;
+    height: 32px;
+    transition: border-color 0.15s, height 0.2s;
+    display: none;
+  }
+
+  .serie-note:focus {
+    border-color: rgba(107,115,144,0.4);
+    height: 60px;
+    color: var(--text);
+  }
+
+  .serie-note.has-note { display: block; color: var(--text); }
+
+  /* Show note field when serie is focused */
+  .serie-row.active .serie-note { display: block; }
+
+  .add-note-btn {
+    grid-column: 2 / -1;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    cursor: pointer;
+    text-align: left;
+    padding: 2px 0;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── COMPLETE BANNER ── */
+  .complete-banner {
+    display: none;
+    margin: 20px 0 0;
+    background: rgba(34,197,94,0.08);
+    border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .complete-banner.show { display: block; }
+
+  .complete-banner .icon { font-size: 36px; margin-bottom: 8px; }
+
+  .complete-banner h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+
+  .complete-banner p { font-size: 13px; color: var(--muted); }
+
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <div>
+      <div class="week-label">Ginásio · Semana 2 · Mai 2026</div>
+      <h1>Força <span>&</span> Upper</h1>
+    </div>
+    <button class="reset-btn" onclick="resetSession()">↺ Reset</button>
+  </div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" id="tab-forca" onclick="switchSession('forca')">
+    <div class="t-label">Quarta</div>
+    <div class="t-name">Força Corredor</div>
+    <div class="t-date">14 Mai · após 6km</div>
+  </div>
+  <div class="tab" id="tab-upper" onclick="switchSession('upper')">
+    <div class="t-label">Domingo</div>
+    <div class="t-name">Upper Body</div>
+    <div class="t-date">18 Mai · pós long run</div>
+  </div>
+</div>
+
+<div class="session-progress">
+  <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="prog-text" id="progText">0 / 0 séries</div>
+</div>
+
+<div class="content" id="content"></div>
+
+
+
+<script>
+const SESSIONS = {
+  forca: {
+    title: "Força Corredor",
+    day: "Quarta, 14 Mai",
+    rest: 65, // seconds between sets
+    note: "Após 6km de corrida leve. Aquece 5min: rotações de anca, mobilidade tornozelo, agachamento lento ×10.",
+    groups: [
+      {
+        name: "Pernas — Cadeia Posterior",
+        color: "#fbbf24",
+        exercises: [
+          { id:"squat", name:"Squat (Barra)", sets:4, reps:"8", tip:"Barra na costas, pés à largura dos ombros. Descida até às coxas paralelas ao chão (ou abaixo). Joelhos seguem a direção dos pés. Costas neutras — não arqueias. 👉 Base de tudo. Força funcional de corredor." },
+          { id:"hipthrust", name:"Hip Thrust", sets:4, reps:"10", tip:"Costas no banco, barra no dobro da anca com almofada. Empurra os quadris para cima até ficares paralelo ao chão. Pausa 1seg no topo, aperta o glúteo. 👉 Glúteo máximo — o motor principal nos km finais." },
+          { id:"bulgarian", name:"Bulgarian Split Squat", sets:3, reps:"8/lado", tip:"Pé traseiro elevado num banco. Desce o joelho traseiro em direção ao chão, joelho da frente não passa a ponta do pé. Halteres nas mãos. 👉 Força unilateral — corrige assimetrias e imita o padrão de corrida." },
+          { id:"legpress", name:"Leg Press (Máquina)", sets:3, reps:"12", tip:"Pés à largura dos ombros no meio da plataforma. Não bloqueia os joelhos no topo. Descida controlada. Depois do Squat e Hip Thrust — volume de quadriceps sem stress na coluna." },
+        ]
+      },
+      {
+        name: "Gémeos",
+        color: "#60a5fa",
+        exercises: [
+          { id:"calfstand", name:"Calf Raises Standing", sets:4, reps:"15", tip:"Numa máquina ou step com a meia ponta do pé. Sobe até ao máximo, desce lentamente (3 seg) abaixo da linha neutra. A fase excêntrica é o que conta. 👉 Fortalece o tendão de Aquiles — diretamente relacionado com o colapso dos gémeos." },
+          { id:"calfpress", name:"Calf Press (Máquina)", sets:3, reps:"15", tip:"Na máquina de leg press: pés na ponta da plataforma. Amplitude completa. Varia a posição dos pés: paralelos, ligeiramente para fora. 👉 Complementa o standing — trabalha ângulo diferente." },
+        ]
+      },
+      {
+        name: "Core",
+        color: "#a855f7",
+        exercises: [
+          { id:"plank", name:"Prancha Frontal", sets:3, reps:"45seg", tip:"Antebraços no chão, corpo em linha reta da cabeça aos calcanhares. Core ativo, sem deixar cair a bacia. Respira. 👉 Estabilidade lombar — nunca saltas o core.", noWeight:true },
+          { id:"situp", name:"Incline Sit-Ups", sets:3, reps:"15", tip:"Num banco inclinado. Movimento controlado — não usas momentum. Mãos atrás da cabeça ou cruzadas no peito. 👉 Core anterior — postura em corrida longa.", noWeight:true },
+        ]
+      }
+    ]
+  },
+  upper: {
+    title: "Upper Body",
+    day: "Domingo, 18 Mai",
+    rest: 75,
+    note: "Dia após o long run. Zero pernas. Se sentires DOMS intenso nos quadriceps, faz só upper e salta o core.",
+    groups: [
+      {
+        name: "Peito — Empurrar",
+        color: "#f97316",
+        exercises: [
+          { id:"bench", name:"Bench Press", sets:4, reps:"8–10", tip:"Pega ligeiramente mais larga que os ombros. Barra desce ao peito (ou perto), cotovelos a ~45°. Não arqueia excessivamente as costas. Controla a descida (2 seg). 👉 Força de empurrar — postura de corrida e braços." },
+          { id:"pushups", name:"Push-Ups", sets:3, reps:"Máx", tip:"Feitos até falha logo após o Bench Press (método cluster). Posição de prancha, cotovelos a 45°. Se ficares abaixo de 5 reps, joelhos no chão. 👉 Resistência muscular — o que importa em maratona.", noWeight:true },
+        ]
+      },
+      {
+        name: "Costas — Puxar",
+        color: "#60a5fa",
+        exercises: [
+          { id:"seatedrow", name:"Seated Row (Máquina)", sets:4, reps:"10", tip:"Costas erguidas, não inclinas para trás para puxar. Puxa para o abdómen, cotovelos rentes ao tronco. Pausa 1seg no fundo. Controla o regresso. 👉 Costas fortes = postura erguida nos km 35–42." },
+          { id:"latpull", name:"Lat Pull Down", sets:3, reps:"12", tip:"Pega larga, puxa até ao mento. Ligeiro lean-back mas não exagerado. Controla a subida — não deixa a barra subir rápida. 👉 Grande dorsal — estabilidade do tronco." },
+        ]
+      },
+      {
+        name: "Ombros",
+        color: "#c084fc",
+        exercises: [
+          { id:"shoulderpress", name:"Shoulder Press (Halteres)", sets:3, reps:"10", tip:"Sentado ou de pé. Halteres ao nível das orelhas, empurra para cima sem arquear as costas. Core ativo. Controla a descida. 👉 Ombros fortes — balanço dos braços em corrida longa." },
+          { id:"facepull", name:"Face Pull (Cabo)", sets:3, reps:"15", tip:"Cabo alto com corda. Puxa para o rosto, cotovelos altos e para fora. Movimento lento e controlado. Carga leve. 👉 Saúde do manguito rotador — previne lesões de ombro no longo prazo.", },
+        ]
+      },
+      {
+        name: "Braços + Core",
+        color: "#4ade80",
+        exercises: [
+          { id:"biceps", name:"Bíceps Curls (Halteres)", sets:3, reps:"12", tip:"Alternado. Cotovelos fixos junto ao tronco — se balanças o tronco, o peso está pesado de mais. Desce lentamente (2 seg)." },
+          { id:"triceps", name:"Tríceps Extension", sets:3, reps:"12", tip:"Com haltere atrás da cabeça ou cabo por cima. Cotovelo fixo, extensão completa. Não bloqueia o cotovelo no topo." },
+          { id:"coreup", name:"Core (à escolha)", sets:3, reps:"45seg", tip:"Prancha, dead bug, ou Russian twists. O que não fizeste na sessão de força de quarta. Nunca saltas o core.", noWeight:true },
+        ]
+      }
+    ]
+  }
+};
+
+let currentSession = 'forca';
+let state = {};
+
+function initState() {
+  const saved = localStorage.getItem('gym_state_v1');
+  if (saved) {
+    try { state = JSON.parse(saved); return; } catch(e) {}
+  }
+  state = { forca: {}, upper: {} };
+}
+
+function saveState() {
+  try { localStorage.setItem('gym_state_v1', JSON.stringify(state)); } catch(e) {}
+}
+
+function resetSession() {
+  if (!confirm('Apagar todos os registos desta sessão?')) return;
+  state[currentSession] = {};
+  saveState();
+  renderSession();
+}
+
+function switchSession(key) {
+  currentSession = key;
+  document.getElementById('tab-forca').classList.toggle('active', key === 'forca');
+  document.getElementById('tab-upper').classList.toggle('active', key === 'upper');
+  renderSession();
+}
+
+function getSetState(exId, setIdx) {
+  if (!state[currentSession][exId]) state[currentSession][exId] = [];
+  if (!state[currentSession][exId][setIdx]) state[currentSession][exId][setIdx] = { weight:'', reps:'', note:'', done:false };
+  return state[currentSession][exId][setIdx];
+}
+
+function totalSets(session) {
+  return session.groups.reduce((a, g) => a + g.exercises.reduce((b, e) => b + e.sets, 0), 0);
+}
+
+function doneSets() {
+  const s = SESSIONS[currentSession];
+  let done = 0;
+  s.groups.forEach(g => g.exercises.forEach(e => {
+    for (let i = 0; i < e.sets; i++) {
+      const st = state[currentSession][e.id]?.[i];
+      if (st?.done) done++;
+    }
+  }));
+  return done;
+}
+
+function updateProgress() {
+  const total = totalSets(SESSIONS[currentSession]);
+  const done = doneSets();
+  const pct = total ? (done / total * 100) : 0;
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progText').textContent = `${done} / ${total} séries`;
+
+  const banner = document.getElementById('completeBanner');
+  if (banner) banner.classList.toggle('show', done === total && total > 0);
+}
+
+function toggleTip(id) {
+  const el = document.getElementById('tip-' + id);
+  el.classList.toggle('open');
+}
+
+function toggleSet(exId, setIdx) {
+  const s = getSetState(exId, setIdx);
+  s.done = !s.done;
+  saveState();
+
+  const btn = document.getElementById(`setbtn-${exId}-${setIdx}`);
+  if (btn) btn.classList.toggle('done', s.done);
+
+  const card = document.getElementById(`excard-${exId}`);
+  if (card) {
+    const ex = findEx(exId);
+    const allDone = ex ? Array.from({length:ex.sets}, (_,i) => state[currentSession][exId]?.[i]?.done).every(Boolean) : false;
+    card.classList.toggle('done', allDone);
+    const check = card.querySelector('.ex-check');
+    if (check) check.textContent = allDone ? '✓' : '';
+  }
+
+  updateProgress();
+}
+  const s = getSetState(exId, setIdx);
+  s.done = !s.done;
+  saveState();
+
+  const btn = document.getElementById(`setbtn-${exId}-${setIdx}`);
+  if (btn) btn.classList.toggle('done', s.done);
+
+  const card = document.getElementById(`excard-${exId}`);
+  if (card) {
+    const ex = findEx(exId);
+    const allDone = ex ? Array.from({length:ex.sets}, (_,i) => state[currentSession][exId]?.[i]?.done).every(Boolean) : false;
+    card.classList.toggle('done', allDone);
+    const check = card.querySelector('.ex-check');
+    if (check) check.textContent = allDone ? '✓' : '';
+  }
+
+  updateProgress();
+}
+  const el = document.getElementById('tip-' + id);
+  el.classList.toggle('open');
+}
+
+function toggleSet(exId, setIdx, restSeconds) {
+  const s = getSetState(exId, setIdx);
+  s.done = !s.done;
+  saveState();
+
+  // Update check button
+  const btn = document.getElementById(`setbtn-${exId}-${setIdx}`);
+  if (btn) btn.classList.toggle('done', s.done);
+
+  // Update card done state
+  const card = document.getElementById(`excard-${exId}`);
+  if (card) {
+    const ex = findEx(exId);
+    const allDone = ex ? Array.from({length:ex.sets}, (_,i) => state[currentSession][exId]?.[i]?.done).every(Boolean) : false;
+    card.classList.toggle('done', allDone);
+    const check = card.querySelector('.ex-check');
+    if (check) check.textContent = allDone ? '✓' : '';
+  }
+
+  if (s.done) startTimer(restSeconds);
+  updateProgress();
+}
+
+function findEx(exId) {
+  for (const g of SESSIONS[currentSession].groups)
+    for (const e of g.exercises)
+      if (e.id === exId) return e;
+  return null;
+}
+
+function onInput(exId, setIdx, field, value) {
+  const s = getSetState(exId, setIdx);
+  s[field] = value;
+  saveState();
+  const inp = document.getElementById(`${field}-${exId}-${setIdx}`);
+  if (inp) inp.classList.toggle('filled', value.trim() !== '');
+}
+
+function toggleNote(exId, setIdx) {
+  const noteEl = document.getElementById(`note-${exId}-${setIdx}`);
+  if (!noteEl) return;
+  noteEl.classList.toggle('has-note', true);
+  noteEl.style.display = 'block';
+  noteEl.focus();
+}
+
+function renderSession() {
+  const session = SESSIONS[currentSession];
+  let html = '';
+
+  // Info note
+  html += `<div style="margin:16px 0 4px;padding:12px 14px;background:var(--card2);border-radius:12px;font-size:13px;color:var(--muted);line-height:1.5">
+    💡 ${session.note}
+  </div>`;
+
+  session.groups.forEach(group => {
+    html += `<div class="group-block">
+      <div class="group-header">
+        <div class="group-dot" style="background:${group.color}"></div>
+        <div class="group-title">${group.name}</div>
+        <div class="group-sub">${group.exercises.length} exerc.</div>
+      </div>`;
+
+    group.exercises.forEach(ex => {
+      const allSetsDone = Array.from({length:ex.sets}, (_,i) => state[currentSession][ex.id]?.[i]?.done).every(Boolean);
+
+      html += `<div class="ex-card${allSetsDone ? ' done' : ''}" id="excard-${ex.id}">
+        <div class="ex-header" onclick="toggleTip('${ex.id}')">
+          <div class="ex-check">${allSetsDone ? '✓' : ''}</div>
+          <div class="ex-info">
+            <div class="ex-name">${ex.name}</div>
+            <div class="ex-meta">
+              <span class="ex-badge sets">${ex.sets} × ${ex.reps}</span>
+              <span class="ex-badge tip-toggle">ver dica ↓</span>
+            </div>
+          </div>
+        </div>
+        <div class="ex-tip" id="tip-${ex.id}">
+          <div class="ex-tip-inner">${ex.tip}</div>
+        </div>
+        <div class="series-block">
+          <div class="series-header">Séries</div>`;
+
+      for (let i = 0; i < ex.sets; i++) {
+        const s = getSetState(ex.id, i);
+        const noteVal = s.note || '';
+        html += `<div class="serie-row" id="srow-${ex.id}-${i}">
+          <div class="serie-num">S${i+1}</div>
+          ${ex.noWeight
+            ? `<input class="serie-input${s.reps ? ' filled' : ''}" id="reps-${ex.id}-${i}" type="text" inputmode="numeric" placeholder="reps" value="${s.reps||''}" oninput="onInput('${ex.id}',${i},'reps',this.value)">`
+            : `<input class="serie-input${s.weight ? ' filled' : ''}" id="weight-${ex.id}-${i}" type="text" inputmode="decimal" placeholder="kg" value="${s.weight||''}" oninput="onInput('${ex.id}',${i},'weight',this.value)">
+               <input class="serie-input${s.reps ? ' filled' : ''}" id="reps-${ex.id}-${i}" type="text" inputmode="numeric" placeholder="reps" value="${s.reps||''}" oninput="onInput('${ex.id}',${i},'reps',this.value)">`
+          }
+          <button class="serie-done-btn${s.done ? ' done' : ''}" id="setbtn-${ex.id}-${i}" onclick="toggleSet('${ex.id}',${i})">✓</button>
+          <textarea class="serie-note${noteVal ? ' has-note' : ''}" id="note-${ex.id}-${i}" placeholder="nota opcional..." oninput="onInput('${ex.id}',${i},'note',this.value)">${noteVal}</textarea>
+          ${!noteVal ? `<button class="add-note-btn" onclick="toggleNote('${ex.id}',${i})">+ nota</button>` : ''}
+        </div>`;
+      }
+
+      html += `</div></div>`;
+    });
+
+    html += `</div>`;
+  });
+
+  // Complete banner
+  html += `<div class="complete-banner${doneSets() === totalSets(session) && totalSets(session) > 0 ? ' show' : ''}" id="completeBanner">
+    <div class="icon">💪</div>
+    <h2>Sessão Completa!</h2>
+    <p>Guarda os pesos — são a referência para a semana que vem.</p>
+  </div>`;
+
+  document.getElementById('content').innerHTML = html;
+  updateProgress();
+}
+
+initState();
+renderSession();
+</script>
+</body>
+</html>
