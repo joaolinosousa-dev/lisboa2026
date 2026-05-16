@@ -18,14 +18,6 @@
     --green: #22c55e;
     --red: #ef4444;
     --purple: #a855f7;
-
-    --base: #3b82f6;
-    --desenv: #f59e0b;
-    --especifica: #f97316;
-    --pico: #ef4444;
-    --taper: #a855f7;
-    --rec: #22c55e;
-    --prova: #ec4899;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -87,7 +79,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    margin-bottom: 0;
   }
 
   .obj-card {
@@ -120,15 +111,15 @@
     font-family: 'DM Mono', monospace;
   }
 
-  .obj-card.min .pace { color: var(--green); }
+  .obj-card.min .pace  { color: var(--green); }
   .obj-card.real .pace { color: var(--accent); }
-  .obj-card.amb .pace { color: var(--accent2); }
+  .obj-card.amb .pace  { color: var(--accent2); }
 
   /* ── SECTION ── */
   .section {
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 20px 40px;
+    padding: 0 20px 48px;
   }
 
   .section-title {
@@ -153,115 +144,70 @@
     background: var(--border);
   }
 
-  /* ── SEMANA 2 DETALHE ── */
-  .week-grid {
+  /* ── DECISION BANNER ── */
+  .decision-banner {
+    background: rgba(251,191,36,0.07);
+    border: 1px solid rgba(251,191,36,0.25);
+    border-radius: 12px;
+    padding: 14px 16px;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .day-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 16px;
-    display: grid;
-    grid-template-columns: 52px 1fr auto;
     gap: 12px;
-    align-items: start;
-    transition: border-color 0.2s;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--muted);
   }
 
-  .day-card:hover { border-color: rgba(255,255,255,0.15); }
-  .day-card.rest { opacity: 0.55; }
-  .day-card.highlight { border-color: var(--accent); }
-  .day-card.longrun { border-color: var(--accent2); }
+  .decision-banner .icon { font-size: 18px; line-height: 1.4; }
+  .decision-banner strong { color: #fbbf24; }
 
-  .day-tag {
+  /* ── VOLUME BARS ── */
+  .vol-bar-wrap {
+    margin-bottom: 16px;
+  }
+
+  .vol-bar-title {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 10px;
+  }
+
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 80px;
+  }
+
+  .bar-col {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    height: 100%;
+    justify-content: flex-end;
+    gap: 4px;
   }
 
-  .day-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    line-height: 1;
-    color: var(--muted);
+  .bar-inner {
+    width: 100%;
+    border-radius: 3px 3px 0 0;
+    min-height: 3px;
+    transition: opacity 0.2s;
   }
 
-  .day-date {
-    font-size: 10px;
+  .bar-label {
+    font-size: 9px;
     color: var(--muted);
     font-family: 'DM Mono', monospace;
-    opacity: 0.7;
   }
 
-  .day-body {}
-
-  .day-title {
-    font-weight: 600;
-    font-size: 15px;
-    margin-bottom: 4px;
-  }
-
-  .day-note {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
-
-  .day-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
-  }
-
-  .badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    padding: 3px 9px;
-    border-radius: 6px;
-    border: 1px solid;
-  }
-
-  .badge.dist { color: var(--accent); border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.08); }
-  .badge.pace { color: var(--accent2); border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
-  .badge.gym  { color: var(--green);  border-color: rgba(34,197,94,0.3);  background: rgba(34,197,94,0.08); }
-
-  .day-vol {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: var(--muted);
-    line-height: 1;
-    text-align: right;
-    white-space: nowrap;
-    padding-top: 4px;
-  }
-
-  .day-vol span { font-size: 13px; font-family: 'DM Sans', sans-serif; font-weight: 300; }
-
-  .week-total {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 16px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 4px;
-  }
-
-  .week-total .label { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; }
-  .week-total .val { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--accent2); }
-
-  /* ── MACRO-PLANO ── */
+  /* ── FASE LEGEND ── */
   .fase-legend {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 12px;
     margin-bottom: 20px;
   }
 
@@ -274,12 +220,13 @@
   }
 
   .fase-dot i {
-    width: 10px; height: 10px;
-    border-radius: 50%;
     display: inline-block;
-    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
   }
 
+  /* ── MACRO LIST ── */
   .macro-list {
     display: flex;
     flex-direction: column;
@@ -287,31 +234,36 @@
   }
 
   .macro-week {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
     display: grid;
-    grid-template-columns: 36px 90px 80px 1fr auto;
+    grid-template-columns: 32px 110px 90px 1fr 48px;
     gap: 10px;
     align-items: center;
-    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
     transition: background 0.15s;
+  }
+
+  @media (max-width: 520px) {
+    .macro-week { grid-template-columns: 28px 80px 70px 1fr; }
+    .macro-km { display: none; }
   }
 
   .macro-week:hover { background: var(--surface2); }
 
   .macro-week.active-week {
-    border-color: var(--green);
-    background: rgba(34,197,94,0.06);
+    border-color: var(--accent);
+    background: rgba(59,130,246,0.06);
   }
 
   .macro-week.decision {
-    border-color: var(--accent2);
+    border-color: rgba(251,191,36,0.4);
+    background: rgba(251,191,36,0.04);
   }
 
   .macro-week.prova-week {
-    border-color: var(--prova);
+    border-color: rgba(236,72,153,0.4);
     background: rgba(236,72,153,0.05);
   }
 
@@ -329,144 +281,56 @@
 
   .macro-fase {
     font-size: 11px;
+    font-weight: 600;
     padding: 3px 8px;
     border-radius: 6px;
-    font-weight: 500;
     text-align: center;
+    letter-spacing: 0.03em;
   }
+
+  .f-base     { background: rgba(59,130,246,0.12);  color: #60a5fa; }
+  .f-desenv   { background: rgba(245,158,11,0.12);  color: #fbbf24; }
+  .f-especifica { background: rgba(249,115,22,0.12); color: #fb923c; }
+  .f-pico     { background: rgba(239,68,68,0.12);   color: #f87171; }
+  .f-rec      { background: rgba(34,197,94,0.12);   color: #4ade80; }
+  .f-taper    { background: rgba(168,85,247,0.12);  color: #c084fc; }
+  .f-prova    { background: rgba(236,72,153,0.12);  color: #f472b6; }
 
   .macro-chave {
     font-size: 13px;
-    color: var(--text);
-    opacity: 0.85;
+    color: var(--muted);
   }
 
   .macro-km {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     text-align: right;
-    white-space: nowrap;
+    line-height: 1;
   }
 
-  .macro-km span { font-size: 11px; font-family: 'DM Sans', sans-serif; font-weight: 300; color: var(--muted); }
-
-  /* Fase colors */
-  .f-base     { background: rgba(59,130,246,0.12); color: #60a5fa; }
-  .f-desenv   { background: rgba(245,158,11,0.12); color: #fbbf24; }
-  .f-especifica { background: rgba(249,115,22,0.12); color: #fb923c; }
-  .f-pico     { background: rgba(239,68,68,0.12);  color: #f87171; }
-  .f-taper    { background: rgba(168,85,247,0.12); color: #c084fc; }
-  .f-rec      { background: rgba(34,197,94,0.12);  color: #4ade80; }
-  .f-prova    { background: rgba(236,72,153,0.12); color: #f472b6; }
+  .macro-km span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+  }
 
   .km-base     { color: #60a5fa; }
   .km-desenv   { color: #fbbf24; }
   .km-especifica { color: #fb923c; }
   .km-pico     { color: #f87171; }
-  .km-taper    { color: #c084fc; }
   .km-rec      { color: #4ade80; }
+  .km-taper    { color: #c084fc; }
   .km-prova    { color: #f472b6; }
-
-  /* Volume bar */
-  .vol-bar-wrap {
-    background: var(--surface2);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  .vol-bar-title {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .bars {
-    display: flex;
-    align-items: flex-end;
-    gap: 4px;
-    height: 80px;
-  }
-
-  .bar-col {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    justify-content: flex-end;
-    gap: 4px;
-    cursor: default;
-  }
-
-  .bar-inner {
-    width: 100%;
-    border-radius: 4px 4px 0 0;
-    transition: opacity 0.2s;
-    min-height: 3px;
-  }
-
-  .bar-col:hover .bar-inner { opacity: 0.7; }
-
-  .bar-label {
-    font-size: 9px;
-    color: var(--muted);
-    font-family: 'DM Mono', monospace;
-  }
-
-  /* Notas */
-  .notes-box {
-    background: rgba(59,130,246,0.06);
-    border: 1px solid rgba(59,130,246,0.2);
-    border-radius: 12px;
-    padding: 16px;
-    margin-top: 16px;
-  }
-
-  .notes-box p {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 6px;
-  }
-
-  .notes-box p:last-child { margin-bottom: 0; }
-  .notes-box p strong { color: var(--text); }
-
-  .decision-banner {
-    background: rgba(245,158,11,0.08);
-    border: 1px solid rgba(245,158,11,0.3);
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin: 16px 0;
-    font-size: 13px;
-    color: #fbbf24;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
-  .decision-banner .icon { font-size: 18px; flex-shrink: 0; }
 
   footer {
     text-align: center;
-    padding: 40px 20px;
+    padding: 32px 20px;
     font-size: 12px;
     color: var(--muted);
-    border-top: 1px solid var(--border);
-    margin-top: 20px;
     font-family: 'DM Mono', monospace;
-  }
-
-  /* ── MOBILE ── */
-  @media (max-width: 500px) {
-    .objetivos { grid-template-columns: 1fr 1fr 1fr; }
-    .obj-card .pace { font-size: 22px; }
-    .macro-week { grid-template-columns: 28px 80px 70px 1fr; }
-    .macro-km { display: none; }
-    .day-card { grid-template-columns: 44px 1fr auto; }
+    border-top: 1px solid var(--border);
+    max-width: 800px;
+    margin: 0 auto;
   }
 </style>
 </head>
@@ -475,12 +339,12 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-label">Plano de Treino · 23 Semanas</div>
-  <h1>Maratona<br>de <span>Lisboa</span><br>2026</h1>
+  <h1>Maratona <span>de Lisboa</span> 2026</h1>
   <div class="hero-meta">
-    <div class="pill">📅 <strong>11 Out 2026</strong></div>
-    <div class="pill">🗓 4 Mai → 11 Out</div>
-    <div class="pill">📍 23 semanas</div>
-    <div class="pill">💪 Sem 1 concluída ✓</div>
+    <span class="pill">📅 <strong>11 Out 2026</strong></span>
+    <span class="pill">🗓 4 Mai → 11 Out</span>
+    <span class="pill">📍 23 semanas</span>
+    <span class="pill">💪 Sem 2 em curso</span>
   </div>
   <div class="objetivos">
     <div class="obj-card min">
@@ -501,143 +365,15 @@
   </div>
 </div>
 
-<!-- SEMANA 2 -->
-<div class="section">
-  <div class="section-title">Semana 2 — 11 a 18 Maio</div>
-
-  <div class="week-grid">
-
-    <div class="day-card rest">
-      <div class="day-tag">
-        <div class="day-name">SEG</div>
-        <div class="day-date">12 Mai</div>
-      </div>
-      <div class="day-body">
-        <div class="day-title">Descanso activo</div>
-        <div class="day-note">Caminhada leve ou mobilidade</div>
-      </div>
-      <div class="day-vol">—</div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-tag">
-        <div class="day-name">TER</div>
-        <div class="day-date">13 Mai</div>
-      </div>
-      <div class="day-body">
-        <div class="day-title">Corrida fácil</div>
-        <div class="day-note">Ritmo conversacional. FC &lt; 150 bpm. 1km aquecimento + 6km fácil + 1km arrefecimento.</div>
-        <div class="day-badges">
-          <span class="badge dist">8 km</span>
-          <span class="badge pace">6:40–6:55/km</span>
-        </div>
-      </div>
-      <div class="day-vol">8<span>km</span></div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-tag">
-        <div class="day-name">QUA</div>
-        <div class="day-date">14 Mai</div>
-      </div>
-      <div class="day-body">
-        <div class="day-title">Corrida leve + Ginásio força</div>
-        <div class="day-note">6km fáceis <strong>antes</strong> do ginásio. Ginásio: agachamentos, afundos, elevações gémeos, glúteo, core — 3×12.</div>
-        <div class="day-badges">
-          <span class="badge dist">6 km</span>
-          <span class="badge pace">6:50–7:05/km</span>
-          <span class="badge gym">Força corredor</span>
-        </div>
-      </div>
-      <div class="day-vol">6<span>km</span></div>
-    </div>
-
-    <div class="day-card highlight">
-      <div class="day-tag">
-        <div class="day-name">QUI</div>
-        <div class="day-date">15 Mai</div>
-      </div>
-      <div class="day-body">
-        <div class="day-title">Corrida progressiva ⚡</div>
-        <div class="day-note">4km fáceis (6:45/km) → últimos 4km a descer gradualmente até 6:10/km. Esforço controlado, não máximo.</div>
-        <div class="day-badges">
-          <span class="badge dist">8 km</span>
-          <span class="badge pace">6:45 → 6:10/km</span>
-        </div>
-      </div>
-      <div class="day-vol">8<span>km</span></div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-tag">
-        <div class="day-name">SEX</div>
-        <div class="day-date">16 Mai</div>
-      </div>
-      <div class="day-body">
-        <div class="day-title">Corrida fácil</div>
-        <div class="day-note">Recuperação activa. Ritmo fácil, sem pressão. Pernas frescas para amanhã.</div>
-        <div class="day-badges">
-          <span class="badge dist">6 km</span>
-          <span class="badge pace">6:40–6:55/km</span>
-        </div>
-      </div>
-      <div class="day-vol">6<span>km</span></div>
-    </div>
-
-    <div class="day-card longrun">
-      <div class="day-tag">
-        <div class="day-name">SÁB</div>
-        <div class="day-date">17 Mai</div>
-      </div>
-      <div class="day-body">
-        <div class="day-title">Long run 🏃</div>
-        <div class="day-note">Ritmo fácil constante do início ao fim. FC alvo 135–150 bpm. Hidrata a cada 5km. Gel ou datas se >1h30.</div>
-        <div class="day-badges">
-          <span class="badge dist">16 km</span>
-          <span class="badge pace">6:40–6:55/km</span>
-        </div>
-      </div>
-      <div class="day-vol">16<span>km</span></div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-tag">
-        <div class="day-name">DOM</div>
-        <div class="day-date">18 Mai</div>
-      </div>
-      <div class="day-body">
-        <div class="day-title">Ginásio — Upper Body</div>
-        <div class="day-note">Peito, costas, ombros, bíceps/tríceps. Sem pernas.</div>
-        <div class="day-badges">
-          <span class="badge gym">Upper body</span>
-        </div>
-      </div>
-      <div class="day-vol">—</div>
-    </div>
-
-    <div class="week-total">
-      <div class="label">Total Semana 2</div>
-      <div class="val">44 km</div>
-    </div>
-
-  </div>
-
-  <div class="notes-box">
-    <p>⚡ <strong>Progressivo de quinta</strong> é a novidade desta semana — começa devagar e deixa o ritmo cair naturalmente. Se as pernas estiverem pesadas, faz tudo fácil sem drama.</p>
-    <p>🏃 <strong>Long run de sábado</strong>: não olhes para o ritmo nos primeiros 5km. Começa devagar, fica devagar. 16km a 6:55/km bate qualquer 16km com ressaca.</p>
-  </div>
-</div>
-
 <!-- MACRO-PLANO -->
 <div class="section">
   <div class="section-title">Macro-Plano — 23 Semanas</div>
 
   <div class="decision-banner">
     <div class="icon">⚑</div>
-    <div><strong>Semana 13 (27 Jul):</strong> ponto de decisão de objectivo com base na evolução do treino. Os dados do Strava dirão.</div>
+    <div><strong>Semana 14 (3 Ago):</strong> ponto de decisão de objectivo — Tempo Run de 12km @ ritmo objectivo dará os dados necessários.</div>
   </div>
 
-  <!-- Volume chart -->
   <div class="vol-bar-wrap">
     <div class="vol-bar-title">Volume semanal estimado (km)</div>
     <div class="bars" id="volBars"></div>
@@ -656,33 +392,33 @@
   <div class="macro-list" id="macroList"></div>
 </div>
 
-<footer>Maratona de Lisboa 2026 · Plano gerado em Maio 2026 · Revisão quinzenal com dados Strava</footer>
+<footer>Maratona de Lisboa 2026 · Plano revisto em Maio 2026 · Revisão quinzenal com dados Strava</footer>
 
 <script>
 const semanas = [
-  { n:1,  datas:"4–10 Mai",     fase:"Base",       km:36, chave:"Long run 14km @ 6:45–7:00/km",            flag:"atual" },
-  { n:2,  datas:"11–17 Mai",    fase:"Base",       km:44, chave:"Long run 16km + progressivo qui",           flag:"" },
-  { n:3,  datas:"18–24 Mai",    fase:"Base",       km:48, chave:"Long run 18km @ 6:35–6:50/km",            flag:"" },
-  { n:4,  datas:"25–31 Mai",    fase:"Rec",        km:36, chave:"Long run 14km fácil — semana de recuperação", flag:"" },
-  { n:5,  datas:"1–7 Jun",      fase:"Base",       km:50, chave:"Long run 20km @ 6:30–6:45/km",            flag:"" },
-  { n:6,  datas:"8–14 Jun",     fase:"Base",       km:54, chave:"Long run 22km @ 6:30–6:45/km",            flag:"" },
-  { n:7,  datas:"15–21 Jun",    fase:"Desenv",     km:56, chave:"Tempo 6–8km @ 5:30–5:40 + Long 22km",     flag:"" },
-  { n:8,  datas:"22–28 Jun",    fase:"Desenv",     km:60, chave:"Tempo 8km + Long 24km @ 6:20–6:35/km",    flag:"" },
-  { n:9,  datas:"29 Jun–5 Jul", fase:"Rec",        km:42, chave:"Long run 18km fácil — recuperação",        flag:"" },
-  { n:10, datas:"6–12 Jul",     fase:"Desenv",     km:62, chave:"Intervalos 5×1km + Long 24km",            flag:"" },
-  { n:11, datas:"13–19 Jul",    fase:"Desenv",     km:66, chave:"Tempo 10km + Long 26km @ 6:15–6:30/km",   flag:"" },
-  { n:12, datas:"20–26 Jul",    fase:"Desenv",     km:68, chave:"Intervalos 6×1km + Long 26km",            flag:"" },
-  { n:13, datas:"27 Jul–2 Ago", fase:"Específica", km:70, chave:"Tempo 12km @ ritmo obj. + Long 28km",     flag:"decisao" },
-  { n:14, datas:"3–9 Ago",      fase:"Específica", km:72, chave:"Tempo 14km @ ritmo maratona + Long 28km", flag:"" },
-  { n:15, datas:"10–16 Ago",    fase:"Rec",        km:52, chave:"Long run 20km fácil — recuperação",        flag:"" },
-  { n:16, datas:"17–23 Ago",    fase:"Específica", km:74, chave:"Tempo 16km @ ritmo mar. + Long 30km",     flag:"" },
-  { n:17, datas:"24–30 Ago",    fase:"Específica", km:76, chave:"Progressão 12km + Long 30km",             flag:"" },
-  { n:18, datas:"31 Ago–6 Set", fase:"Pico",       km:80, chave:"Tempo 18km + Long 32km — semana pico",    flag:"" },
-  { n:19, datas:"7–13 Set",     fase:"Rec",        km:58, chave:"Long run 22km fácil — recuperação pós-pico", flag:"" },
-  { n:20, datas:"14–20 Set",    fase:"Pico",       km:76, chave:"Simulação 25km @ ritmo maratona",         flag:"" },
-  { n:21, datas:"21–27 Set",    fase:"Taper",      km:58, chave:"Long run 18km @ ritmo mar. — início taper", flag:"" },
-  { n:22, datas:"28 Set–4 Out", fase:"Taper",      km:40, chave:"Long run 12km fácil — pernas frescas",    flag:"" },
-  { n:23, datas:"5–11 Out",     fase:"Prova",      km:10, chave:"MARATONA DE LISBOA — 11 Out 2026 🏁",     flag:"prova" },
+  { n:1,  datas:"4–10 Mai",     fase:"Base",       km:36, chave:"Long run 14km @ 6:45–7:00/km",                        flag:"" },
+  { n:2,  datas:"11–17 Mai",    fase:"Base",       km:44, chave:"Long run 16km + progressivo qui",                      flag:"atual" },
+  { n:3,  datas:"18–24 Mai",    fase:"Base",       km:48, chave:"Long run 18km @ 6:35–6:50/km",                        flag:"" },
+  { n:4,  datas:"25–31 Mai",    fase:"Rec",        km:36, chave:"Long run 14km fácil — recuperação 3+1",                flag:"" },
+  { n:5,  datas:"1–7 Jun",      fase:"Base",       km:50, chave:"Long run 20km @ 6:30–6:45/km",                        flag:"" },
+  { n:6,  datas:"8–14 Jun",     fase:"Base",       km:54, chave:"Long run 22km @ 6:30–6:45/km",                        flag:"" },
+  { n:7,  datas:"15–21 Jun",    fase:"Desenv",     km:58, chave:"Tempo 6–8km @ 5:30–5:40/km + Long 22km",              flag:"" },
+  { n:8,  datas:"22–28 Jun",    fase:"Desenv",     km:62, chave:"Tempo 8km + Long 24km @ 6:20–6:35/km",                flag:"" },
+  { n:9,  datas:"29 Jun–5 Jul", fase:"Rec",        km:44, chave:"Long run 18km fácil — recuperação 4+1",               flag:"" },
+  { n:10, datas:"6–12 Jul",     fase:"Desenv",     km:64, chave:"Intervalos 5×1km + Long 24km",                        flag:"" },
+  { n:11, datas:"13–19 Jul",    fase:"Desenv",     km:68, chave:"Tempo 10km + Long 26km @ 6:15–6:30/km",               flag:"" },
+  { n:12, datas:"20–26 Jul",    fase:"Desenv",     km:70, chave:"Intervalos 6×1km + Long 26km",                        flag:"" },
+  { n:13, datas:"27 Jul–2 Ago", fase:"Rec",        km:50, chave:"Long run 20km fácil — recuperação 3+1",               flag:"" },
+  { n:14, datas:"3–9 Ago",      fase:"Específica", km:68, chave:"Tempo 12km @ ritmo obj. + Long 28km",                 flag:"decisao" },
+  { n:15, datas:"10–16 Ago",    fase:"Específica", km:72, chave:"Tempo 14km @ ritmo maratona + Long 28km",             flag:"" },
+  { n:16, datas:"17–23 Ago",    fase:"Específica", km:74, chave:"Tempo 16km @ ritmo mar. + Long 30km",                 flag:"" },
+  { n:17, datas:"24–30 Ago",    fase:"Específica", km:76, chave:"Progressão 14km + Long 30km",                         flag:"" },
+  { n:18, datas:"31 Ago–6 Set", fase:"Pico",       km:74, chave:"Intervalos + Long 30km — entrada no pico",            flag:"" },
+  { n:19, datas:"7–13 Set",     fase:"Pico",       km:78, chave:"Simulação 25km @ ritmo maratona + Tempo 10km",        flag:"" },
+  { n:20, datas:"14–20 Set",    fase:"Pico",       km:80, chave:"Tempo 18km + Long 32km — pico máximo",                flag:"" },
+  { n:21, datas:"21–27 Set",    fase:"Taper",      km:64, chave:"Long run 20km fácil — taper ~80% do pico",            flag:"" },
+  { n:22, datas:"28 Set–4 Out", fase:"Taper",      km:44, chave:"Long run 14km fácil — taper ~55% do pico",            flag:"" },
+  { n:23, datas:"5–11 Out",     fase:"Prova",      km:0,  chave:"Corridas curtas leves + MARATONA DE LISBOA 11 Out",   flag:"prova" },
 ];
 
 const faseClass = {
@@ -702,9 +438,9 @@ semanas.forEach(s => {
   const colors = {base:'#3b82f6',desenv:'#f59e0b',especifica:'#f97316',pico:'#ef4444',rec:'#22c55e',taper:'#a855f7',prova:'#ec4899'};
   const col = document.createElement('div');
   col.className = 'bar-col';
-  const pct = (s.km / maxKm) * 100;
+  const pct = s.km > 0 ? (s.km / maxKm) * 100 : 8;
   col.innerHTML = `
-    <div class="bar-inner" style="height:${pct}%;background:${colors[fc]};opacity:${s.flag==='atual'?1:0.55}" title="Sem ${s.n}: ${s.km}km"></div>
+    <div class="bar-inner" style="height:${pct}%;background:${colors[fc]};opacity:${s.flag==='atual'?1:0.6}" title="Sem ${s.n}: ${s.km > 0 ? s.km+'km' : 'Prova'}"></div>
     <div class="bar-label">${s.n}</div>
   `;
   barsEl.appendChild(col);
@@ -722,7 +458,7 @@ semanas.forEach(s => {
     <div class="macro-dates">${s.datas}</div>
     <div class="macro-fase f-${fc}">${faseLabel[s.fase]}</div>
     <div class="macro-chave">${s.chave}${s.flag==='decisao' ? ' <strong style="color:#fbbf24">⚑</strong>' : ''}</div>
-    <div class="macro-km km-${fc}">${s.flag==='prova'?'🏁':s.km}<span>${s.flag==='prova'?'':' km'}</span></div>
+    <div class="macro-km km-${fc}">${s.flag==='prova' ? '🏁' : s.km}<span>${s.flag==='prova' ? '' : ' km'}</span></div>
   `;
   listEl.appendChild(div);
 });
