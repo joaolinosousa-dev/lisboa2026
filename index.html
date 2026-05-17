@@ -7,362 +7,80 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d0f14;
-    --card: #161921;
-    --card2: #1c2030;
-    --border: rgba(255,255,255,0.08);
-    --text: #e8eaf0;
-    --muted: #6b7390;
-    --blue: #3b82f6;
-    --amber: #f59e0b;
-    --green: #22c55e;
-    --red: #ef4444;
-    --purple: #a855f7;
+    --bg: #0d0f14; --card: #161921; --card2: #1c2030;
+    --border: rgba(255,255,255,0.08); --text: #e8eaf0; --muted: #6b7390;
+    --blue: #3b82f6; --amber: #f59e0b; --green: #22c55e; --red: #ef4444; --purple: #a855f7;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
-    max-width: 480px;
-    margin: 0 auto;
-    padding-bottom: 60px;
-    min-height: 100vh;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    padding: 36px 20px 24px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .hero-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--blue);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .hero h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
-    line-height: 0.95;
-    letter-spacing: 0.02em;
-    margin-bottom: 16px;
-  }
-
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.5; max-width: 480px; margin: 0 auto; padding-bottom: 60px; min-height: 100vh; }
+  .hero { padding: 36px 20px 24px; border-bottom: 1px solid var(--border); }
+  .hero-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--blue); text-transform: uppercase; margin-bottom: 8px; }
+  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; line-height: 0.95; letter-spacing: 0.02em; margin-bottom: 16px; }
   .hero h1 span { color: var(--amber); }
-
-  .countdown-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  .cd-unit {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 8px;
-    text-align: center;
-  }
-
-  .cd-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    line-height: 1;
-    color: var(--amber);
-  }
-
-  .cd-label {
-    font-size: 10px;
-    color: var(--muted);
-    font-family: 'DM Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-top: 2px;
-  }
-
-  .obj-strip {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .obj-pill {
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-family: 'DM Mono', monospace;
-    border: 1px solid;
-  }
-
+  .countdown-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+  .cd-unit { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 8px; text-align: center; }
+  .cd-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1; color: var(--amber); }
+  .cd-label { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+  .obj-strip { display: flex; gap: 6px; flex-wrap: wrap; }
+  .obj-pill { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-family: 'DM Mono', monospace; border: 1px solid; }
   .obj-pill.min  { color: var(--green);  border-color: rgba(34,197,94,0.3);  background: rgba(34,197,94,0.08); }
   .obj-pill.real { color: var(--blue);   border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.08); }
   .obj-pill.amb  { color: var(--amber);  border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
-
-  /* ── SECTION ── */
   .section { padding: 24px 20px 0; }
-
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  /* ── WEEK CARD (semana atual) ── */
-  .week-card {
-    background: var(--card);
-    border: 1px solid rgba(34,197,94,0.3);
-    border-radius: 16px;
-    padding: 18px;
-    margin-bottom: 10px;
-  }
-
-  .week-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 14px;
-  }
-
-  .week-card-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    line-height: 1;
-    color: var(--green);
-  }
-
-  .week-card-sub {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-
-  .week-km {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    color: var(--amber);
-    line-height: 1;
-    text-align: right;
-  }
-
+  .section-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; margin-bottom: 12px; }
+  .week-card { background: var(--card); border: 1px solid rgba(34,197,94,0.3); border-radius: 16px; padding: 18px; margin-bottom: 10px; }
+  .week-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+  .week-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; line-height: 1; color: var(--green); }
+  .week-card-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .week-km { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--amber); line-height: 1; text-align: right; }
   .week-km span { font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--muted); font-weight: 300; }
-
-  .week-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
-  }
-
-  .wd {
-    text-align: center;
-    padding: 6px 2px;
-    border-radius: 8px;
-    background: var(--card2);
-  }
-
+  .week-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .wd { text-align: center; padding: 6px 2px; border-radius: 8px; background: var(--card2); }
   .wd .wd-name { font-size: 9px; color: var(--muted); font-family: 'DM Mono', monospace; text-transform: uppercase; }
   .wd .wd-km   { font-family: 'Bebas Neue', sans-serif; font-size: 16px; line-height: 1.2; margin-top: 2px; }
-  .wd .wd-dot  { width: 5px; height: 5px; border-radius: 50%; margin: 3px auto 0; }
-
-  .wd.run  { background: rgba(59,130,246,0.1);  }
-  .wd.gym  { background: rgba(34,197,94,0.1);   }
-  .wd.both { background: rgba(245,158,11,0.1);  }
-  .wd.long { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.25); }
+  .wd.run  { background: rgba(59,130,246,0.1); } .wd.gym { background: rgba(34,197,94,0.1); }
+  .wd.both { background: rgba(245,158,11,0.1); } .wd.long { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.25); }
   .wd.rest { opacity: 0.4; }
-
-  .wd.run  .wd-km { color: var(--blue); }
-  .wd.gym  .wd-km { color: var(--green); }
-  .wd.both .wd-km { color: var(--amber); }
-  .wd.long .wd-km { color: var(--amber); }
-  .wd.rest .wd-km { color: var(--muted); }
-
-  /* ── APP BUTTONS ── */
-  .app-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .app-btn {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 18px;
-    cursor: pointer;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    transition: border-color 0.15s, background 0.15s;
-    -webkit-tap-highlight-color: transparent;
-  }
-
+  .wd.run .wd-km { color: var(--blue); } .wd.gym .wd-km { color: var(--green); }
+  .wd.both .wd-km { color: var(--amber); } .wd.long .wd-km { color: var(--amber); } .wd.rest .wd-km { color: var(--muted); }
+  .app-grid { display: flex; flex-direction: column; gap: 8px; }
+  .app-btn { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 16px; transition: border-color 0.15s, background 0.15s; }
   .app-btn:active { background: var(--card2); }
-
-  .app-btn.corrida { border-left: 3px solid var(--blue); }
-  .app-btn.ginasio { border-left: 3px solid var(--green); }
-  .app-btn.macro   { border-left: 3px solid var(--amber); }
-
-  .app-icon {
-    font-size: 28px;
-    flex-shrink: 0;
-    width: 44px;
-    text-align: center;
-  }
-
+  .app-btn.corrida { border-left: 3px solid var(--blue); } .app-btn.ginasio { border-left: 3px solid var(--green); } .app-btn.macro { border-left: 3px solid var(--amber); }
+  .app-icon { font-size: 28px; flex-shrink: 0; width: 44px; text-align: center; }
   .app-info { flex: 1; }
-
-  .app-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .app-btn.corrida .app-name { color: var(--blue); }
-  .app-btn.ginasio .app-name { color: var(--green); }
-  .app-btn.macro   .app-name { color: var(--amber); }
-
-  .app-desc {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.4;
-  }
-
-  .app-arrow {
-    color: var(--muted);
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-
-  /* ── MACRO MINI ── */
-  .macro-mini {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    margin-bottom: 10px;
-  }
-
-  .macro-mini-header {
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .macro-mini-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
-    letter-spacing: 0.05em;
-  }
-
-  .macro-mini-sub {
-    font-size: 11px;
-    color: var(--muted);
-    font-family: 'DM Mono', monospace;
-  }
-
-  .phase-row {
-    display: flex;
-    height: 8px;
-  }
-
-  .phase-seg {
-    height: 100%;
-    transition: opacity 0.2s;
-  }
-
-  .phase-seg:hover { opacity: 0.7; }
-
-  .sem-row {
-    padding: 10px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-
+  .app-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; line-height: 1; margin-bottom: 4px; }
+  .app-btn.corrida .app-name { color: var(--blue); } .app-btn.ginasio .app-name { color: var(--green); } .app-btn.macro .app-name { color: var(--amber); }
+  .app-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .app-arrow { color: var(--muted); font-size: 20px; flex-shrink: 0; }
+  .macro-mini { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 10px; }
+  .macro-mini-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .macro-mini-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.05em; }
+  .macro-mini-sub { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .phase-row { display: flex; height: 8px; }
+  .phase-seg { height: 100%; }
+  .sem-row { padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); font-size: 13px; }
   .sem-row:last-child { border-bottom: none; }
-
   .sem-row.current { background: rgba(34,197,94,0.06); }
   .sem-row.decision { background: rgba(245,158,11,0.05); }
-
   .sem-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); min-width: 28px; }
   .sem-dates { color: var(--muted); font-size: 12px; min-width: 100px; }
   .sem-fase { font-size: 11px; padding: 2px 7px; border-radius: 5px; }
   .sem-km { font-family: 'Bebas Neue', sans-serif; font-size: 20px; }
-
-  .f-base      { background: rgba(59,130,246,0.12); color: #60a5fa; }
-  .f-desenv    { background: rgba(245,158,11,0.12); color: #fbbf24; }
-  .f-especifica{ background: rgba(249,115,22,0.12); color: #fb923c; }
-  .f-pico      { background: rgba(239,68,68,0.12);  color: #f87171; }
-  .f-rec       { background: rgba(34,197,94,0.12);  color: #4ade80; }
-  .f-taper     { background: rgba(168,85,247,0.12); color: #c084fc; }
-  .f-prova     { background: rgba(236,72,153,0.12); color: #f472b6; }
-
-  .km-base     { color: #60a5fa; }
-  .km-desenv   { color: #fbbf24; }
-  .km-especifica{color: #fb923c; }
-  .km-pico     { color: #f87171; }
-  .km-rec      { color: #4ade80; }
-  .km-taper    { color: #c084fc; }
-  .km-prova    { color: #f472b6; }
-
-  .show-more-btn {
-    width: 100%;
-    background: none;
-    border: none;
-    border-top: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 12px;
-    font-family: 'DM Mono', monospace;
-    padding: 12px;
-    cursor: pointer;
-    text-align: center;
-    letter-spacing: 0.1em;
-  }
-
-  /* ── INSTALL HINT ── */
-  .install-hint {
-    margin: 20px 0 0;
-    background: rgba(59,130,246,0.06);
-    border: 1px solid rgba(59,130,246,0.2);
-    border-radius: 14px;
-    padding: 14px 16px;
-  }
-
-  .install-hint .ih-title {
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: var(--blue);
-  }
-
-  .install-hint p {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
+  .f-base{background:rgba(59,130,246,0.12);color:#60a5fa;} .f-desenv{background:rgba(245,158,11,0.12);color:#fbbf24;}
+  .f-especifica{background:rgba(249,115,22,0.12);color:#fb923c;} .f-pico{background:rgba(239,68,68,0.12);color:#f87171;}
+  .f-rec{background:rgba(34,197,94,0.12);color:#4ade80;} .f-taper{background:rgba(168,85,247,0.12);color:#c084fc;}
+  .f-prova{background:rgba(236,72,153,0.12);color:#f472b6;}
+  .km-base{color:#60a5fa;} .km-desenv{color:#fbbf24;} .km-especifica{color:#fb923c;} .km-pico{color:#f87171;}
+  .km-rec{color:#4ade80;} .km-taper{color:#c084fc;} .km-prova{color:#f472b6;}
+  .show-more-btn { width: 100%; background: none; border: none; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; font-family: 'DM Mono', monospace; padding: 12px; cursor: pointer; text-align: center; letter-spacing: 0.1em; }
+  .install-hint { margin: 20px 0 0; background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.2); border-radius: 14px; padding: 14px 16px; }
+  .install-hint .ih-title { font-size: 12px; font-weight: 600; margin-bottom: 6px; color: var(--blue); }
+  .install-hint p { font-size: 12px; color: var(--muted); line-height: 1.5; }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-label">Maratona de Lisboa 2026</div>
   <h1>Lisboa<br><span>2026</span></h1>
@@ -380,11 +98,11 @@
   <div class="week-card">
     <div class="week-card-header">
       <div>
-        <div class="week-card-title">Semana 2 · Base</div>
-        <div class="week-card-sub">11–18 Maio 2026</div>
+        <div class="week-card-title">Semana 3 · Base</div>
+        <div class="week-card-sub">19–25 Maio 2026</div>
       </div>
       <div>
-        <div class="week-km">44<span>km</span></div>
+        <div class="week-km">48<span>km</span></div>
       </div>
     </div>
     <div class="week-days">
@@ -393,7 +111,7 @@
       <div class="wd both"><div class="wd-name">QUA</div><div class="wd-km">6+💪</div></div>
       <div class="wd run"><div class="wd-name">QUI</div><div class="wd-km">8</div></div>
       <div class="wd run"><div class="wd-name">SEX</div><div class="wd-km">6</div></div>
-      <div class="wd long"><div class="wd-name">SÁB</div><div class="wd-km">16</div></div>
+      <div class="wd long"><div class="wd-name">SÁB</div><div class="wd-km">20</div></div>
       <div class="wd gym"><div class="wd-name">DOM</div><div class="wd-km">💪</div></div>
     </div>
   </div>
@@ -403,11 +121,11 @@
 <div class="section">
   <div class="section-label">Abrir</div>
   <div class="app-grid">
-    <a class="app-btn corrida" href="semana2_mobile.html">
+    <a class="app-btn corrida" href="semana3_mobile.html">
       <div class="app-icon">🏃</div>
       <div class="app-info">
         <div class="app-name">Plano de Corrida</div>
-        <div class="app-desc">Semana 2 · Treinos diários, ritmos e estrutura</div>
+        <div class="app-desc">Semana 3 · Treinos diários, ritmos e estrutura</div>
       </div>
       <div class="app-arrow">›</div>
     </a>
@@ -415,7 +133,7 @@
       <div class="app-icon">💪</div>
       <div class="app-info">
         <div class="app-name">Tracker de Ginásio</div>
-        <div class="app-desc">Força corredor (Qua) · Upper body (Dom) · Registo de pesos</div>
+        <div class="app-desc">Força corredor (Qua) · Upper body (Dom) · Referência sem 2</div>
       </div>
       <div class="app-arrow">›</div>
     </a>
@@ -436,7 +154,7 @@
   <div class="macro-mini">
     <div class="macro-mini-header">
       <div class="macro-mini-title">23 Semanas</div>
-      <div class="macro-mini-sub">⚑ Decisão sem 13 · 27 Jul</div>
+      <div class="macro-mini-sub">⚑ Decisão sem 14 · 3 Ago</div>
     </div>
     <div class="phase-row" id="phaseBar"></div>
     <div id="macroRows"></div>
@@ -444,92 +162,69 @@
   </div>
 </div>
 
-<!-- INSTALL HINT -->
 <div class="section">
   <div class="install-hint">
     <div class="ih-title">📲 Adicionar ao ecrã inicial</div>
     <p><strong>iPhone:</strong> Safari → botão Partilhar → "Adicionar ao Ecrã de Início"<br>
-    <strong>Android:</strong> Chrome → menu (⋮) → "Adicionar ao ecrã principal"<br>
-    Funciona como uma app — abre diretamente, sem browser visível.</p>
+    <strong>Android:</strong> Chrome → menu (⋮) → "Adicionar ao ecrã principal"</p>
   </div>
 </div>
 
 <script>
-// ── COUNTDOWN ──
 const raceDate = new Date('2026-10-11T09:00:00');
-
 function updateCountdown() {
-  const now = new Date();
-  const diff = raceDate - now;
-  if (diff <= 0) {
-    document.getElementById('countdown').innerHTML = '<div style="grid-column:1/-1;text-align:center;font-family:Bebas Neue;font-size:28px;color:var(--green)">É hoje! 🏁</div>';
-    return;
-  }
-  const days  = Math.floor(diff / (1000*60*60*24));
-  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-  const mins  = Math.floor((diff % (1000*60*60)) / (1000*60));
-  const secs  = Math.floor((diff % (1000*60)) / 1000);
-
-  const units = [
-    { val: Math.floor(days/7), label: 'semanas' },
-    { val: days % 7,           label: 'dias' },
-    { val: hours,              label: 'horas' },
-    { val: mins,               label: 'min' },
-  ];
-
-  document.getElementById('countdown').innerHTML = units.map(u => `
-    <div class="cd-unit">
-      <div class="cd-num">${String(u.val).padStart(2,'0')}</div>
-      <div class="cd-label">${u.label}</div>
-    </div>`).join('');
+  const diff = raceDate - new Date();
+  if (diff <= 0) { document.getElementById('countdown').innerHTML = '<div style="grid-column:1/-1;text-align:center;font-family:Bebas Neue;font-size:28px;color:var(--green)">É hoje! 🏁</div>'; return; }
+  const days = Math.floor(diff/(1000*60*60*24));
+  const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const mins  = Math.floor((diff%(1000*60*60))/(1000*60));
+  const units = [{val:Math.floor(days/7),label:'semanas'},{val:days%7,label:'dias'},{val:hours,label:'horas'},{val:mins,label:'min'}];
+  document.getElementById('countdown').innerHTML = units.map(u => `<div class="cd-unit"><div class="cd-num">${String(u.val).padStart(2,'0')}</div><div class="cd-label">${u.label}</div></div>`).join('');
 }
-
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ── MACRO ──
 const semanas = [
   { n:1,  datas:"4–10 Mai",     fase:"Base",        km:36,  flag:"done" },
-  { n:2,  datas:"11–17 Mai",    fase:"Base",        km:44,  flag:"current" },
-  { n:3,  datas:"18–24 Mai",    fase:"Base",        km:48,  flag:"" },
-  { n:4,  datas:"25–31 Mai",    fase:"Rec",         km:36,  flag:"" },
+  { n:2,  datas:"11–18 Mai",    fase:"Base",        km:44,  flag:"done" },
+  { n:3,  datas:"19–25 Mai",    fase:"Base",        km:48,  flag:"current" },
+  { n:4,  datas:"26 Mai–1 Jun", fase:"Rec",         km:36,  flag:"" },
   { n:5,  datas:"1–7 Jun",      fase:"Base",        km:50,  flag:"" },
   { n:6,  datas:"8–14 Jun",     fase:"Base",        km:54,  flag:"" },
-  { n:7,  datas:"15–21 Jun",    fase:"Desenv",      km:56,  flag:"" },
-  { n:8,  datas:"22–28 Jun",    fase:"Desenv",      km:60,  flag:"" },
-  { n:9,  datas:"29 Jun–5 Jul", fase:"Rec",         km:42,  flag:"" },
-  { n:10, datas:"6–12 Jul",     fase:"Desenv",      km:62,  flag:"" },
-  { n:11, datas:"13–19 Jul",    fase:"Desenv",      km:66,  flag:"" },
-  { n:12, datas:"20–26 Jul",    fase:"Desenv",      km:68,  flag:"" },
-  { n:13, datas:"27 Jul–2 Ago", fase:"Específica",  km:70,  flag:"decision" },
-  { n:14, datas:"3–9 Ago",      fase:"Específica",  km:72,  flag:"" },
-  { n:15, datas:"10–16 Ago",    fase:"Rec",         km:52,  flag:"" },
+  { n:7,  datas:"15–21 Jun",    fase:"Desenv",      km:58,  flag:"" },
+  { n:8,  datas:"22–28 Jun",    fase:"Desenv",      km:62,  flag:"" },
+  { n:9,  datas:"29 Jun–5 Jul", fase:"Rec",         km:44,  flag:"" },
+  { n:10, datas:"6–12 Jul",     fase:"Desenv",      km:64,  flag:"" },
+  { n:11, datas:"13–19 Jul",    fase:"Desenv",      km:68,  flag:"" },
+  { n:12, datas:"20–26 Jul",    fase:"Desenv",      km:70,  flag:"" },
+  { n:13, datas:"27 Jul–2 Ago", fase:"Rec",         km:50,  flag:"" },
+  { n:14, datas:"3–9 Ago",      fase:"Específica",  km:68,  flag:"decision" },
+  { n:15, datas:"10–16 Ago",    fase:"Específica",  km:72,  flag:"" },
   { n:16, datas:"17–23 Ago",    fase:"Específica",  km:74,  flag:"" },
   { n:17, datas:"24–30 Ago",    fase:"Específica",  km:76,  flag:"" },
-  { n:18, datas:"31 Ago–6 Set", fase:"Pico",        km:80,  flag:"" },
-  { n:19, datas:"7–13 Set",     fase:"Rec",         km:58,  flag:"" },
-  { n:20, datas:"14–20 Set",    fase:"Pico",        km:76,  flag:"" },
-  { n:21, datas:"21–27 Set",    fase:"Taper",       km:58,  flag:"" },
-  { n:22, datas:"28 Set–4 Out", fase:"Taper",       km:40,  flag:"" },
-  { n:23, datas:"5–11 Out",     fase:"Prova",       km:10,  flag:"prova" },
+  { n:18, datas:"31 Ago–6 Set", fase:"Pico",        km:74,  flag:"" },
+  { n:19, datas:"7–13 Set",     fase:"Pico",        km:78,  flag:"" },
+  { n:20, datas:"14–20 Set",    fase:"Pico",        km:80,  flag:"" },
+  { n:21, datas:"21–27 Set",    fase:"Taper",       km:64,  flag:"" },
+  { n:22, datas:"28 Set–4 Out", fase:"Taper",       km:44,  flag:"" },
+  { n:23, datas:"5–11 Out",     fase:"Prova",       km:0,   flag:"prova" },
 ];
 
-const faseClass = { Base:"base", Desenv:"desenv", Específica:"especifica", Pico:"pico", Rec:"rec", Taper:"taper", Prova:"prova" };
-const faseLabel = { Base:"Base", Desenv:"Desenv.", Específica:"Específ.", Pico:"Pico", Rec:"Recup.", Taper:"Taper", Prova:"Prova" };
+const faseClass  = { Base:"base", Desenv:"desenv", Específica:"especifica", Pico:"pico", Rec:"rec", Taper:"taper", Prova:"prova" };
+const faseLabel  = { Base:"Base", Desenv:"Desenv.", Específica:"Específ.", Pico:"Pico", Rec:"Recup.", Taper:"Taper", Prova:"Prova" };
 const faseColors = { Base:"#3b82f6", Desenv:"#f59e0b", Específica:"#f97316", Pico:"#ef4444", Rec:"#22c55e", Taper:"#a855f7", Prova:"#ec4899" };
 const totalKm = semanas.reduce((a,s) => a+s.km, 0);
 
-// Phase bar
 const barEl = document.getElementById('phaseBar');
 semanas.forEach(s => {
+  if (s.km === 0) return;
   const seg = document.createElement('div');
   seg.className = 'phase-seg';
-  seg.style.cssText = `width:${s.km/totalKm*100}%;background:${faseColors[s.fase]};opacity:${s.flag==='done'?0.4:0.8}`;
+  seg.style.cssText = `width:${s.km/totalKm*100}%;background:${faseColors[s.fase]};opacity:${s.flag==='done'?0.35:0.8}`;
   seg.title = `S${s.n}: ${s.km}km`;
   barEl.appendChild(seg);
 });
 
-// Macro rows
 let showAll = false;
 const macroEl = document.getElementById('macroRows');
 
@@ -537,13 +232,14 @@ function renderMacro() {
   const toShow = showAll ? semanas : semanas.slice(0, 5);
   macroEl.innerHTML = toShow.map(s => {
     const fc = faseClass[s.fase];
-    const extra = s.flag === 'current' ? ' current' : s.flag === 'decision' ? ' decision' : '';
-    const icon = s.flag === 'done' ? '✓ ' : s.flag === 'current' ? '▶ ' : s.flag === 'decision' ? '⚑ ' : s.flag === 'prova' ? '🏁 ' : '';
+    const extra = s.flag==='current' ? ' current' : s.flag==='decision' ? ' decision' : '';
+    const icon  = s.flag==='done' ? '✓ ' : s.flag==='current' ? '▶ ' : s.flag==='decision' ? '⚑ ' : s.flag==='prova' ? '🏁' : '';
+    const kmStr = s.flag==='prova' ? '🏁' : s.km+'km';
     return `<div class="sem-row${extra}">
       <span class="sem-num">${String(s.n).padStart(2,'0')}</span>
       <span class="sem-dates">${s.datas}</span>
       <span class="sem-fase f-${fc}">${faseLabel[s.fase]}</span>
-      <span class="sem-km km-${fc}">${icon}${s.flag==='prova'?'🏁':s.km+'km'}</span>
+      <span class="sem-km km-${fc}">${icon}${kmStr}</span>
     </div>`;
   }).join('');
 }
