@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Semana 4 · Maratona Lisboa 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0d0f14;--card:#161921;--card2:#1c2030;--border:rgba(255,255,255,0.08);--text:#e8eaf0;--muted:#6b7390;--blue:#3b82f6;--amber:#f59e0b;--green:#22c55e;--red:#ef4444;--purple:#a855f7; }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.5;max-width:480px;margin:0 auto;padding-bottom:60px;}
+  header{padding:28px 20px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:10;}
+  .header-top{display:flex;justify-content:space-between;align-items:flex-start;}
+  .week-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--blue);text-transform:uppercase;margin-bottom:4px;}
+  header h1{font-family:'Bebas Neue',sans-serif;font-size:34px;line-height:1;letter-spacing:0.03em;}
+  header h1 span{color:var(--amber);}
+  .vol-chip{background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:8px 14px;text-align:center;flex-shrink:0;}
+  .vol-chip .num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--amber);line-height:1;}
+  .vol-chip .unit{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;}
+  .week-strip{display:flex;gap:6px;padding:16px 20px 0;overflow-x:auto;scrollbar-width:none;}
+  .week-strip::-webkit-scrollbar{display:none;}
+  .day-btn{flex-shrink:0;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 12px;text-align:center;cursor:pointer;transition:all 0.15s;min-width:54px;}
+  .day-btn .dname{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;}
+  .day-btn .dnum{font-family:'Bebas Neue',sans-serif;font-size:22px;line-height:1.1;}
+  .day-btn .ddot{width:5px;height:5px;border-radius:50%;margin:4px auto 0;background:transparent;}
+  .day-btn.has-run .ddot{background:var(--blue);}
+  .day-btn.has-gym .ddot{background:var(--green);}
+  .day-btn.has-both .ddot{background:var(--amber);}
+  .day-btn.rest{opacity:0.4;}
+  .day-btn.active{background:var(--blue);border-color:var(--blue);}
+  .day-btn.active .dname,.day-btn.active .dnum{color:white;}
+  .day-btn.active .ddot{background:rgba(255,255,255,0.5);}
+  .week-progress{padding:12px 20px 0;display:flex;align-items:center;gap:10px;}
+  .prog-bar{flex:1;height:4px;background:var(--card2);border-radius:2px;overflow:hidden;}
+  .prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--amber));border-radius:2px;transition:width 0.4s ease;}
+  .prog-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);white-space:nowrap;}
+  .day-detail{padding:20px;}
+  .detail-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .detail-header h2{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.03em;line-height:1;}
+  .detail-date{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-top:3px;}
+  .tipo-badge{font-size:11px;padding:4px 12px;border-radius:20px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;}
+  .metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+  .metric{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;}
+  .metric .m-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;font-family:'DM Mono',monospace;margin-bottom:6px;}
+  .metric .m-val{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;}
+  .metric .m-sub{font-size:11px;color:var(--muted);margin-top:3px;}
+  .metric.blue{border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.07);}
+  .metric.amber{border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.07);}
+  .metric.green{border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.07);}
+  .metric.red{border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.07);}
+  .metric.purple{border-color:rgba(168,85,247,0.3);background:rgba(168,85,247,0.07);}
+  .metric.blue .m-val{color:#60a5fa;}.metric.amber .m-val{color:#fbbf24;}.metric.green .m-val{color:#4ade80;}.metric.red .m-val{color:#f87171;}.metric.purple .m-val{color:#c084fc;}
+  .structure{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:14px;}
+  .structure h3{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em;font-family:'DM Mono',monospace;margin-bottom:14px;}
+  .step{display:grid;grid-template-columns:36px 1fr auto;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid var(--border);}
+  .step:last-child{border-bottom:none;padding-bottom:0;}.step:first-child{padding-top:0;}
+  .step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:12px;font-weight:500;flex-shrink:0;margin-top:1px;}
+  .step-body .step-title{font-weight:600;font-size:14px;margin-bottom:2px;}
+  .step-body .step-desc{font-size:13px;color:var(--muted);line-height:1.4;}
+  .step-pace{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--muted);white-space:nowrap;text-align:right;margin-top:2px;line-height:1;}
+  .step-pace small{display:block;font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.1em;}
+  .notes{background:var(--card2);border-radius:14px;padding:14px 16px;margin-bottom:10px;}
+  .notes .n-title{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em;font-family:'DM Mono',monospace;margin-bottom:10px;}
+  .note-item{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--muted);line-height:1.4;}
+  .note-item:last-child{border-bottom:none;}.note-item .ni{flex-shrink:0;}.note-item strong{color:var(--text);}
+  .rest-screen{text-align:center;padding:40px 20px;}
+  .rest-screen .icon{font-size:48px;margin-bottom:16px;}
+  .rest-screen h2{font-family:'Bebas Neue',sans-serif;font-size:28px;margin-bottom:8px;color:var(--muted);}
+  .rest-screen p{font-size:14px;color:var(--muted);}
+  .today-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--amber);margin-left:6px;vertical-align:middle;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+  .milestone{background:rgba(168,85,247,0.07);border:1px solid rgba(168,85,247,0.25);border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:13px;color:var(--purple);display:flex;gap:10px;align-items:flex-start;}
+  .result-bar{background:var(--card);border:1px solid rgba(34,197,94,0.3);border-radius:14px;padding:14px 16px;margin-bottom:14px;}
+  .result-bar .rb-title{font-size:10px;color:var(--green);text-transform:uppercase;letter-spacing:0.15em;font-family:'DM Mono',monospace;margin-bottom:10px;}
+  .result-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;}
+  .result-row:last-child{border-bottom:none;}
+  .result-row .rk{color:var(--muted);}
+  .result-row .rv{font-family:'DM Mono',monospace;color:var(--text);font-size:12px;}
+  .result-row .rv.good{color:var(--green);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div>
+      <div class="week-label">Semana 6 · Base · Maratona Lisboa 2026</div>
+      <h1>9–15 <span>Jun</span></h1>
+    </div>
+    <div class="vol-chip">
+      <div class="num">50</div>
+      <div class="unit">km total</div>
+    </div>
+  </div>
+</header>
+
+<div class="week-strip" id="weekStrip"></div>
+<div class="week-progress">
+  <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="prog-label" id="progLabel">0 / 36 km</div>
+</div>
+
+<div class="day-detail" id="dayDetail"></div>
+
+<script>
+const days = [
+  {
+    id:0, name:"SEG", date:"9", full:"Segunda, 9 Jun",
+    type:"gym", label:"Upper Body", color:"green", km:0,
+    notes:[
+      {icon:"💪",text:"Sessão extra — recupera o upper body em falta da semana 5."},
+      {icon:"🦵",text:"<strong>Zero pernas</strong> — pernas descansadas para a terça."},
+      {icon:"📱",text:"Abre o <strong>tracker de ginásio</strong> para referência."},
+      {icon:"🏋️",text:"Progressões habituais: Shoulder Press consolida 7,5kg · Tríceps tenta 16kg · Lat Pull 35kg."},
+    ]
+  },
+  {
+    id:1, name:"TER", date:"10", full:"Terça, 10 Jun",
+    type:"run", label:"Fácil + Strides", color:"blue", km:8,
+    metrics:[
+      {label:"Distância",val:"8",unit:"km",color:"blue"},
+      {label:"Ritmo alvo",val:"6:40–6:55",unit:"/km",color:"amber"},
+      {label:"FC máx",val:"145",unit:"bpm",color:"red"},
+      {label:"Strides",val:"8×",unit:"20seg ~95%",color:"purple"},
+    ],
+    structure:[
+      {n:"1",label:"Corrida fácil",desc:"8km conversacional. FC < 145 bpm. Nas subidas deixa o pace subir.",pace:"6:40–6:55",paceUnit:"/km",color:"#60a5fa",bg:"rgba(59,130,246,0.12)"},
+      {n:"S",label:"Strides (× 8)",desc:"No final: 8× 20seg a ~95% esforço + 60seg caminhada. Terreno plano.",pace:"~4:00",paceUnit:"/km",color:"#c084fc",bg:"rgba(168,85,247,0.12)"},
+    ],
+    notes:[
+      {icon:"⚡",text:"8 strides — mesmo protocolo da semana passada."},
+      {icon:"📊",text:"Referência semana 5: pace strides ~4:08/km · FC 135–145 · 8 repetições."},
+      {icon:"💡",text:"Faz os strides nos últimos 2km, em terreno plano se possível."},
+    ]
+  },
+  {
+    id:2, name:"QUA", date:"11", full:"Quarta, 11 Jun",
+    type:"both", label:"Corrida + Ginásio", color:"amber", km:6,
+    metrics:[
+      {label:"Corrida",val:"6",unit:"km",color:"blue"},
+      {label:"Ritmo alvo",val:"6:40–6:55",unit:"/km",color:"amber"},
+      {label:"FC máx",val:"145",unit:"bpm",color:"red"},
+      {label:"Ginásio",val:"Força",unit:"corredor",color:"green"},
+    ],
+    structure:[
+      {n:"1",label:"Corrida leve (antes do ginásio)",desc:"6km de activação suave. FC conversacional.",pace:"6:40–6:55",paceUnit:"/km",color:"#60a5fa",bg:"rgba(59,130,246,0.12)"},
+    ],
+    notes:[
+      {icon:"⚡",text:"<strong>Corrida SEMPRE antes do ginásio.</strong>"},
+      {icon:"🏋️",text:"Progressões: Squat consolida 40kg · Leg Press tenta 57kg · Calf Raises 15kg nas 4 séries."},
+      {icon:"📱",text:"Abre o <strong>tracker de ginásio</strong> para referência detalhada."},
+    ]
+  },
+  {
+    id:3, name:"QUI", date:"12", full:"Quinta, 12 Jun",
+    type:"run", label:"Progressivo 10km ↗", color:"blue", km:10,
+    milestone:"Primeiro progressivo de 10km do plano",
+    metrics:[
+      {label:"Distância",val:"10",unit:"km",color:"blue"},
+      {label:"Arranque",val:"6:45",unit:"/km",color:"green"},
+      {label:"Chegada",val:"6:05",unit:"/km",color:"amber"},
+      {label:"FC final",val:"~158",unit:"bpm",color:"red"},
+    ],
+    structure:[
+      {n:"1",label:"Aquecimento",desc:"2km muito lentos. Deixa o corpo acordar completamente.",pace:"6:50–7:00",paceUnit:"/km",color:"#4ade80",bg:"rgba(34,197,94,0.12)"},
+      {n:"2",label:"Progressão",desc:"5km a acelerar gradualmente. Não forces — deixa o pace baixar de forma natural.",pace:"6:30–6:15",paceUnit:"/km",color:"#fbbf24",bg:"rgba(245,158,11,0.12)"},
+      {n:"3",label:"Bloco final",desc:"3km a ritmo forte mas controlado. FC pode ir a 155–160bpm.",pace:"6:15–6:05",paceUnit:"/km",color:"#f87171",bg:"rgba(239,68,68,0.12)"},
+    ],
+    notes:[
+      {icon:"📊",text:"Referência: progressivo 4 Jun · 6km · pace médio 6:21 · FC 137 · últimos km a 6:06."},
+      {icon:"🎯",text:"São mais 2km que o último progressivo — o bloco de progressão é mais longo. Paciência na fase 2."},
+      {icon:"❤️",text:"FC pode subir acima de 155bpm nos últimos 3km — é normal e esperado."},
+      {icon:"🌡️",text:"Se estiver calor, a FC vai subir mais. Usa-a como guia, não o relógio."},
+    ]
+  },
+  {
+    id:4, name:"SEX", date:"13", full:"Sexta, 13 Jun",
+    type:"run", label:"Fácil", color:"blue", km:6,
+    metrics:[
+      {label:"Distância",val:"6",unit:"km",color:"blue"},
+      {label:"Ritmo alvo",val:"6:40–6:55",unit:"/km",color:"amber"},
+      {label:"FC máx",val:"145",unit:"bpm",color:"red"},
+      {label:"Tipo",val:"Fácil",unit:"aeróbico",color:"green"},
+    ],
+    structure:[
+      {n:"1",label:"Corrida fácil",desc:"6km completamente conversacional. Recuperação após o progressivo.",pace:"6:40–6:55",paceUnit:"/km",color:"#60a5fa",bg:"rgba(59,130,246,0.12)"},
+    ],
+    notes:[
+      {icon:"😌",text:"Dia de recuperação após o progressivo mais longo do plano. <strong>Resiste à tentação de forçar.</strong>"},
+      {icon:"❤️",text:"FC < 145 bpm como referência."},
+      {icon:"🦵",text:"Gémeo direito: continua com os alongamentos preventivos nocturnos."},
+    ]
+  },
+  {
+    id:5, name:"SÁB", date:"14", full:"Sábado, 14 Jun",
+    type:"run", label:"Long Run 20km 🏃", color:"amber", km:20,
+    milestone:"Primeiro 20km completo do plano — objectivo da semana 3",
+    metrics:[
+      {label:"Distância",val:"20",unit:"km",color:"amber"},
+      {label:"Ritmo alvo",val:"6:35–6:50",unit:"/km",color:"blue"},
+      {label:"FC alvo",val:"135–145",unit:"bpm",color:"green"},
+      {label:"Duração",val:"~2h10",unit:"estimado",color:"blue"},
+    ],
+    structure:[
+      {n:"1",label:"Arranque conservador",desc:"3km muito lentos. FC a subir gradualmente. Não olhes para o pace.",pace:"6:50–7:00",paceUnit:"/km",color:"#4ade80",bg:"rgba(34,197,94,0.12)"},
+      {n:"2",label:"Bloco principal",desc:"14km ao ritmo alvo. FC estável entre 135–145. Deve ser conversacional.",pace:"6:35–6:50",paceUnit:"/km",color:"#fbbf24",bg:"rgba(245,158,11,0.12)"},
+      {n:"3",label:"Chegada",desc:"Últimos 3km: mantém ou abranda. Chega com reserva — não é uma corrida de esforço.",pace:"6:40–7:00",paceUnit:"/km",color:"#60a5fa",bg:"rgba(59,130,246,0.12)"},
+    ],
+    notes:[
+      {icon:"🎯",text:"<strong>O objectivo que ficou por cumprir na semana 3.</strong> Agora tens muito melhor base — forma melhorou, pernas descansadas das férias."},
+      {icon:"🌅",text:"<strong>Manhã cedo</strong> — antes das 8h se possível. O calor tem sido o factor mais limitante."},
+      {icon:"💧",text:"Soft flask + hidratação a cada 5km. Gel disponível a partir do km 14 se precisares."},
+      {icon:"🦵",text:"Gémeo direito: ao primeiro sinal de aperto, abranda 30seg. Sem heróismos."},
+      {icon:"📊",text:"Referência: long run Córdoba (12km) · 6:13/km · FC 143. Hoje é mais longo mas pace mais conservador."},
+    ]
+  },
+  {
+    id:6, name:"DOM", date:"15", full:"Domingo, 15 Jun",
+    type:"gym", label:"Upper Body", color:"green", km:0,
+    notes:[
+      {icon:"🦵",text:"<strong>Zero pernas</strong> — estão a recuperar do long run de sábado."},
+      {icon:"📱",text:"Abre o <strong>tracker de ginásio</strong> para referência detalhada."},
+      {icon:"🏋️",text:"Progressões: Shoulder Press consolida 7,5kg · Lat Pull tenta 35kg · Tríceps tenta 16kg."},
+      {icon:"💪",text:"<strong>Push-ups:</strong> objectivo progredir para 3×10. Bench Press mantém 35kg."},
+    ]
+  },
+];
+
+const today = new Date();
+const todayDow = today.getDay();
+const dayMap = {1:0,2:1,3:2,4:3,5:4,6:5,0:6};
+const todayIdx = dayMap[todayDow];
+const weekStart = new Date(2026,5,9);
+const weekEnd   = new Date(2026,5,15);
+const isThisWeek = today >= weekStart && today <= weekEnd;
+const activeDay = isThisWeek ? todayIdx : 1;
+let current = activeDay;
+
+const strip = document.getElementById('weekStrip');
+days.forEach((d,i) => {
+  const btn = document.createElement('div');
+  const cls = d.type==='rest'?'rest':d.type==='both'?'has-both':d.type==='gym'?'has-gym':'has-run';
+  btn.className = `day-btn ${cls}${i===activeDay?' active':''}`;
+  const isToday = isThisWeek && i===todayIdx;
+  btn.innerHTML = `<div class="dname">${d.name}</div><div class="dnum">${d.date}${isToday?'<span class="today-dot"></span>':''}</div><div class="ddot"></div>`;
+  btn.addEventListener('click',() => selectDay(i));
+  strip.appendChild(btn);
+});
+
+const kmDone = days.slice(0, isThisWeek ? todayIdx : 0).reduce((a,d) => a+d.km, 0);
+document.getElementById('progFill').style.width = `${(kmDone/50)*100}%`;
+document.getElementById('progLabel').textContent = `${kmDone} / 50 km`;
+
+function selectDay(i) {
+  current = i;
+  document.querySelectorAll('.day-btn').forEach((b,j) => b.classList.toggle('active', j===i));
+  renderDay(days[i]);
+}
+
+function renderDay(d) {
+  const el = document.getElementById('dayDetail');
+  if (d.type==='rest') {
+    el.innerHTML = `<div class="rest-screen"><div class="icon">😴</div><h2>Descanso Activo</h2><p>Caminhada leve, mobilidade ou simplesmente descanso.<br>O corpo cresce quando recupera.</p></div>`;
+    return;
+  }
+
+  const typeColors = {run:'#3b82f6',gym:'#22c55e',both:'#f59e0b'};
+  const typeBg = {run:'rgba(59,130,246,0.15)',gym:'rgba(34,197,94,0.15)',both:'rgba(245,158,11,0.15)'};
+
+  let html = `<div class="detail-header">
+    <div><h2>${d.label}</h2><div class="detail-date">${d.full}</div></div>
+    <div class="tipo-badge" style="background:${typeBg[d.type]};color:${typeColors[d.type]}">${d.type==='both'?'Duplo':d.type==='gym'?'Ginásio':'Corrida'}</div>
+  </div>`;
+
+  if (d.milestone) {
+    html += `<div class="milestone">⚡ <div><strong>${d.milestone}</strong></div></div>`;
+  }
+
+  if (d.metrics) {
+    html += `<div class="metrics">`;
+    d.metrics.forEach(m => {
+      html += `<div class="metric ${m.color}"><div class="m-label">${m.label}</div><div class="m-val">${m.val}</div><div class="m-sub">${m.unit}</div></div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (d.result) {
+    html += `<div class="result-bar"><div class="rb-title">✅ Resultado real</div>`;
+    d.result.items.forEach(r => {
+      html += `<div class="result-row"><span class="rk">${r.k}</span><span class="rv${r.good?' good':''}">${r.v}</span></div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (d.structure) {
+    html += `<div class="structure"><h3>Estrutura do treino</h3>`;
+    d.structure.forEach(s => {
+      html += `<div class="step">
+        <div class="step-num" style="background:${s.bg};color:${s.color}">${s.n}</div>
+        <div class="step-body"><div class="step-title">${s.label}</div><div class="step-desc">${s.desc}</div></div>
+        <div class="step-pace" style="color:${s.color}">${s.pace}<small>${s.paceUnit}</small></div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (d.notes) {
+    html += `<div class="notes"><div class="n-title">Notas do treino</div>`;
+    d.notes.forEach(n => {
+      html += `<div class="note-item"><span class="ni">${n.icon}</span><span>${n.text}</span></div>`;
+    });
+    html += `</div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+selectDay(activeDay);
+</script>
+</body>
+</html>
