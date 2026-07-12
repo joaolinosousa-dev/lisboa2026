@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Ginásio · Semana 10</title>
+<title>Ginásio · Semana 11</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -105,7 +105,7 @@
 <header>
   <div class="header-row">
     <div>
-      <div class="week-label">Ginásio · Semana 10 · Jul 2026</div>
+      <div class="week-label">Ginásio · Semana 11 · Jul 2026</div>
       <h1>Força <span>&</span> Upper</h1>
     </div>
     <button class="reset-btn" onclick="resetSession()">↺ Reset</button>
@@ -119,9 +119,9 @@
     <div class="t-date">2 Jul · após 5km</div>
   </div>
   <div class="tab" id="tab-upper" onclick="switchSession('upper')">
-    <div class="t-label">Domingo</div>
+    <div class="t-label">Sexta</div>
     <div class="t-name">Upper Body</div>
-    <div class="t-date">12 Jul · pós recovery run 5km</div>
+    <div class="t-date">17 Jul (Sexta) · antes do long run de sábado</div>
   </div>
 </div>
 
@@ -156,27 +156,27 @@
 </div>
 
 <script>
-// ── REFERÊNCIA SEMANA 9 ──
+// ── REFERÊNCIA SEMANA 10 ──
 const REF = {
   forca: {
-    squat:     { series: ["45kg×8","45kg×8","45kg×8","45kg×8"], note:"Terceira semana a 45kg — consolidado, sem referência a dificuldade.", next:"Testa 47,5-50kg na S4" },
-    hipthrust: { series: ["23kg×10","23kg×10","23kg×10","23kg×10"], note:"\"Controlado\" em todas as séries — movimento completamente interiorizado.", next:"Sobe para 25kg" },
-    bulgarian: { series: ["0kg×8","0kg×8","0kg×8"], note:"\"Equilibrado\" consistente há várias semanas.", next:"Introduz 2-4kg esta semana" },
-    legpress:  { series: ["59kg×12","59kg×12","59kg×12"], note:"Controlado mas difícil nas últimas reps — consistente.", next:"Tenta 62-63kg" },
-    calfstand: { series: ["15kg×15","15kg×15","15kg×15","15kg×15"], note:"\"Lento e controlado\" — completamente consolidado.", next:"Testa 17-18kg nas S3/S4" },
-    calfpress: { series: ["45kg×15","45kg×15","45kg×15"], note:"Consolidado.", next:"Mantém 45kg" },
+    squat:     { series: ["40kg×8","40kg×8","40kg×8","40kg×8"], note:"Reduzido para 40kg por niggle lombar (precaução). Consolidado sem dificuldade.", next:"Testa 47,5-50kg na S4 — lombar OK agora" },
+    hipthrust: { series: ["23kg×10","23kg×10","23kg×10","23kg×10"], note:"\"Boa forma, tensão focada nos glúteos\" — feedback ideal.", next:"Sobe para 25kg" },
+    bulgarian: { series: ["0kg×8","0kg×8","0kg×8"], note:"\"Equilibrado\" nas 3 séries — consistente.", next:"Introduz 2-4kg" },
+    legpress:  { series: ["59kg×12","59kg×12","59kg×12"], note:"Controlado mas difícil — consistente há 4 semanas.", next:"Tenta 62-63kg" },
+    calfstand: { series: ["15kg×15","15kg×15","15kg×15","15kg×15"], note:"Consolidado, sem dificuldade.", next:"Testa 17-18kg nas S3/S4" },
+    calfpress: { series: ["45kg×15","45kg×15","47kg×15"], note:"Testou 47kg na S3 — \"controlado, amplitude completa\".", next:"Consolida 47kg" },
     plank:     { series: ["45–60s","45–60s","45–60s"], note:"Concluído.", next:"Foca os 60s consistentes" },
     situp:     { series: ["15×","15×","15×"], note:"Concluído.", next:"Mantém 15 reps" },
   },
   upper: {
-    bench:        { series: ["40kg×10","40kg×10","40kg×10","40kg×10"], note:"40kg nas 4 séries, \"controlado\" — consolidado.", next:"Mantém 40kg nas 4 séries" },
+    bench:        { series: ["40kg×8","40kg×8","45kg×8","40kg×8"], note:"Testou 45kg na S3 — perto da falha. Consolidado a 40kg.", next:"Mantém 40kg nas 4 séries — sem tentar 45kg" },
     pushups:      { series: ["×12","×12","×12"], note:"3×12 consistente, fadiga progressiva normal.", next:"Mantém 3×12, tenta 3×15" },
     seatedrow:    { series: ["29kg×10","29kg×10","29kg×10","32kg×10"], note:"32kg controlado na S4.", next:"29kg S1–S3, 32kg S4" },
     latpull:      { series: ["39kg×12","39kg×12","39kg×12"], note:"Salto para 39kg completo nas 3 séries.", next:"Consolida 39kg" },
-    shoulderpress:{ series: ["10kg×10","10kg×10","7.5kg×8"], note:"10kg nas S1/S2, falha na 8ª rep da S3.", next:"Objectivo 3×10 a 10kg completas" },
+    shoulderpress:{ series: ["10kg×10","10kg×10","7.5kg×8"], note:"S1/S2 completas a 10kg, falha na 9ª rep da S3.", next:"Objectivo fechar 3×10 a 10kg" },
     facepull:     { series: ["14kg×15","14kg×15","14kg×15"], note:"Controlado.", next:"Mantém 14kg" },
     biceps:       { series: ["7.5kg×12","7.5kg×12","7.5kg×12"], note:"Consolidado nas 3 séries.", next:"Mantém 7,5kg" },
-    triceps:      { series: ["16kg×12","14kg×12","14kg×12"], note:"\"Perda de forma\" a 16kg na S1, desceu para 14kg. Consistente a 14kg nas S2/S3.", next:"Tenta 16kg nas S1/S2, 14kg na S3" },
+    triceps:      { series: ["16kg×12","14kg×10","14kg×10"], note:"16kg com perda de forma na S1, 14kg com fadiga acumulada.", next:"16kg S1/S2, 14kg S3" },
     coreup:       { series: ["×15","×15","×15"], note:"Concluído.", next:"Experimenta dead bug" },
   }
 };
@@ -184,7 +184,7 @@ const REF = {
 const SESSIONS = {
   forca: {
     title: "Força Corredor",
-    day: "Quarta, 8 Jul",
+    day: "Quarta, 15 Jul",
     note: "Após 5km de corrida leve. Recovery week — aquece bem: rotações de anca, mobilidade tornozelo, agachamento lento ×10.",
     groups: [
       {
@@ -193,7 +193,7 @@ const SESSIONS = {
           { id:"squat", name:"Squat (Barra)", sets:4, reps:"8",
             tip:"Barra nas costas, pés à largura dos ombros. Descida até às coxas paralelas. Joelhos seguem os pés. Costas neutras.",
             ref:"Sem 4: 40/40/40/40kg — controlado, salto espontâneo de 35→40kg.",
-            sug:"→ Sem 10: testa 47,5-50kg na S4." },
+            sug:"→ Sem 11: testa 47,5-50kg na S4. Faz aquecimento lombar antes." },
           { id:"hipthrust", name:"Hip Thrust (Máquina)", sets:4, reps:"10",
             tip:"Costas no banco/máquina. Empurra os quadris até paralelo. Pausa 1seg, aperta o glúteo. Amplitude completa.",
             ref:"Sem 4: 23/23/23/23kg×10 — glúteos bem activados.",
@@ -238,8 +238,8 @@ const SESSIONS = {
   },
   upper: {
     title: "Upper Body",
-    day: "Domingo, 12 Jul",
-    note: "Após recovery run de 5km. Zero pernas — estão a recuperar do long run de sábado.",
+    day: "Sexta, 17 Jul",
+    note: "Upper Body antecipado para sexta — última sessão antes de 2 semanas sem ginásio (férias Algarve). Long run amanhã — sem forçar progressões hoje.",
     groups: [
       {
         name: "Peito — Empurrar", color: "#f97316",
@@ -247,7 +247,7 @@ const SESSIONS = {
           { id:"bench", name:"Bench Press", sets:4, reps:"8–10",
             tip:"Pega ligeiramente mais larga que os ombros. Barra desce ao peito, cotovelos a ~45°. Controla a descida (2 seg).",
             ref:"Sem 4: 35kg×10 nas 4 séries — controlado, últimas reps difíceis na S4.",
-            sug:"→ Sem 10: consolida 40kg. Pode testar 42,5kg na S4 se as 4 séries parecerem fáceis." },
+            sug:"→ Sem 11: mantém 40kg nas 4 séries. É a última sessão antes das férias — não arrisques." },
           { id:"pushups", name:"Push-Ups", sets:3, reps:"Máx", noWeight:true,
             tip:"Até falha logo após o Bench. Cotovelos a 45°. Se ficares abaixo de 5 reps, joelhos no chão.",
             ref:"Sem 4: 12/10/8 — milestone 3×8 atingido.",
@@ -305,13 +305,13 @@ let currentSession = 'forca';
 let state = {};
 
 function initState() {
-  const saved = localStorage.getItem('gym_state_sem10_v1');
+  const saved = localStorage.getItem('gym_state_sem11_v1');
   if (saved) { try { state = JSON.parse(saved); return; } catch(e) {} }
   state = { forca: {}, upper: {} };
 }
 
 function saveState() {
-  try { localStorage.setItem('gym_state_sem10_v1', JSON.stringify(state)); } catch(e) {}
+  try { localStorage.setItem('gym_state_sem11_v1', JSON.stringify(state)); } catch(e) {}
 }
 
 function resetSession() { document.getElementById('resetModal').classList.add('open'); }
@@ -393,7 +393,7 @@ function renderRef(session) {
   const sess = SESSIONS[session];
   let html = `<div class="ref-block">
     <div class="ref-toggle" id="refToggle" onclick="toggleRef()">
-      📊 Referência Semana 9 <span class="arrow">▼</span>
+      📊 Referência Semana 10 <span class="arrow">▼</span>
     </div>
     <div class="ref-content" id="refContent">`;
   sess.groups.forEach(g => {
