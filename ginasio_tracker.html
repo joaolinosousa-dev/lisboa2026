@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Ginásio · Semana 11</title>
+<title>Ginásio · Semana 14</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -105,7 +105,7 @@
 <header>
   <div class="header-row">
     <div>
-      <div class="week-label">Ginásio · Semana 11 · Jul 2026</div>
+      <div class="week-label">Ginásio · Semana 14 · Ago 2026</div>
       <h1>Força <span>&</span> Upper</h1>
     </div>
     <button class="reset-btn" onclick="resetSession()">↺ Reset</button>
@@ -116,12 +116,12 @@
   <div class="tab active" id="tab-forca" onclick="switchSession('forca')">
     <div class="t-label">Quarta</div>
     <div class="t-name">Força Corredor</div>
-    <div class="t-date">2 Jul · após 5km</div>
+    <div class="t-date">5 Ago · após 6km</div>
   </div>
   <div class="tab" id="tab-upper" onclick="switchSession('upper')">
     <div class="t-label">Domingo</div>
-    <div class="t-name">Upper Body</div>
-    <div class="t-date">17 Jul (Sexta) · antes do long run de sábado</div>
+    <div class="t-name">Upper Body (pós 28km)</div>
+    <div class="t-date">9 Ago · pós long run 28km</div>
   </div>
 </div>
 
@@ -156,7 +156,7 @@
 </div>
 
 <script>
-// ── REFERÊNCIA SEMANA 10 ──
+// ── REFERÊNCIA SEMANA 13 ──
 const REF = {
   forca: {
     squat:     { series: ["40kg×8","40kg×8","40kg×8","40kg×8"], note:"Reduzido para 40kg por niggle lombar (precaução). Consolidado sem dificuldade.", next:"Testa 47,5-50kg na S4 — lombar OK agora" },
@@ -184,7 +184,7 @@ const REF = {
 const SESSIONS = {
   forca: {
     title: "Força Corredor",
-    day: "— Sem ginásio (Algarve)",
+    day: "Quarta, 5 Ago",
     note: "Após 5km de corrida leve. Recovery week — aquece bem: rotações de anca, mobilidade tornozelo, agachamento lento ×10.",
     groups: [
       {
@@ -238,8 +238,8 @@ const SESSIONS = {
   },
   upper: {
     title: "Upper Body",
-    day: "Domingo, 2 Ago",
-    note: "Upper Body antecipado para sexta — última sessão antes de 2 semanas sem ginásio (férias Algarve). Long run amanhã — sem forçar progressões hoje.",
+    day: "Domingo, 9 Ago",
+    note: "Dia após o long run de 28km. Zero pernas. Ombro esquerdo: continua com reverse grip no Lat Pull.",
     groups: [
       {
         name: "Peito — Empurrar", color: "#f97316",
@@ -305,13 +305,13 @@ let currentSession = 'forca';
 let state = {};
 
 function initState() {
-  const saved = localStorage.getItem('gym_state_sem11_v1');
+  const saved = localStorage.getItem('gym_state_sem14_v1');
   if (saved) { try { state = JSON.parse(saved); return; } catch(e) {} }
   state = { forca: {}, upper: {} };
 }
 
 function saveState() {
-  try { localStorage.setItem('gym_state_sem11_v1', JSON.stringify(state)); } catch(e) {}
+  try { localStorage.setItem('gym_state_sem14_v1', JSON.stringify(state)); } catch(e) {}
 }
 
 function resetSession() { document.getElementById('resetModal').classList.add('open'); }
@@ -393,7 +393,7 @@ function renderRef(session) {
   const sess = SESSIONS[session];
   let html = `<div class="ref-block">
     <div class="ref-toggle" id="refToggle" onclick="toggleRef()">
-      📊 Referência Semana 10 <span class="arrow">▼</span>
+      📊 Referência Semana 13 <span class="arrow">▼</span>
     </div>
     <div class="ref-content" id="refContent">`;
   sess.groups.forEach(g => {
@@ -455,7 +455,7 @@ function renderSession() {
         <div class="ex-tip" id="tip-${ex.id}">
           <div class="ex-tip-inner">
             ${ex.tip}
-            <div class="ref">📊 Sem 3: ${REF[currentSession][ex.id]?.series.join(' · ') || '—'}</div>
+            <div class="ref">📊 Sem 13: ${REF[currentSession][ex.id]?.series.join(' · ') || '—'}</div>
             <div class="sug">💡 ${ex.sug || '—'}</div>
           </div>
         </div>
