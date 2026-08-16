@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Ginásio · Semana 15</title>
+<title>Ginásio · Semana 16</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -105,7 +105,7 @@
 <header>
   <div class="header-row">
     <div>
-      <div class="week-label">Ginásio · Semana 15 · Ago 2026</div>
+      <div class="week-label">Ginásio · Semana 16 · Ago 2026</div>
       <h1>Força <span>&</span> Upper</h1>
     </div>
     <button class="reset-btn" onclick="resetSession()">↺ Reset</button>
@@ -116,12 +116,12 @@
   <div class="tab active" id="tab-forca" onclick="switchSession('forca')">
     <div class="t-label">Quarta</div>
     <div class="t-name">Força Corredor</div>
-    <div class="t-date">12 Ago · após 6km</div>
+    <div class="t-date">19 Ago · após 6km</div>
   </div>
   <div class="tab" id="tab-upper" onclick="switchSession('upper')">
     <div class="t-label">Domingo</div>
-    <div class="t-name">Upper Body (pós 28km)</div>
-    <div class="t-date">9 Ago · pós long run 28km</div>
+    <div class="t-name">Upper Body (pós 32km)</div>
+    <div class="t-date">23 Ago · pós long run 30-32km</div>
   </div>
 </div>
 
@@ -156,56 +156,56 @@
 </div>
 
 <script>
-// ── REFERÊNCIA SEMANA 13 ──
+// ── REFERÊNCIA SEMANA 15 ──
 const REF = {
   forca: {
-    squat:     { series: ["40kg×8","40kg×8","40kg×8","40kg×8"], note:"Reduzido para 40kg por niggle lombar (precaução). Consolidado sem dificuldade.", next:"Testa 47,5-50kg na S4 — lombar OK agora" },
-    hipthrust: { series: ["23kg×10","23kg×10","23kg×10","23kg×10"], note:"\"Boa forma, tensão focada nos glúteos\" — feedback ideal.", next:"Sobe para 25kg" },
-    bulgarian: { series: ["0kg×8","0kg×8","0kg×8"], note:"\"Equilibrado\" nas 3 séries — consistente.", next:"Introduz 2-4kg" },
-    legpress:  { series: ["59kg×12","59kg×12","59kg×12"], note:"Controlado mas difícil — consistente há 4 semanas.", next:"Tenta 62-63kg" },
-    calfstand: { series: ["15kg×15","15kg×15","15kg×15","15kg×15"], note:"Consolidado, sem dificuldade.", next:"Testa 17-18kg nas S3/S4" },
-    calfpress: { series: ["45kg×15","45kg×15","47kg×15"], note:"Testou 47kg na S3 — \"controlado, amplitude completa\".", next:"Consolida 47kg" },
-    plank:     { series: ["45–60s","45–60s","45–60s"], note:"Concluído.", next:"Foca os 60s consistentes" },
-    situp:     { series: ["15×","15×","15×"], note:"Concluído.", next:"Mantém 15 reps" },
+    squat:     { series: ["50kg×8","50kg×8","50kg×8","50kg×8"], note:"\"Controlado mas desafiante\" nas 4 séries — novo recorde nas 4 séries completas.", next:"ENTRA EM MANUTENÇÃO — mantém 50kg×8, sem tentar subir mais" },
+    hipthrust: { series: ["28kg×10","28kg×10","28kg×10","28kg×10"], note:"\"Controlado\" — últimas reps das S3/S4 ligeiramente mais desafiantes. Superou o target de 25kg.", next:"Sobe para 30kg" },
+    bulgarian: { series: ["4kg×8","4kg×8","4kg×8"], note:"\"Controlado e equilibrado\" nas 3 séries.", next:"Sobe para 5-6kg" },
+    legpress:  { series: ["59kg×12","59kg×12","62kg×12"], note:"62kg testado na S3 — \"últimas reps difíceis\".", next:"Consolida 62kg ou tenta 63-65kg" },
+    calfstand: { series: ["15kg×15","15kg×15","20kg×15","20kg×15"], note:"20kg testado nas S3/S4 — \"lento e controlado\". Novo recorde.", next:"Consolida 20kg nas 4 séries" },
+    calfpress: { series: ["47kg×15","47kg×15","47kg×15"], note:"Consistente nas 3 séries.", next:"Mantém 47kg ou testa 49kg" },
+    plank:     { series: ["60s","60s","60s"], note:"Consolidado.", next:"Mantém 60s" },
+    situp:     { series: ["15×","15×","15×"], note:"Consolidado.", next:"Mantém 15 reps" },
   },
   upper: {
-    bench:        { series: ["40kg×8","40kg×8","45kg×8","40kg×8"], note:"Testou 45kg na S3 — perto da falha. Consolidado a 40kg.", next:"Mantém 40kg nas 4 séries — sem tentar 45kg" },
-    pushups:      { series: ["×12","×12","×12"], note:"3×12 consistente, fadiga progressiva normal.", next:"Mantém 3×12, tenta 3×15" },
-    seatedrow:    { series: ["29kg×10","29kg×10","29kg×10","29kg×10"], note:"Conservador no regresso — execução limpa.", next:"32kg S1-S3 · 35kg S4" },
-    latpull:      { series: ["39kg×12","39kg×12","39kg×12"], note:"Salto para 39kg completo nas 3 séries.", next:"Consolida 39kg" },
-    shoulderpress:{ series: ["10kg×10","10kg×10","7.5kg×8"], note:"S1/S2 completas a 10kg, falha na 9ª rep da S3.", next:"Objectivo fechar 3×10 a 10kg" },
+    bench:        { series: ["40kg×10","40kg×10","40kg×10","40kg×10"], note:"Consolidado nas 4 séries — \"últimas reps desafiantes\" na S4.", next:"Mantém 40kg×10" },
+    pushups:      { series: ["×12","×12","×12"], note:"Consistente nas 3 séries.", next:"Mantém 3×12, tenta pés mais elevados" },
+    seatedrow:    { series: ["32kg×12","35kg×10","37kg×10","37kg×10"], note:"Progressão dentro da própria sessão — \"controlado\" em todas.", next:"Consolida 37kg nas 4 séries" },
+    latpull:      { series: ["39kg×12","34kg×12","34kg×12"], note:"⚠️ 39kg foi \"Desconfortável\" (ombro) na S1 — reduzido para 34kg nas S2/S3, voltou a \"Controlado\".", next:"COMEÇA a 34-35kg, NÃO 39kg. Sobe só se zero desconforto." },
+    shoulderpress:{ series: ["10kg×10","10kg×10","10kg×10"], note:"Consolidado nas 3 séries — milestone.", next:"Mantém 10kg×10, considera 11-12kg se fácil" },
     facepull:     { series: ["14kg×15","14kg×15","14kg×15"], note:"Controlado.", next:"Mantém 14kg" },
-    biceps:       { series: ["7.5kg×12","7.5kg×12","7.5kg×12"], note:"Consolidado nas 3 séries.", next:"Mantém 7,5kg" },
-    triceps:      { series: ["16kg×12","14kg×10","14kg×10"], note:"16kg com perda de forma na S1, 14kg com fadiga acumulada.", next:"16kg S1/S2, 14kg S3" },
-    coreup:       { series: ["×15","×15","×15"], note:"Concluído.", next:"Experimenta dead bug" },
+    biceps:       { series: ["7.5kg×12","7.5kg×12","7.5kg×12"], note:"Consolidado.", next:"Mantém 7,5kg, considera 8kg" },
+    triceps:      { series: ["14kg×12","16kg×12","16kg×12"], note:"Progressão dentro da sessão — consolidado a 16kg nas S2/S3.", next:"Consolida 16kg nas 3 séries" },
+    coreup:       { series: ["×15","×15","×15"], note:"Consolidado.", next:"Mantém ou varia exercício" },
   }
 };
 
 const SESSIONS = {
   forca: {
     title: "Força Corredor",
-    day: "Quarta, 12 Ago",
-    note: "Após 6km de corrida leve. Aquece bem: rotações de anca, mobilidade tornozelo, agachamento lento ×10. Pliometria no final (10 min).",
+    day: "Quarta, 19 Ago",
+    note: "Após 6km de corrida leve. Aquece bem: rotações de anca, mobilidade tornozelo, agachamento lento ×10. Pliometria no final (10 min). Squat entra em manutenção esta semana — o foco de progressão passa para Hip Thrust e Bulgarian.",
     groups: [
       {
         name: "Pernas — Cadeia Posterior", color: "#fbbf24",
         exercises: [
           { id:"squat", name:"Squat (Barra)", sets:4, reps:"8",
             tip:"Barra nas costas, pés à largura dos ombros. Descida até às coxas paralelas. Joelhos seguem os pés. Costas neutras.",
-            ref:"Sem 13: 47,5/47,5/47,5/47,5kg — consolidado, \"controlado\" em todas as séries.",
-            sug:"→ Sem 15: S1-S3 a 47,5kg · S4 a 50kg." },
+            ref:"Sem 15: 50/50/50/50kg×8 — \"controlado mas desafiante\" nas 4 séries. Novo recorde.",
+            sug:"→ Sem 16: MANUTENÇÃO. Mantém 50kg×8 — sem tentar subir mais. As pernas precisam de reserva para a corrida." },
           { id:"hipthrust", name:"Hip Thrust (Máquina)", sets:4, reps:"10",
             tip:"Costas no banco/máquina. Empurra os quadris até paralelo. Pausa 1seg, aperta o glúteo. Amplitude completa.",
-            ref:"Sem 13: 23/23/23/23kg×10 — \"controlado, boa forma\" em todas as séries.",
-            sug:"→ Sem 14: sobe para 25kg." },
+            ref:"Sem 15: 28/28/28/28kg×10 — \"controlado\", últimas reps das S3/S4 mais desafiantes. Superou target de 25kg.",
+            sug:"→ Sem 16: sobe para 30kg." },
           { id:"bulgarian", name:"Bulgarian Split Squat", sets:3, reps:"8/lado",
             tip:"Pé traseiro elevado. Desce o joelho traseiro em direção ao chão. Joelho da frente não passa a ponta do pé.",
-            ref:"Sem 13: 0kg×8 — \"estável\" nas 3 séries, equilíbrio consolidado.",
-            sug:"→ Sem 14: introduz 4kg de carga." },
+            ref:"Sem 15: 4/4/4kg×8 — \"controlado e equilibrado\" nas 3 séries.",
+            sug:"→ Sem 16: sobe para 5-6kg." },
           { id:"legpress", name:"Leg Press (Máquina)", sets:3, reps:"12",
             tip:"Pés à largura dos ombros no meio da plataforma. Não bloqueia os joelhos. Descida controlada.",
-            ref:"Sem 13: 59/59/59kg×12 — controlado mas difícil nas últimas reps.",
-            sug:"→ Sem 14: tenta 62-63kg." },
+            ref:"Sem 15: 59/59/62kg×12 — 62kg testado na S3, \"últimas reps difíceis\".",
+            sug:"→ Sem 16: consolida 62kg nas 3 séries ou tenta 63-65kg se sentires margem." },
         ]
       },
       {
@@ -213,12 +213,12 @@ const SESSIONS = {
         exercises: [
           { id:"calfstand", name:"Calf Raises Standing", sets:4, reps:"15",
             tip:"Step ou máquina. Sobe ao máximo, desce lentamente (3 seg) abaixo da linha neutra. A fase excêntrica é o que conta.",
-            ref:"Sem 13: 15/15/15/15kg — \"lento e controlado\" nas 4 séries.",
-            sug:"→ Sem 14: testa 17-18kg nas S3/S4." },
+            ref:"Sem 15: 15/15/20/20kg — 20kg testado nas S3/S4, \"lento e controlado\". Novo recorde.",
+            sug:"→ Sem 16: consolida 20kg nas 4 séries." },
           { id:"calfpress", name:"Calf Press (Máquina)", sets:3, reps:"15",
             tip:"Na leg press: pés na ponta da plataforma. Amplitude completa. Varia posição dos pés.",
-            ref:"Sem 13: 45/47/47kg×15 — 47kg testado e controlado nas S2/S3.",
-            sug:"→ Sem 14: consolida 47kg nas 3 séries." },
+            ref:"Sem 15: 47/47/47kg×15 — consistente nas 3 séries.",
+            sug:"→ Sem 16: mantém 47kg ou testa 49kg." },
         ]
       },
       {
@@ -226,32 +226,32 @@ const SESSIONS = {
         exercises: [
           { id:"plank", name:"Prancha Frontal", sets:3, reps:"45–60seg", noWeight:true,
             tip:"Antebraços no chão, corpo em linha reta. Core ativo, sem baixar a bacia. Respira.",
-            ref:"Sem 13: 60s×3 — consolidado.",
-            sug:"→ Sem 14: mantém 60s. Experimenta prancha lateral para variar." },
+            ref:"Sem 15: 60s×3 — consolidado.",
+            sug:"→ Sem 16: mantém 60s." },
           { id:"situp", name:"Incline Sit-Ups", sets:3, reps:"15", noWeight:true,
             tip:"Banco inclinado. Movimento controlado, sem momentum. Mãos atrás da cabeça ou cruzadas no peito.",
-            ref:"Sem 13: 15×3 com 5kg — consolidado.",
-            sug:"→ Sem 14: mantém." },
+            ref:"Sem 15: 15×3 — consolidado.",
+            sug:"→ Sem 16: mantém." },
         ]
       }
     ]
   },
   upper: {
     title: "Upper Body",
-    day: "Domingo, 16 Ago",
-    note: "Dia após o long run de 28km. Zero pernas. Ombro esquerdo: continua com reverse grip no Lat Pull.",
+    day: "Domingo, 23 Ago",
+    note: "Dia após o long run de 30-32km. Zero pernas. Ombro esquerdo: continua com reverse grip no Lat Pull — começa a 34-35kg, NÃO 39kg (sem 15 teve desconforto a essa carga).",
     groups: [
       {
         name: "Peito — Empurrar", color: "#f97316",
         exercises: [
           { id:"bench", name:"Bench Press", sets:4, reps:"8–10",
             tip:"Pega ligeiramente mais larga que os ombros. Barra desce ao peito, cotovelos a ~45°. Controla a descida (2 seg).",
-            ref:"Sem 13: 30/30/30/40kg — ombro deu sinal no aquecimento, limitou nas S1-S3. S4 a 40kg OK.",
-            sug:"→ Sem 14: 35kg S1-S3 (ombro a recuperar). Testa 40kg na S4 se ombro OK." },
+            ref:"Sem 15: 40/40/40/40kg×10 — consolidado, \"últimas reps desafiantes\" na S4.",
+            sug:"→ Sem 16: mantém 40kg×10 nas 4 séries." },
           { id:"pushups", name:"Push-Ups", sets:3, reps:"Máx", noWeight:true,
             tip:"Até falha logo após o Bench. Cotovelos a 45°. Se ficares abaixo de 5 reps, joelhos no chão.",
-            ref:"Sem 13: 12/12/12 — consolidado sem chegar à falha.",
-            sug:"→ Sem 14: pés elevados ou mochila leve para aumentar dificuldade." },
+            ref:"Sem 15: 12/12/12 — consistente.",
+            sug:"→ Sem 16: mantém 3×12, tenta pés mais elevados para aumentar dificuldade." },
         ]
       },
       {
@@ -259,12 +259,12 @@ const SESSIONS = {
         exercises: [
           { id:"seatedrow", name:"Seated Row (Máquina)", sets:4, reps:"10",
             tip:"Costas erguidas, não inclinas para trás. Puxa para o abdómen, cotovelos rentes ao tronco. Pausa 1seg.",
-            ref:"Sem 13: 29/29/29/29kg — execução limpa, conservador no regresso.",
-            sug:"→ Sem 14: 32kg S1-S3, testa 35kg na S4." },
+            ref:"Sem 15: 32/35/37/37kg — progressão dentro da própria sessão, \"controlado\" em todas.",
+            sug:"→ Sem 16: consolida 37kg nas 4 séries." },
           { id:"latpull", name:"Lat Pull Down", sets:3, reps:"12",
             tip:"Pega larga, puxa até ao mento. Ligeiro lean-back. Controla a subida.",
-            ref:"Sem 13: 32/34/36kg (reverse grip) — progressão limpa, ombro OK.",
-            sug:"→ Sem 14: reverse grip · consolida 36kg · tenta 38kg na S3 se controlado." },
+            ref:"Sem 15: 39(desconfortável)/34/34kg (reverse grip) — carga mais alta gerou desconforto no ombro, reduzido e resolvido.",
+            sug:"→ Sem 16: COMEÇA a 34-35kg. Sobe só se sentires zero desconforto — não forces os 39kg já." },
         ]
       },
       {
@@ -272,12 +272,12 @@ const SESSIONS = {
         exercises: [
           { id:"shoulderpress", name:"Shoulder Press (Halteres)", sets:3, reps:"10",
             tip:"Sentado ou de pé. Halteres ao nível das orelhas, empurra para cima. Core ativo. Controla a descida.",
-            ref:"Sem 13: 10/10/7,5kg — S1/S2 completas a 10kg, S3 teve de descer.",
-            sug:"→ Sem 14: objectivo fechar 3×10 a 10kg." },
+            ref:"Sem 15: 10/10/10kg×10 — consolidado nas 3 séries, milestone.",
+            sug:"→ Sem 16: mantém 10kg×10. Considera 11-12kg se sentires fácil." },
           { id:"facepull", name:"Face Pull (Cabo)", sets:3, reps:"15",
             tip:"Cabo alto com corda. Puxa para o rosto, cotovelos altos e para fora. Lento e controlado.",
-            ref:"Sem 13: 14/14/14kg×15 — confortável nas 3 séries.",
-            sug:"→ Sem 14: mantém 14kg." },
+            ref:"Sem 15: 14/14/14kg×15 — controlado nas 3 séries.",
+            sug:"→ Sem 16: mantém 14kg." },
         ]
       },
       {
@@ -285,16 +285,16 @@ const SESSIONS = {
         exercises: [
           { id:"biceps", name:"Bíceps Curls (Halteres)", sets:3, reps:"12",
             tip:"Alternado. Cotovelos fixos junto ao tronco. Desce lentamente (2 seg). Se balançares o tronco, está pesado de mais.",
-            ref:"Sem 13: 7,5/7,5/7,5kg×12 — controlado nas 3 séries.",
-            sug:"→ Sem 14: mantém 7,5kg." },
+            ref:"Sem 15: 7,5/7,5/7,5kg×12 — consolidado nas 3 séries.",
+            sug:"→ Sem 16: mantém 7,5kg. Considera 8kg." },
           { id:"triceps", name:"Tríceps Extension", sets:3, reps:"12",
             tip:"Com haltere atrás da cabeça ou cabo com pega em V. Cotovelo fixo, extensão completa. Não bloqueia o cotovelo.",
-            ref:"Sem 13: 14/14/14kg — \"controlado, últimas reps desafiantes\" nas 3 séries.",
-            sug:"→ Sem 14: testa 16kg na S1. Se controlado avança para S2. 14kg na S3." },
+            ref:"Sem 15: 14/16/16kg — progressão dentro da sessão, consolidado a 16kg nas S2/S3.",
+            sug:"→ Sem 16: consolida 16kg nas 3 séries." },
           { id:"coreup", name:"Core (à escolha)", sets:3, reps:"45seg", noWeight:true,
             tip:"Prancha, dead bug, ou Russian twists. O que não fizeste na sessão de quarta.",
-            ref:"Sem 13: prancha 60s×3 — consolidado.",
-            sug:"→ Sem 14: dead bug 2×8/lado ou Russian twists." },
+            ref:"Sem 15: 15×3 — consolidado.",
+            sug:"→ Sem 16: mantém ou varia exercício." },
         ]
       }
     ]
@@ -305,13 +305,13 @@ let currentSession = 'forca';
 let state = {};
 
 function initState() {
-  const saved = localStorage.getItem('gym_state_sem15_v1');
+  const saved = localStorage.getItem('gym_state_sem16_v1');
   if (saved) { try { state = JSON.parse(saved); return; } catch(e) {} }
   state = { forca: {}, upper: {} };
 }
 
 function saveState() {
-  try { localStorage.setItem('gym_state_sem15_v1', JSON.stringify(state)); } catch(e) {}
+  try { localStorage.setItem('gym_state_sem16_v1', JSON.stringify(state)); } catch(e) {}
 }
 
 function resetSession() { document.getElementById('resetModal').classList.add('open'); }
@@ -393,7 +393,7 @@ function renderRef(session) {
   const sess = SESSIONS[session];
   let html = `<div class="ref-block">
     <div class="ref-toggle" id="refToggle" onclick="toggleRef()">
-      📊 Referência Semana 13 <span class="arrow">▼</span>
+      📊 Referência Semana 15 <span class="arrow">▼</span>
     </div>
     <div class="ref-content" id="refContent">`;
   sess.groups.forEach(g => {
