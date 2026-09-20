@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Ginásio · Semana 19</title>
+<title>Ginásio · Semana 21</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -105,7 +105,7 @@
 <header>
   <div class="header-row">
     <div>
-      <div class="week-label">Ginásio · Semana 19 · Set 2026</div>
+      <div class="week-label">Ginásio · Semana 21 · Set 2026 (Taper)</div>
       <h1>Força <span>&</span> Upper</h1>
     </div>
     <button class="reset-btn" onclick="resetSession()">↺ Reset</button>
@@ -115,13 +115,13 @@
 <div class="tabs">
   <div class="tab active" id="tab-forca" onclick="switchSession('forca')">
     <div class="t-label">Quarta</div>
-    <div class="t-name">Força Corredor (volume reduzido — Pico)</div>
-    <div class="t-date">10 Set · após 7km</div>
+    <div class="t-name">Força Corredor (opcional — Taper)</div>
+    <div class="t-date">24 Set · muito leve, se fizeres</div>
   </div>
   <div class="tab" id="tab-upper" onclick="switchSession('upper')">
     <div class="t-label">Domingo</div>
-    <div class="t-name">Upper Body</div>
-    <div class="t-date">13 Set · pós long run 30-32km</div>
+    <div class="t-name">Upper Body (leve)</div>
+    <div class="t-date">27 Set · manter leve</div>
   </div>
 </div>
 
@@ -156,36 +156,36 @@
 </div>
 
 <script>
-// ── REFERÊNCIA SEMANA 18 (força) / SEMANA 17 (upper) ──
+// ── REFERÊNCIA SEMANA 18 (força, saltada nas sem19 e sem20) / SEMANA 20 (upper, leve intencional) ──
 const REF = {
   forca: {
-    squat:     { series: ["40kg×8","50kg×8","50kg×8"], note:"3 séries (Pico) — S1 mais leve como rampa, S2/S3 a 50kg \"controlado\".", next:"MANTÉM 50kg×8 (3 séries) — podes uniformizar todas a 50kg se sentires margem." },
-    hipthrust: { series: ["30kg×10","30kg×10","30kg×10","30kg×10"], note:"\"Controlado\" nas 4 séries.", next:"MANTÉM 30kg×10 — sem alteração, protector (lombar)." },
-    bulgarian: { series: ["8kg×8","8kg×8"], note:"2 séries (Pico) — consolidado.", next:"MANTÉM 8kg (2 séries)." },
-    legpress:  { series: ["52kg×12","52kg×12","52kg×12"], note:"\"Confortável\" — baixado propositadamente de 59kg por precaução (DOMS da semana anterior).", next:"Decide hoje: volta a 59kg se sentires recuperado, ou mantém 52kg se ainda houver resíduo de fadiga." },
-    calfstand: { series: ["20kg×15","20kg×15","20kg×15","20kg×15"], note:"Consolidado nas 4 séries.", next:"MANTÉM 20kg." },
-    calfpress: { series: ["52kg×15","52kg×15","52kg×15"], note:"Consolidado a 52kg nas 3 séries.", next:"MANTÉM 52kg." },
-    plank:     { series: ["60s","60s","60s"], note:"Consolidado.", next:"Mantém 60s" },
-    situp:     { series: ["15×","15×","15×"], note:"Consolidado.", next:"Mantém 15 reps" },
+    squat:     { series: ["40kg×8","50kg×8","50kg×8"], note:"SALTADA nas sem19 e sem20. Última referência: sem18, \"controlado\".", next:"TAPER: opcional. Se fizeres, 2×8 leve (ex: 35-40kg)." },
+    hipthrust: { series: ["30kg×10","30kg×10","30kg×10","30kg×10"], note:"SALTADA nas sem19 e sem20. Última referência: sem18.", next:"TAPER: opcional. Se fizeres, 3×10 a 25-30kg." },
+    bulgarian: { series: ["8kg×8","8kg×8"], note:"SALTADA nas sem19 e sem20. Última referência: sem18.", next:"TAPER: opcional. Se fizeres, 1×8 leve (peso corporal ou 4kg)." },
+    legpress:  { series: ["52kg×12","52kg×12","52kg×12"], note:"SALTADA nas sem19 e sem20. Última referência: sem18, baixado por precaução.", next:"TAPER: opcional. Se fizeres, 2×12 a 45-52kg." },
+    calfstand: { series: ["20kg×15","20kg×15","20kg×15","20kg×15"], note:"SALTADA nas sem19 e sem20.", next:"TAPER: opcional, leve." },
+    calfpress: { series: ["52kg×15","52kg×15","52kg×15"], note:"SALTADA nas sem19 e sem20.", next:"TAPER: opcional, leve." },
+    plank:     { series: ["60s","60s","60s"], note:"SALTADA nas sem19 e sem20.", next:"Mantém 60s se fizeres." },
+    situp:     { series: ["15×","15×","15×"], note:"SALTADA nas sem19 e sem20.", next:"Mantém 15 reps se fizeres." },
   },
   upper: {
-    bench:        { series: ["40kg×10","40kg×10","40kg×10","40kg×10"], note:"Sem17: consolidado — \"últimas reps desafiantes\" nas S3/S4.", next:"Mantém 40kg×10." },
-    pushups:      { series: ["×12","×12","×12"], note:"Sem17: consistente.", next:"Mantém 3×12" },
-    seatedrow:    { series: ["39kg×10","39kg×10","39kg×10","39kg×10"], note:"Sem17: consolidado a 39kg, \"controlado\".", next:"Tenta 40-41kg se sentires margem." },
-    latpull:      { series: ["34kg×10","36kg×10","36kg×10"], note:"Sem17: progressão dentro da sessão — \"confortável/controlado\". Zero desconforto.", next:"Tenta 37-38kg se zero desconforto persistir." },
-    shoulderpress:{ series: ["10kg×10","10kg×10","10kg×10"], note:"Sem17: \"controlado\" nas 3 séries.", next:"Considera 11-12kg." },
-    facepull:     { series: ["14kg×15","14kg×15","14kg×15"], note:"Sem17: \"confortável\".", next:"Considera 16kg." },
-    biceps:       { series: ["7.5kg×12","7.5kg×12","7.5kg×12"], note:"Sem17: \"fácil/confortável\".", next:"Tenta 8kg." },
-    triceps:      { series: ["16kg×12","16kg×12","16kg×12"], note:"Sem17: consolidado.", next:"Mantém 16kg ou tenta 18kg." },
-    coreup:       { series: ["×15","×15","×15"], note:"Sem17: consolidado.", next:"Mantém ou varia" },
+    bench:        { series: ["30kg×10","30kg×10","30kg×10","30kg×10"], note:"Sem20: reduzido intencionalmente de 40→30kg, \"leve e confortável\" — boa gestão pós-esforço.", next:"Taper: mantém leve (30-35kg) ou volta a 40kg se sentires vontade." },
+    pushups:      { series: ["—","—","—"], note:"Sem20: não realizado (sessão encurtada).", next:"Retoma se quiseres, sem pressão." },
+    seatedrow:    { series: ["34kg×10","34kg×10","34kg×10","—"], note:"Sem20: reduzido de 39→34kg, \"confortável\". S4 não realizada.", next:"Mantém leve (34-37kg)." },
+    latpull:      { series: ["—","—","—"], note:"Sem20: não realizado (sessão encurtada).", next:"Retoma a 34-36kg se quiseres." },
+    shoulderpress:{ series: ["7.5kg×10","7.5kg×10","7.5kg×10"], note:"Sem20: reduzido de 10→7,5kg, \"confortável\".", next:"Mantém leve (7,5-10kg)." },
+    facepull:     { series: ["—","—","—"], note:"Sem20: não realizado.", next:"Opcional, leve." },
+    biceps:       { series: ["7.5kg×12","7.5kg×12","—"], note:"Sem20: \"controlado\", S3 não realizada.", next:"Mantém 7,5kg." },
+    triceps:      { series: ["14kg×12","14kg×12","14kg×12"], note:"Sem20: \"confortável\" nas 3 séries.", next:"Mantém 14kg." },
+    coreup:       { series: ["×15","×15","×15"], note:"Sem20: completo, 3 séries.", next:"Mantém." },
   }
 };
 
 const SESSIONS = {
   forca: {
     title: "Força Corredor",
-    day: "Quinta, 10 Set",
-    note: "PICO — volume reduzido. Após 7km de corrida leve. Pliometria 5 min. Decide Leg Press hoje: voltar a 59kg ou manter 52kg conforme sensações.",
+    day: "Quinta, 24 Set (opcional)",
+    note: "TAPER — sessão totalmente opcional. Saltada nas últimas 2 semanas sem qualquer impacto. Se decidires fazer, mantém muito leve (cargas reduzidas 20-30%, longe da falha) — o objectivo é activação, não construção.",
     groups: [
       {
         name: "Pernas — Cadeia Posterior", color: "#fbbf24",
@@ -193,19 +193,19 @@ const SESSIONS = {
           { id:"squat", name:"Squat (Barra)", sets:3, reps:"8",
             tip:"Barra nas costas, pés à largura dos ombros. Descida até às coxas paralelas. Joelhos seguem os pés. Costas neutras.",
             ref:"Sem 18: 40/50/50kg×8 (3 séries) — S1 mais leve como rampa, S2/S3 \"controlado\".",
-            sug:"→ Sem 19: mantém 50kg×8 (3 séries). Podes uniformizar todas a 50kg se sentires margem." },
+            sug:"→ Sem 20: mantém 50kg×8 (3 séries). Podes uniformizar todas a 50kg se sentires margem." },
           { id:"hipthrust", name:"Hip Thrust (Máquina)", sets:4, reps:"10",
             tip:"Costas no banco/máquina. Empurra os quadris até paralelo. Pausa 1seg, aperta o glúteo. Amplitude completa.",
             ref:"Sem 18: 30/30/30/30kg×10 — \"controlado\" nas 4 séries.",
-            sug:"→ Sem 19: MANTÉM 4 séries a 30kg — sem alteração, protector (lombar)." },
+            sug:"→ Sem 20: MANTÉM 4 séries a 30kg — sem alteração, protector (lombar)." },
           { id:"bulgarian", name:"Bulgarian Split Squat", sets:2, reps:"8/lado",
             tip:"Pé traseiro elevado. Desce o joelho traseiro em direção ao chão. Joelho da frente não passa a ponta do pé.",
             ref:"Sem 18: 8/8kg×8 (2 séries) — consolidado.",
-            sug:"→ Sem 19: MANTÉM 8kg (2 séries)." },
+            sug:"→ Sem 20: MANTÉM 8kg (2 séries)." },
           { id:"legpress", name:"Leg Press (Máquina)", sets:3, reps:"12",
             tip:"Pés à largura dos ombros no meio da plataforma. Não bloqueia os joelhos. Descida controlada.",
             ref:"Sem 18: 52/52/52kg×12 — \"confortável\", baixado propositadamente por precaução (DOMS).",
-            sug:"→ Sem 19: DECIDE hoje — volta a 59kg se sentires recuperado, ou mantém 52kg se ainda houver resíduo de fadiga." },
+            sug:"→ Sem 20: DECIDE hoje — volta a 59kg se sentires recuperado, ou mantém 52kg se ainda houver resíduo de fadiga." },
         ]
       },
       {
@@ -214,11 +214,11 @@ const SESSIONS = {
           { id:"calfstand", name:"Calf Raises Standing", sets:4, reps:"15",
             tip:"Step ou máquina. Sobe ao máximo, desce lentamente (3 seg) abaixo da linha neutra. A fase excêntrica é o que conta.",
             ref:"Sem 18: 20/20/20/20kg — consolidado nas 4 séries.",
-            sug:"→ Sem 19: MANTÉM 20kg." },
+            sug:"→ Sem 20: MANTÉM 20kg." },
           { id:"calfpress", name:"Calf Press (Máquina)", sets:3, reps:"15",
             tip:"Na leg press: pés na ponta da plataforma. Amplitude completa. Varia posição dos pés.",
             ref:"Sem 18: 52/52/52kg×15 — consolidado.",
-            sug:"→ Sem 19: MANTÉM 52kg." },
+            sug:"→ Sem 20: MANTÉM 52kg." },
         ]
       },
       {
@@ -227,31 +227,31 @@ const SESSIONS = {
           { id:"plank", name:"Prancha Frontal", sets:3, reps:"45–60seg", noWeight:true,
             tip:"Antebraços no chão, corpo em linha reta. Core ativo, sem baixar a bacia. Respira.",
             ref:"Sem 18: 60s×3 — consolidado.",
-            sug:"→ Sem 19: mantém 60s." },
+            sug:"→ Sem 20: mantém 60s." },
           { id:"situp", name:"Incline Sit-Ups", sets:3, reps:"15", noWeight:true,
             tip:"Banco inclinado. Movimento controlado, sem momentum. Mãos atrás da cabeça ou cruzadas no peito.",
             ref:"Sem 18: 15×3 — consolidado.",
-            sug:"→ Sem 19: mantém." },
+            sug:"→ Sem 20: mantém." },
         ]
       }
     ]
   },
   upper: {
     title: "Upper Body",
-    day: "Domingo, 13 Set",
-    note: "Dia após o long run de 30-32km + ~12km pace maratona. Zero pernas. Dados de referência ainda da sem17 (upper body não foi reportado na sem18 devido à mudança de calendário).",
+    day: "Domingo, 27 Set",
+    note: "TAPER — mantém leve, como fizeste na sem20 (Bench 30kg em vez de 40kg, etc). Sem pressão para completar todas as séries se não apetecer.",
     groups: [
       {
         name: "Peito — Empurrar", color: "#f97316",
         exercises: [
           { id:"bench", name:"Bench Press", sets:4, reps:"8–10",
             tip:"Pega ligeiramente mais larga que os ombros. Barra desce ao peito, cotovelos a ~45°. Controla a descida (2 seg).",
-            ref:"Sem 17: 40/40/40/40kg×10 — consolidado, \"últimas reps desafiantes\".",
-            sug:"→ Sem 18: mantém 40kg×10." },
+            ref:"Sem 19: 40/40/40/40kg×10 — \"controlado\" nas 4 séries.",
+            sug:"→ Sem 20: mantém 40kg×10." },
           { id:"pushups", name:"Push-Ups", sets:3, reps:"Máx", noWeight:true,
             tip:"Até falha logo após o Bench. Cotovelos a 45°. Se ficares abaixo de 5 reps, joelhos no chão.",
-            ref:"Sem 17: 12/12/12 — consistente.",
-            sug:"→ Sem 18: mantém 3×12." },
+            ref:"Sem 19: 12/12/12 — consistente.",
+            sug:"→ Sem 20: mantém 3×12." },
         ]
       },
       {
@@ -259,12 +259,12 @@ const SESSIONS = {
         exercises: [
           { id:"seatedrow", name:"Seated Row (Máquina)", sets:4, reps:"10",
             tip:"Costas erguidas, não inclinas para trás. Puxa para o abdómen, cotovelos rentes ao tronco. Pausa 1seg.",
-            ref:"Sem 17: 39/39/39/39kg — consolidado, \"controlado\".",
-            sug:"→ Sem 18: tenta 40-41kg se sentires margem." },
+            ref:"Sem 19: 39/39/39kg — sessão encurtada, S4 não realizada.",
+            sug:"→ Sem 20: completa as 4 séries a 39kg." },
           { id:"latpull", name:"Lat Pull Down", sets:3, reps:"12",
             tip:"Pega larga, puxa até ao mento. Ligeiro lean-back. Controla a subida.",
-            ref:"Sem 17: 34/36/36kg (reverse grip) — progressão dentro da sessão, \"confortável/controlado\", zero desconforto.",
-            sug:"→ Sem 18: tenta 37-38kg se zero desconforto persistir." },
+            ref:"Sem 19: 32/34/36kg (reverse grip) — progressão dentro da sessão, \"confortável\" em todas. Zero desconforto.",
+            sug:"→ Sem 20: tenta manter 36kg nas 3 séries, ou mais se zero desconforto." },
         ]
       },
       {
@@ -272,12 +272,12 @@ const SESSIONS = {
         exercises: [
           { id:"shoulderpress", name:"Shoulder Press (Halteres)", sets:3, reps:"10",
             tip:"Sentado ou de pé. Halteres ao nível das orelhas, empurra para cima. Core ativo. Controla a descida.",
-            ref:"Sem 17: 10/10/10kg×10 — \"controlado\".",
-            sug:"→ Sem 18: considera 11-12kg — bem consolidado há semanas." },
+            ref:"Sem 19: 10/10/10kg×10 — \"controlado\", última rep da S3 perto da falha.",
+            sug:"→ Sem 20: mantém 10kg — ainda a exigir esforço." },
           { id:"facepull", name:"Face Pull (Cabo)", sets:3, reps:"15",
             tip:"Cabo alto com corda. Puxa para o rosto, cotovelos altos e para fora. Lento e controlado.",
-            ref:"Sem 17: 14/14/14kg×15 — \"confortável\".",
-            sug:"→ Sem 18: considera 16kg." },
+            ref:"Sem 19: não realizado (sessão encurtada).",
+            sug:"→ Sem 20: retoma a 14-16kg." },
         ]
       },
       {
@@ -285,16 +285,16 @@ const SESSIONS = {
         exercises: [
           { id:"biceps", name:"Bíceps Curls (Halteres)", sets:3, reps:"12",
             tip:"Alternado. Cotovelos fixos junto ao tronco. Desce lentamente (2 seg). Se balançares o tronco, está pesado de mais.",
-            ref:"Sem 17: 7,5/7,5/7,5kg×12 — \"fácil/confortável\".",
-            sug:"→ Sem 18: tenta 8kg." },
+            ref:"Sem 19: 7,5/7,5kg×12 — sessão encurtada, S3 não realizada.",
+            sug:"→ Sem 20: completa as 3 séries, considera 8kg." },
           { id:"triceps", name:"Tríceps Extension", sets:3, reps:"12",
             tip:"Com haltere atrás da cabeça ou cabo com pega em V. Cotovelo fixo, extensão completa. Não bloqueia o cotovelo.",
-            ref:"Sem 17: 16/16/16kg — consolidado.",
-            sug:"→ Sem 18: mantém 16kg ou tenta 18kg." },
+            ref:"Sem 19: 14/14/14kg — \"confortável\" nas 3 séries.",
+            sug:"→ Sem 20: podes testar 16kg se sentires margem." },
           { id:"coreup", name:"Core (à escolha)", sets:3, reps:"45seg", noWeight:true,
             tip:"Prancha, dead bug, ou Russian twists. O que não fizeste na sessão de quarta.",
-            ref:"Sem 17: 15×3 — consolidado.",
-            sug:"→ Sem 18: mantém ou varia." },
+            ref:"Sem 19: não realizado (sessão encurtada).",
+            sug:"→ Sem 20: retoma normalmente." },
         ]
       }
     ]
@@ -305,13 +305,13 @@ let currentSession = 'forca';
 let state = {};
 
 function initState() {
-  const saved = localStorage.getItem('gym_state_sem19_v1');
+  const saved = localStorage.getItem('gym_state_sem21_v1');
   if (saved) { try { state = JSON.parse(saved); return; } catch(e) {} }
   state = { forca: {}, upper: {} };
 }
 
 function saveState() {
-  try { localStorage.setItem('gym_state_sem19_v1', JSON.stringify(state)); } catch(e) {}
+  try { localStorage.setItem('gym_state_sem21_v1', JSON.stringify(state)); } catch(e) {}
 }
 
 function resetSession() { document.getElementById('resetModal').classList.add('open'); }
@@ -393,7 +393,7 @@ function renderRef(session) {
   const sess = SESSIONS[session];
   let html = `<div class="ref-block">
     <div class="ref-toggle" id="refToggle" onclick="toggleRef()">
-      📊 Referência Semana 18 <span class="arrow">▼</span>
+      📊 Referência Semana 21 <span class="arrow">▼</span>
     </div>
     <div class="ref-content" id="refContent">`;
   sess.groups.forEach(g => {
