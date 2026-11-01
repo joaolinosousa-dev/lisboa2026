@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Ginásio · Meia S1</title>
+<title>Ginásio · Meia S2</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -106,7 +106,7 @@
   <a href="index.html" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none;display:inline-block;margin-bottom:8px">‹ Hub</a>
   <div class="header-row">
     <div>
-      <div class="week-label">Ginásio · Meia S1 · 26 Out–1 Nov</div>
+      <div class="week-label">Ginásio · Meia S2 · 2–8 Nov</div>
       <h1>Força <span>&</span> Upper</h1>
     </div>
     <button class="reset-btn" onclick="resetSession()">↺ Reset</button>
@@ -115,14 +115,14 @@
 
 <div class="tabs">
   <div class="tab active" id="tab-forca" onclick="switchSession('forca')">
-    <div class="t-label">Terça</div>
+    <div class="t-label">Quarta</div>
     <div class="t-name">Força Pernas · Reintrodução</div>
-    <div class="t-date">27 Out · depois da corrida · 50-60%</div>
+    <div class="t-date">4 Nov · manhã · 50-60%</div>
   </div>
   <div class="tab" id="tab-upper" onclick="switchSession('upper')">
-    <div class="t-label">Sábado</div>
-    <div class="t-name">Upper Body (moderado)</div>
-    <div class="t-date">31 Out · domingo é prova</div>
+    <div class="t-label">Domingo</div>
+    <div class="t-name">Upper Body (opcional)</div>
+    <div class="t-date">8 Nov · depois do recovery</div>
   </div>
 </div>
 
@@ -161,18 +161,18 @@
 // Upper de 25 Out ainda não registado: exporta o resumo e envia-me para atualizar.
 const REF = {
   forca: {
-    squat:     { series: ["40kg×8","50kg×8","50kg×8"], note:"Sem 18 (última sessão de força completa).", next:"S1 meia: 3×6 a 35-40 kg. Semana 2 passa a 4×5 a 45-50 kg." },
-    hipthrust: { series: ["30kg×10","30kg×10","30kg×10","30kg×10"], note:"Sem 18.", next:"S1 meia: 3×8 a 20-25 kg." },
-    legpress:  { series: ["52kg×12","52kg×12","52kg×12"], note:"Sem 18.", next:"S1 meia: 2×10 a 35-40 kg." },
-    calfstand: { series: ["20kg×15","20kg×15","20kg×15","20kg×15"], note:"Sem 18.", next:"S1 meia: 3×12 a 10-12 kg, excêntrica lenta." },
+    squat:     { series: ["40kg×8","50kg×8","50kg×8"], note:"Sem 18 (última sessão de força completa).", next:"S2 meia: 3×6 a 35-40 kg. Semana 3: 3×5 a 40-45 kg · semana 4: 4×5 a 45-50 kg." },
+    hipthrust: { series: ["30kg×10","30kg×10","30kg×10","30kg×10"], note:"Sem 18.", next:"S2 meia: 3×8 a 20-25 kg." },
+    legpress:  { series: ["52kg×12","52kg×12","52kg×12"], note:"Sem 18.", next:"S2 meia: 2×10 a 35-40 kg." },
+    calfstand: { series: ["20kg×15","20kg×15","20kg×15","20kg×15"], note:"Sem 18.", next:"S2 meia: 3×12 a 10-12 kg, excêntrica lenta." },
     plank:     { series: ["60s","60s","60s"], note:"Sem 18.", next:"2×45-60s." },
   },
   upper: {
-    bench:        { series: ["30kg×10","30kg×10","30kg×10","30kg×10"], note:"Sem 20 (taper, reduzido de 40 kg).", next:"S1 meia: 35 kg×8-10, sem falha." },
+    bench:        { series: ["30kg×10","30kg×10","30kg×10","30kg×10"], note:"Sem 20 (taper, reduzido de 40 kg).", next:"S2 meia: 35 kg×8-10, sem falha." },
     pushups:      { series: ["12","12","12"], note:"Sem 19.", next:"3×10, longe da falha." },
-    seatedrow:    { series: ["34kg×10","34kg×10","34kg×10"], note:"Sem 20 (reduzido de 39 kg).", next:"S1 meia: 34-37 kg." },
-    latpull:      { series: ["32kg×12","34kg×12","36kg×12"], note:"Sem 19, reverse grip, zero desconforto.", next:"S1 meia: 32-34 kg, SEMPRE pega invertida." },
-    shoulderpress:{ series: ["7.5kg×10","7.5kg×10","7.5kg×10"], note:"Sem 20.", next:"S1 meia: 7,5-10 kg." },
+    seatedrow:    { series: ["34kg×10","34kg×10","34kg×10"], note:"Sem 20 (reduzido de 39 kg).", next:"S2 meia: 34-37 kg." },
+    latpull:      { series: ["32kg×12","34kg×12","36kg×12"], note:"Sem 19, reverse grip, zero desconforto.", next:"S2 meia: 32-34 kg, SEMPRE pega invertida." },
+    shoulderpress:{ series: ["7.5kg×10","7.5kg×10","7.5kg×10"], note:"Sem 20.", next:"S2 meia: 7,5-10 kg." },
     facepull:     { series: ["—","—","—"], note:"Sem registo recente.", next:"Leve: escolhe a carga e regista." },
     biceps:       { series: ["7.5kg×12","7.5kg×12"], note:"Sem 20.", next:"7,5 kg." },
     triceps:      { series: ["14kg×12","14kg×12","14kg×12"], note:"Sem 20.", next:"14 kg." },
@@ -182,8 +182,8 @@ const REF = {
 const SESSIONS = {
   forca: {
     title: "Força Pernas · Reintrodução",
-    day: "Terça, 27 Out (meia S1)",
-    note: "REINTRODUÇÃO — primeira força de pernas desde a sem 18. Cargas a 50-60%, 2 reps em reserva no mínimo, descida controlada e subida rápida. Faz depois da corrida, nunca antes. Objetivo: reacordar o padrão sem DOMS; o bloco pesado (4×5) começa na semana 2.",
+    day: "Quarta, 4 Nov (meia S2)",
+    note: "REINTRODUÇÃO — primeira força de pernas desde a sem 18 (a de 28 Out não se fez). Cargas a 50-60%, 2 reps em reserva no mínimo, descida controlada e subida rápida. Faz de manhã; a corrida fácil fica para a tarde. Objetivo: reacordar o padrão sem DOMS; o bloco pesado (4×5) começa na semana 2.",
     groups: [
       {
         name: "Pernas — Principais", color: "#fbbf24",
@@ -219,8 +219,8 @@ const SESSIONS = {
   },
   upper: {
     title: "Upper Body",
-    day: "Sábado, 31 Out (meia S1)",
-    note: "Moderado: volta perto das cargas normais, mas nada à falha. Passa para sábado porque domingo há Corrida da Água (se preferires domingo depois da prova, também dá). Lat pull SEMPRE com pega invertida (ombro).",
+    day: "Domingo, 8 Nov (meia S2)",
+    note: "Moderado: volta perto das cargas normais, mas nada à falha. Opcional: a sessão a proteger é a de pernas de quarta. Lat pull SEMPRE com pega invertida (ombro).",
     groups: [
       {
         name: "Peito — Empurrar", color: "#f97316",
@@ -282,13 +282,13 @@ let currentSession = 'forca';
 let state = {};
 
 function initState() {
-  const saved = localStorage.getItem('gym_state_meia_s01_v1');
+  const saved = localStorage.getItem('gym_state_meia_s02_v1');
   if (saved) { try { state = JSON.parse(saved); return; } catch(e) {} }
   state = { forca: {}, upper: {} };
 }
 
 function saveState() {
-  try { localStorage.setItem('gym_state_meia_s01_v1', JSON.stringify(state)); } catch(e) {}
+  try { localStorage.setItem('gym_state_meia_s02_v1', JSON.stringify(state)); } catch(e) {}
 }
 
 function resetSession() { document.getElementById('resetModal').classList.add('open'); }

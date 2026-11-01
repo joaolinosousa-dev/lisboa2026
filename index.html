@@ -131,7 +131,7 @@
       <div class="app-icon">💪</div>
       <div class="app-info">
         <div class="app-name">Tracker de Ginásio</div>
-        <div class="app-desc">Força de pernas à terça · Upper body</div>
+        <div class="app-desc">Força de pernas à quarta de manhã · Upper ao domingo</div>
       </div>
       <div class="app-arrow">›</div>
     </a>
@@ -175,7 +175,7 @@
     <div class="rule"><span>✂️</span><span>Se for preciso cortar uma sessão, <strong>corta o long run</strong>.</span></div>
     <div class="rule"><span>🚦</span><span><strong>Dois sinais juntos = baixar carga nesse dia:</strong> FC fácil +5 bpm, pernas pesadas ao acordar, sono pior, stance balance fora de 50–51%.</span></div>
     <div class="rule"><span>💓</span><span>Fácil define-se pela <strong>FC &lt;145 bpm</strong>, não pelo ritmo.</span></div>
-    <div class="rule"><span>🏋️</span><span>Força de pernas <strong>depois</strong> da corrida, nunca antes.</span></div>
+    <div class="rule"><span>🏋️</span><span>Força de pernas <strong>à quarta de manhã</strong>, fácil à tarde. Nunca força antes de uma sessão de qualidade, e sempre longe da falha.</span></div>
   </div>
 </div>
 
@@ -196,20 +196,20 @@ updateCountdown(); setInterval(updateCountdown, 30000);
 // dias: [km, tipo] — tipo: run | both | gym | long | race | rest
 const semanas = [
   { n:1,  ini:"2026-10-26", datas:"26 Out–1 Nov", fase:"Readapt", km:44, titulo:"Readaptação",
-    dias:[[6,"run"],[7,"both"],[6,"run"],[9,"run"],[0,"gym"],[5,"both"],[11,"race"]],
-    det:"<strong>Ter</strong> fácil 7 km + strides + força (reintrodução) · <strong>Qui</strong> 5×3 min a 4:55–5:05 · <strong>Sáb</strong> 5 km + upper · <strong>Dom</strong> Corrida da Água como easy." },
-  { n:2,  ini:"2026-11-02", datas:"2–8 Nov", fase:"Desenv", km:54, titulo:"Desenvolvimento",
-    dias:[[7,"run"],[10,"both"],[7,"run"],[11,"run"],[0,"gym"],[14,"long"],[5,"both"]],
-    det:"<strong>Ter</strong> fartlek 6×3 min a 4:35–4:40 + força pesada arranca · <strong>Qua</strong> fácil + hill sprints · <strong>Qui</strong> 3×2 km a 4:50–4:55 · <strong>Sáb</strong> long 14 km fácil (testar gel novo)." },
+    dias:[[6,"run"],[0,"gym"],[7,"both"],[6,"run"],[9,"run"],[5,"both"],[11,"race"]],
+    det:"<strong>Ter</strong> descanso (trocado com sexta) · <strong>Qua</strong> fácil 8 km + strides (força não feita, passa para a semana 2) · <strong>Sex</strong> 5×3 min a 4:55–5:05 · <strong>Sáb</strong> 5 km + upper · <strong>Dom</strong> Corrida da Água: 55:14 em Monsanto, final forte (FC 179)." },
+  { n:2,  ini:"2026-11-02", datas:"2–8 Nov", fase:"Desenv", km:51, titulo:"Desenvolvimento",
+    dias:[[6,"run"],[8,"run"],[7,"both"],[11,"run"],[0,"gym"],[14,"long"],[5,"both"]],
+    det:"<strong>Ter</strong> fácil + strides (fartlek sai: domingo foi duro) · <strong>Qua</strong> força de pernas: reintrodução 50-60% (manhã) + fácil (tarde) · <strong>Qui</strong> 3×2 km a 4:50–4:55 · <strong>Sáb</strong> long 14 km fácil (testar gel novo)." },
   { n:3,  ini:"2026-11-09", datas:"9–15 Nov", fase:"Qual", km:58, titulo:"Qualidade + Teste",
-    dias:[[7,"run"],[12,"both"],[8,"run"],[9,"run"],[0,"gym"],[16,"long"],[6,"both"]],
-    det:"<strong>Ter</strong> 6×1000 m a 4:30–4:35 · <strong>Qui</strong> 2×2 km a 4:50 (curto, chegar fresco ao teste) · <strong>Sáb 14 TREINO-TESTE:</strong> 16 km com 8 km a 4:44–4:48 → fixar meta (1:42 / 1:40 / 1:38). Adios Pro 4 + pesagem antes/depois." },
+    dias:[[7,"run"],[12,"run"],[8,"both"],[9,"run"],[0,"gym"],[16,"long"],[6,"both"]],
+    det:"<strong>Seg</strong> fácil + hill sprints · <strong>Ter</strong> 6×1000 m a 4:30–4:35 · <strong>Qua</strong> força moderada (3×5, sem subir muito a carga: sábado é teste) + fácil · ankle hops/saltos curtos depois dos strides · <strong>Qui</strong> 2×2 km a 4:50 (curto, chegar fresco ao teste) · <strong>Sáb 14 TREINO-TESTE:</strong> 16 km com 8 km a 4:44–4:48 → fixar meta (1:42 / 1:40 / 1:38). Adios Pro 4 + pesagem antes/depois." },
   { n:4,  ini:"2026-11-16", datas:"16–22 Nov", fase:"Pico", km:60, titulo:"Pico de carga",
-    dias:[[7,"run"],[12,"both"],[8,"run"],[11,"run"],[0,"gym"],[18,"long"],[4,"both"]],
-    det:"<strong>Ter</strong> 5×1500 m a 4:35–4:38 · <strong>Qui</strong> tempo 8 km a 4:50–4:55 (válvula) · <strong>Sáb</strong> long 18 km com 2×5 km a ritmo-alvo, géis como na prova + 2.ª pesagem · pliometria leve volta." },
+    dias:[[7,"run"],[12,"run"],[8,"both"],[11,"run"],[0,"gym"],[18,"long"],[4,"both"]],
+    det:"<strong>Ter</strong> 5×1500 m a 4:35–4:38 · <strong>Qua</strong> força 4×5 (a sessão mais pesada do bloco) + fácil + pliometria leve · <strong>Qui</strong> tempo 8 km a 4:50–4:55 (válvula) · <strong>Sáb</strong> long 18 km com 2×5 km a ritmo-alvo, géis como na prova + 2.ª pesagem." },
   { n:5,  ini:"2026-11-23", datas:"23–29 Nov", fase:"Taper", km:51, titulo:"Taper + Meia",
-    dias:[[5,"run"],[8,"both"],[5,"run"],[6,"run"],[0,"rest"],[4,"run"],[23,"race"]],
-    det:"<strong>Ter</strong> 4×1 km a ritmo-alvo + ativação leve no ginásio · <strong>Qui</strong> 6 km com 2 km a ritmo-alvo · <strong>Sáb</strong> 4 km + strides · <strong>Dom 29</strong> MEIA 🏁 (levantar dorsal 26-28 Nov, Decathlon Amadora)." },
+    dias:[[5,"run"],[8,"run"],[5,"both"],[6,"run"],[0,"rest"],[4,"run"],[23,"race"]],
+    det:"<strong>Ter</strong> 4×1 km a ritmo-alvo · <strong>Qua</strong> ativação leve no ginásio + 5 km fácil · <strong>Qui</strong> 6 km com 2 km a ritmo-alvo · <strong>Sáb</strong> 4 km + strides · <strong>Dom 29</strong> MEIA 🏁 (levantar dorsal 26-28 Nov, Decathlon Amadora)." },
   { n:6,  ini:"2026-11-30", datas:"30 Nov–6 Dez", fase:"Rec", km:25, titulo:"Recuperação ativa", prov:true,
     det:"Só corridas fáceis nos primeiros 4-5 dias. Strides no fim de semana se as pernas estiverem bem." },
   { n:7,  ini:"2026-12-07", datas:"7–13 Dez", fase:"10k", km:45, titulo:"Afinação 10k", prov:true,
