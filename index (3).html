@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Meia 2026 · Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14; --card: #161921; --card2: #1c2030;
+    --border: rgba(255,255,255,0.08); --text: #e8eaf0; --muted: #6b7390;
+    --blue: #3b82f6; --amber: #f59e0b; --green: #22c55e; --red: #ef4444; --purple: #a855f7; --pink:#ec4899;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.5; max-width: 480px; margin: 0 auto; padding-bottom: 60px; min-height: 100vh; }
+  .hero { padding: 36px 20px 24px; border-bottom: 1px solid var(--border); }
+  .hero-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--blue); text-transform: uppercase; margin-bottom: 8px; }
+  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 44px; line-height: 0.95; letter-spacing: 0.02em; margin-bottom: 6px; }
+  .hero h1 span { color: var(--amber); }
+  .hero-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; font-family:'DM Mono',monospace; }
+  .countdown-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+  .cd-unit { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 8px; text-align: center; }
+  .cd-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; line-height: 1; color: var(--amber); }
+  .cd-label { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+  .obj-strip { display: flex; gap: 6px; flex-wrap: wrap; }
+  .obj-pill { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-family: 'DM Mono', monospace; border: 1px solid; }
+  .obj-pill.min  { color: var(--green);  border-color: rgba(34,197,94,0.3);  background: rgba(34,197,94,0.08); }
+  .obj-pill.real { color: var(--blue);   border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.08); }
+  .obj-pill.amb  { color: var(--amber);  border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
+  .obj-note { font-size: 11px; color: var(--muted); margin-top: 10px; }
+  .section { padding: 24px 20px 0; }
+  .section-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; margin-bottom: 12px; }
+  .week-card { background: var(--card); border: 1px solid rgba(34,197,94,0.3); border-radius: 16px; padding: 18px; margin-bottom: 10px; }
+  .week-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; gap:10px; }
+  .week-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; line-height: 1; color: var(--green); }
+  .week-card-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .week-km { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--amber); line-height: 1; text-align: right; }
+  .week-km span { font-size: 14px; font-family: 'DM Sans', sans-serif; color: var(--muted); font-weight: 300; }
+  .week-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .wd { text-align: center; padding: 6px 2px; border-radius: 8px; background: var(--card2); }
+  .wd .wd-name { font-size: 9px; color: var(--muted); font-family: 'DM Mono', monospace; text-transform: uppercase; }
+  .wd .wd-km   { font-family: 'Bebas Neue', sans-serif; font-size: 16px; line-height: 1.2; margin-top: 2px; }
+  .wd.run  { background: rgba(59,130,246,0.1); } .wd.gym { background: rgba(34,197,94,0.1); }
+  .wd.both { background: rgba(245,158,11,0.1); } .wd.long { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.25); }
+  .wd.race { background: rgba(236,72,153,0.12); border: 1px solid rgba(236,72,153,0.3); }
+  .wd.rest { opacity: 0.4; }
+  .wd.run .wd-km { color: var(--blue); } .wd.gym .wd-km { color: var(--green); }
+  .wd.both .wd-km, .wd.long .wd-km { color: var(--amber); } .wd.race .wd-km { color: #f472b6; } .wd.rest .wd-km { color: var(--muted); }
+  .app-grid { display: flex; flex-direction: column; gap: 8px; }
+  .app-btn { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; cursor: pointer; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 16px; }
+  .app-btn:active { background: var(--card2); }
+  .app-btn.corrida { border-left: 3px solid var(--blue); } .app-btn.ginasio { border-left: 3px solid var(--green); } .app-btn.arquivo { border-left: 3px solid var(--muted); }
+  .app-icon { font-size: 28px; flex-shrink: 0; width: 44px; text-align: center; }
+  .app-info { flex: 1; }
+  .app-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; line-height: 1; margin-bottom: 4px; }
+  .app-btn.corrida .app-name { color: var(--blue); } .app-btn.ginasio .app-name { color: var(--green); } .app-btn.arquivo .app-name { color: var(--muted); }
+  .app-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .app-arrow { color: var(--muted); font-size: 20px; flex-shrink: 0; }
+  .macro-mini { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 10px; }
+  .macro-mini-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .macro-mini-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.05em; }
+  .macro-mini-sub { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .phase-row { display: flex; height: 8px; }
+  .phase-seg { height: 100%; }
+  .sem { border-bottom: 1px solid var(--border); }
+  .sem:last-child { border-bottom: none; }
+  .sem-row { padding: 10px 16px; display: grid; grid-template-columns: 26px 1fr auto auto; gap: 8px; align-items: center; font-size: 13px; cursor: pointer; }
+  .sem.current { background: rgba(34,197,94,0.06); }
+  .sem.race-wk { background: rgba(236,72,153,0.05); }
+  .sem-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+  .sem-dates { color: var(--muted); font-size: 12px; }
+  .sem-fase { font-size: 11px; padding: 2px 7px; border-radius: 5px; white-space:nowrap; }
+  .sem-km { font-family: 'Bebas Neue', sans-serif; font-size: 20px; min-width: 44px; text-align:right; }
+  .sem-detail { display: none; padding: 0 16px 12px 50px; font-size: 12px; color: var(--muted); line-height: 1.55; }
+  .sem.open .sem-detail { display: block; }
+  .sem-detail strong { color: var(--text); font-weight: 600; }
+  .sem-detail .prov { color: var(--amber); font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; }
+  .f-readapt{background:rgba(59,130,246,0.12);color:#60a5fa;} .f-desenv{background:rgba(245,158,11,0.12);color:#fbbf24;}
+  .f-qual{background:rgba(249,115,22,0.12);color:#fb923c;} .f-pico{background:rgba(239,68,68,0.12);color:#f87171;}
+  .f-rec{background:rgba(34,197,94,0.12);color:#4ade80;} .f-taper{background:rgba(168,85,247,0.12);color:#c084fc;}
+  .f-10k{background:rgba(236,72,153,0.12);color:#f472b6;}
+  .km-readapt{color:#60a5fa;} .km-desenv{color:#fbbf24;} .km-qual{color:#fb923c;} .km-pico{color:#f87171;}
+  .km-rec{color:#4ade80;} .km-taper{color:#c084fc;} .km-10k{color:#f472b6;}
+  .race-list { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .race-row { display: grid; grid-template-columns: 54px 1fr; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); align-items: center; }
+  .race-row:last-child { border-bottom: none; }
+  .race-row.main { background: rgba(245,158,11,0.06); }
+  .race-date { font-family: 'Bebas Neue', sans-serif; font-size: 20px; line-height: 1; text-align: center; }
+  .race-date small { display:block; font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:0.1em; }
+  .race-name { font-size: 14px; font-weight: 600; }
+  .race-role { font-size: 12px; color: var(--muted); }
+  .race-row.main .race-name { color: var(--amber); }
+  .rules { background: var(--card2); border-radius: 14px; padding: 14px 16px; }
+  .rule { display:flex; gap:10px; padding:6px 0; border-bottom:1px solid var(--border); font-size:13px; color:var(--muted); line-height:1.4; }
+  .rule:last-child { border-bottom:none; }
+  .rule strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Meia Maratona dos Descobrimentos · Prova principal 2026</div>
+  <h1>Meia <span>29 Nov</span></h1>
+  <div class="hero-sub">Praça do Império → Museu da Marinha · plano, junto ao rio</div>
+  <div class="countdown-row" id="countdown"></div>
+  <div class="obj-strip">
+    <div class="obj-pill min">Piso 1:42–1:43 · ~4:51/km</div>
+    <div class="obj-pill real">Alvo sub-1:40 · 4:44/km</div>
+    <div class="obj-pill amb">Dia perfeito 1:38 · 4:39/km</div>
+  </div>
+  <div class="obj-note">⚑ Meta final fixada no treino-teste de 14 Nov. Referência: meia 2025 em 1:43:45.</div>
+</div>
+
+<div class="section">
+  <div class="section-label">Esta semana</div>
+  <div class="week-card" id="weekCard"></div>
+</div>
+
+<div class="section">
+  <div class="section-label">Abrir</div>
+  <div class="app-grid">
+    <a class="app-btn corrida" id="weekLink" href="semana01_meia_mobile.html">
+      <div class="app-icon">🏃</div>
+      <div class="app-info">
+        <div class="app-name">Plano de Corrida</div>
+        <div class="app-desc" id="weekLinkDesc">Semana 1 · Readaptação</div>
+      </div>
+      <div class="app-arrow">›</div>
+    </a>
+    <a class="app-btn ginasio" href="ginasio_tracker.html">
+      <div class="app-icon">💪</div>
+      <div class="app-info">
+        <div class="app-name">Tracker de Ginásio</div>
+        <div class="app-desc">Força de pernas à quarta de manhã · Upper ao domingo</div>
+      </div>
+      <div class="app-arrow">›</div>
+    </a>
+    <a class="app-btn arquivo" href="plano_maratona_2026.html">
+      <div class="app-icon">🗂️</div>
+      <div class="app-info">
+        <div class="app-name">Arquivo · Maratona 2026</div>
+        <div class="app-desc">23 semanas · 3:57:48 (PR, sub-4)</div>
+      </div>
+      <div class="app-arrow">›</div>
+    </a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Macro-plano · toca numa semana</div>
+  <div class="macro-mini">
+    <div class="macro-mini-header">
+      <div class="macro-mini-title">10 Semanas · até 3 Jan</div>
+      <div class="macro-mini-sub">⚑ Teste 14 Nov</div>
+    </div>
+    <div class="phase-row" id="phaseBar"></div>
+    <div id="macroRows"></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Provas</div>
+  <div class="race-list">
+    <div class="race-row"><div class="race-date">01<small>NOV</small></div><div><div class="race-name">Corrida da Água 10k</div><div class="race-role">Easy run, sem tempo · FC &lt;145</div></div></div>
+    <div class="race-row main"><div class="race-date">29<small>NOV</small></div><div><div class="race-name">Meia Maratona dos Descobrimentos</div><div class="race-role">Prova principal · alvo sub-1:40</div></div></div>
+    <div class="race-row"><div class="race-date">20<small>DEZ</small></div><div><div class="race-name">GP Natal 10k</div><div class="race-role">PR sem pressão (atual 47:00)</div></div></div>
+    <div class="race-row"><div class="race-date">31<small>DEZ</small></div><div><div class="race-name">São Silvestre da Amadora 10k</div><div class="race-role">Fun run</div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Regras do bloco</div>
+  <div class="rules">
+    <div class="rule"><span>🎚️</span><span><strong>Quinta (limiar) é a sessão mais valiosa</strong> e a válvula: completa se fresco, encurtada se cansado.</span></div>
+    <div class="rule"><span>✂️</span><span>Se for preciso cortar uma sessão, <strong>corta o long run</strong>.</span></div>
+    <div class="rule"><span>🚦</span><span><strong>Dois sinais juntos = baixar carga nesse dia:</strong> FC fácil +5 bpm, pernas pesadas ao acordar, sono pior, stance balance fora de 50–51%.</span></div>
+    <div class="rule"><span>💓</span><span>Fácil define-se pela <strong>FC &lt;145 bpm</strong>, não pelo ritmo.</span></div>
+    <div class="rule"><span>🏋️</span><span>Força de pernas <strong>à quarta de manhã</strong>, fácil à tarde. Nunca força antes de uma sessão de qualidade, e sempre longe da falha.</span></div>
+  </div>
+</div>
+
+<script>
+const raceDate = new Date('2026-11-29T09:00:00'); // hora de partida a confirmar
+function updateCountdown() {
+  const diff = raceDate - new Date();
+  const el = document.getElementById('countdown');
+  if (diff <= 0) { el.innerHTML = '<div style="grid-column:1/-1;text-align:center;font-family:Bebas Neue;font-size:28px;color:var(--green)">É hoje! 🏁</div>'; return; }
+  const days = Math.floor(diff/86400000);
+  const hours = Math.floor((diff%86400000)/3600000);
+  const mins  = Math.floor((diff%3600000)/60000);
+  const units = [{val:Math.floor(days/7),label:'semanas'},{val:days%7,label:'dias'},{val:hours,label:'horas'},{val:mins,label:'min'}];
+  el.innerHTML = units.map(u => `<div class="cd-unit"><div class="cd-num">${String(u.val).padStart(2,'0')}</div><div class="cd-label">${u.label}</div></div>`).join('');
+}
+updateCountdown(); setInterval(updateCountdown, 30000);
+
+// dias: [km, tipo] — tipo: run | both | gym | long | race | rest
+const semanas = [
+  { n:1,  ini:"2026-10-26", datas:"26 Out–1 Nov", fase:"Readapt", km:44, titulo:"Readaptação",
+    dias:[[6,"run"],[0,"gym"],[7,"both"],[6,"run"],[9,"run"],[5,"both"],[11,"race"]],
+    det:"<strong>Ter</strong> descanso (trocado com sexta) · <strong>Qua</strong> fácil 8 km + strides (força não feita, passa para a semana 2) · <strong>Sex</strong> 5×3 min a 4:55–5:05 · <strong>Sáb</strong> 5 km + upper · <strong>Dom</strong> Corrida da Água: 55:14 em Monsanto, final forte (FC 179)." },
+  { n:2,  ini:"2026-11-02", datas:"2–8 Nov", fase:"Desenv", km:51, titulo:"Desenvolvimento",
+    dias:[[6,"run"],[8,"run"],[7,"both"],[11,"run"],[0,"gym"],[14,"long"],[5,"both"]],
+    det:"<strong>Ter</strong> fácil + strides (fartlek sai: domingo foi duro) · <strong>Qua</strong> força de pernas: reintrodução 50-60% (manhã) + fácil (tarde) · <strong>Qui</strong> 3×2 km a 4:50–4:55 · <strong>Sáb</strong> long 14 km fácil (testar gel novo)." },
+  { n:3,  ini:"2026-11-09", datas:"9–15 Nov", fase:"Qual", km:58, titulo:"Qualidade + Teste",
+    dias:[[7,"run"],[12,"run"],[8,"both"],[9,"run"],[0,"gym"],[16,"long"],[6,"both"]],
+    det:"<strong>Seg</strong> fácil + hill sprints · <strong>Ter</strong> 6×1000 m a 4:30–4:35 · <strong>Qua</strong> força moderada (3×5, sem subir muito a carga: sábado é teste) + fácil · ankle hops/saltos curtos depois dos strides · <strong>Qui</strong> 2×2 km a 4:50 (curto, chegar fresco ao teste) · <strong>Sáb 14 TREINO-TESTE:</strong> 16 km com 8 km a 4:44–4:48 → fixar meta (1:42 / 1:40 / 1:38). Adios Pro 4 + pesagem antes/depois." },
+  { n:4,  ini:"2026-11-16", datas:"16–22 Nov", fase:"Pico", km:60, titulo:"Pico de carga",
+    dias:[[7,"run"],[12,"run"],[8,"both"],[11,"run"],[0,"gym"],[18,"long"],[4,"both"]],
+    det:"<strong>Ter</strong> 5×1500 m a 4:35–4:38 · <strong>Qua</strong> força 4×5 (a sessão mais pesada do bloco) + fácil + pliometria leve · <strong>Qui</strong> tempo 8 km a 4:50–4:55 (válvula) · <strong>Sáb</strong> long 18 km com 2×5 km a ritmo-alvo, géis como na prova + 2.ª pesagem." },
+  { n:5,  ini:"2026-11-23", datas:"23–29 Nov", fase:"Taper", km:51, titulo:"Taper + Meia",
+    dias:[[5,"run"],[8,"run"],[5,"both"],[6,"run"],[0,"rest"],[4,"run"],[23,"race"]],
+    det:"<strong>Ter</strong> 4×1 km a ritmo-alvo · <strong>Qua</strong> ativação leve no ginásio + 5 km fácil · <strong>Qui</strong> 6 km com 2 km a ritmo-alvo · <strong>Sáb</strong> 4 km + strides · <strong>Dom 29</strong> MEIA 🏁 (levantar dorsal 26-28 Nov, Decathlon Amadora)." },
+  { n:6,  ini:"2026-11-30", datas:"30 Nov–6 Dez", fase:"Rec", km:25, titulo:"Recuperação ativa", prov:true,
+    det:"Só corridas fáceis nos primeiros 4-5 dias. Strides no fim de semana se as pernas estiverem bem." },
+  { n:7,  ini:"2026-12-07", datas:"7–13 Dez", fase:"10k", km:45, titulo:"Afinação 10k", prov:true,
+    det:"<strong>Ter</strong> 8×800 m a ritmo 5k · <strong>Qui</strong> tempo curto · long 12-14 km fácil." },
+  { n:8,  ini:"2026-12-14", datas:"14–20 Dez", fase:"10k", km:38, titulo:"Afinação + GP Natal", prov:true,
+    det:"<strong>Ter</strong> 5×1000 m a ritmo 10k · mini-taper · <strong>Dom 20</strong> GP Natal 10k, PR sem pressão." },
+  { n:9,  ini:"2026-12-21", datas:"21–27 Dez", fase:"Rec", km:35, titulo:"Manutenção", prov:true,
+    det:"Fácil + strides. Natal sem stress." },
+  { n:10, ini:"2026-12-28", datas:"28 Dez–3 Jan", fase:"10k", km:35, titulo:"São Silvestre", prov:true,
+    det:"<strong>Qui 31</strong> São Silvestre da Amadora (fun run). A seguir: bloco de 10k + treino híbrido." },
+];
+
+const faseClass  = { Readapt:"readapt", Desenv:"desenv", Qual:"qual", Pico:"pico", Rec:"rec", Taper:"taper", "10k":"10k" };
+const faseLabel  = { Readapt:"Readapt.", Desenv:"Desenv.", Qual:"Qualid.", Pico:"Pico", Rec:"Recup.", Taper:"Taper", "10k":"10k" };
+const faseColors = { Readapt:"#3b82f6", Desenv:"#f59e0b", Qual:"#f97316", Pico:"#ef4444", Rec:"#22c55e", Taper:"#a855f7", "10k":"#ec4899" };
+
+function startOf(s){ const [y,m,d]=s.ini.split('-').map(Number); return new Date(y,m-1,d); }
+const now = new Date();
+let curIdx = semanas.findIndex(s => { const a=startOf(s), b=new Date(a); b.setDate(b.getDate()+7); return now>=a && now<b; });
+if (curIdx === -1) curIdx = now < startOf(semanas[0]) ? 0 : semanas.length-1;
+const cur = semanas[curIdx];
+
+// cartão da semana
+const dn = ["SEG","TER","QUA","QUI","SEX","SÁB","DOM"];
+let wd = '';
+if (cur.dias) {
+  wd = '<div class="week-days">' + cur.dias.map((d,i) => {
+    const lbl = d[1]==='race' ? d[0]+'🏁' : d[1]==='gym' ? '😴' : d[1]==='rest' ? '—' : d[1]==='both' ? d[0]+'💪' : d[0];
+    return `<div class="wd ${d[1]}"><div class="wd-name">${dn[i]}</div><div class="wd-km">${lbl}</div></div>`;
+  }).join('') + '</div>';
+}
+document.getElementById('weekCard').innerHTML = `
+  <div class="week-card-header">
+    <div><div class="week-card-title">Semana ${cur.n} · ${cur.titulo}</div>
+    <div class="week-card-sub">${cur.datas} 2026</div></div>
+    <div class="week-km">${cur.km}<span>km</span></div>
+  </div>${wd}`;
+const pad = String(cur.n).padStart(2,'0');
+document.getElementById('weekLink').href = `semana${pad}_meia_mobile.html`;
+document.getElementById('weekLinkDesc').textContent = `Semana ${cur.n} · ${cur.titulo} · ${cur.km} km`;
+
+// barra de fases
+const totalKm = semanas.reduce((a,s)=>a+s.km,0);
+const barEl = document.getElementById('phaseBar');
+semanas.forEach((s,i) => {
+  const seg = document.createElement('div');
+  seg.className = 'phase-seg';
+  seg.style.cssText = `width:${s.km/totalKm*100}%;background:${faseColors[s.fase]};opacity:${i<curIdx?0.35:0.85}`;
+  barEl.appendChild(seg);
+});
+
+// linhas do macro
+document.getElementById('macroRows').innerHTML = semanas.map((s,i) => {
+  const fc = faseClass[s.fase];
+  const isRace = s.n===5;
+  const cls = 'sem' + (i===curIdx ? ' current open' : '') + (isRace ? ' race-wk' : '');
+  const icon = i<curIdx ? '✓ ' : i===curIdx ? '▶ ' : isRace ? '🏁 ' : '';
+  return `<div class="${cls}">
+    <div class="sem-row" onclick="this.parentElement.classList.toggle('open')">
+      <span class="sem-num">${String(s.n).padStart(2,'0')}</span>
+      <span class="sem-dates">${s.datas}</span>
+      <span class="sem-fase f-${fc}">${faseLabel[s.fase]}</span>
+      <span class="sem-km km-${fc}">${icon}${s.prov?'~':''}${s.km}</span>
+    </div>
+    <div class="sem-detail">${s.prov?'<div class="prov">Provisório</div>':''}${s.det}</div>
+  </div>`;
+}).join('');
+</script>
+</body>
+</html>
