@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Ginásio · Meia S2</title>
+<title>Ginásio · Meia S3</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -106,7 +106,7 @@
   <a href="index.html" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none;display:inline-block;margin-bottom:8px">‹ Hub</a>
   <div class="header-row">
     <div>
-      <div class="week-label">Ginásio · Meia S2 · 2–8 Nov</div>
+      <div class="week-label">Ginásio · Meia S3 · 9–15 Nov</div>
       <h1>Força <span>&</span> Upper</h1>
     </div>
     <button class="reset-btn" onclick="resetSession()">↺ Reset</button>
@@ -116,13 +116,13 @@
 <div class="tabs">
   <div class="tab active" id="tab-forca" onclick="switchSession('forca')">
     <div class="t-label">Quarta</div>
-    <div class="t-name">Força Pernas · Reintrodução</div>
-    <div class="t-date">4 Nov · manhã · 50-60%</div>
+    <div class="t-name">Força Pernas · Moderada</div>
+    <div class="t-date">11 Nov · manhã · 3×5, sábado é teste</div>
   </div>
   <div class="tab" id="tab-upper" onclick="switchSession('upper')">
     <div class="t-label">Domingo</div>
     <div class="t-name">Upper Body (opcional)</div>
-    <div class="t-date">8 Nov · depois do recovery</div>
+    <div class="t-date">15 Nov · depois do recovery</div>
   </div>
 </div>
 
@@ -157,82 +157,81 @@
 </div>
 
 <script>
-// ── REFERÊNCIAS: força = última sessão completa (sem 18, ciclo da maratona) · upper = sem 19/20 ──
-// Upper de 25 Out ainda não registado: exporta o resumo e envia-me para atualizar.
+// ── REFERÊNCIAS: semana 2 da meia (domingo, 8 Nov — full body) ──
 const REF = {
   forca: {
-    squat:     { series: ["40kg×8","50kg×8","50kg×8"], note:"Sem 18 (última sessão de força completa).", next:"S2 meia: 3×6 a 35-40 kg. Semana 3: 3×5 a 40-45 kg · semana 4: 4×5 a 45-50 kg." },
-    hipthrust: { series: ["30kg×10","30kg×10","30kg×10","30kg×10"], note:"Sem 18.", next:"S2 meia: 3×8 a 20-25 kg." },
-    legpress:  { series: ["52kg×12","52kg×12","52kg×12"], note:"Sem 18.", next:"S2 meia: 2×10 a 35-40 kg." },
-    calfstand: { series: ["20kg×15","20kg×15","20kg×15","20kg×15"], note:"Sem 18.", next:"S2 meia: 3×12 a 10-12 kg, excêntrica lenta." },
-    plank:     { series: ["60s","60s","60s"], note:"Sem 18.", next:"2×45-60s." },
+    squat:     { series: ["35kg×6","35kg×6","40kg×6"], note:"8 Nov: \"confortável\" a 35, \"controlado\" a 40.", next:"S3: 3×5 a 40-42,5 kg." },
+    hipthrust: { series: ["23kg×10","23kg×10","23kg×10"], note:"8 Nov: fez 10 em vez de 8 — havia margem.", next:"S3: 3×8 a 27-30 kg." },
+    legpress:  { series: ["39kg×10","45kg×10"], note:"8 Nov: \"fácil\" / \"confortável\".", next:"S3: 2×8 a 50 kg." },
+    calfstand: { series: ["7.5kg×12","7.5kg×12","7.5kg×12"], note:"8 Nov: \"controlado\".", next:"S3: 3×12 a 10 kg, descida de 3 s." },
+    plank:     { series: ["60s","60s"], note:"8 Nov.", next:"2×60s." },
   },
   upper: {
-    bench:        { series: ["30kg×10","30kg×10","30kg×10","30kg×10"], note:"Sem 20 (taper, reduzido de 40 kg).", next:"S2 meia: 35 kg×8-10, sem falha." },
-    pushups:      { series: ["12","12","12"], note:"Sem 19.", next:"3×10, longe da falha." },
-    seatedrow:    { series: ["34kg×10","34kg×10","34kg×10"], note:"Sem 20 (reduzido de 39 kg).", next:"S2 meia: 34-37 kg." },
-    latpull:      { series: ["32kg×12","34kg×12","36kg×12"], note:"Sem 19, reverse grip, zero desconforto.", next:"S2 meia: 32-34 kg, SEMPRE pega invertida." },
-    shoulderpress:{ series: ["7.5kg×10","7.5kg×10","7.5kg×10"], note:"Sem 20.", next:"S2 meia: 7,5-10 kg." },
-    facepull:     { series: ["—","—","—"], note:"Sem registo recente.", next:"Leve: escolhe a carga e regista." },
-    biceps:       { series: ["7.5kg×12","7.5kg×12"], note:"Sem 20.", next:"7,5 kg." },
-    triceps:      { series: ["14kg×12","14kg×12","14kg×12"], note:"Sem 20.", next:"14 kg." },
+    bench:        { series: ["35kg×10","35kg×10","35kg×10"], note:"8 Nov: S3 \"últimas reps desafiantes\". S4 não feita.", next:"S3: 4×10 a 35 kg (completar a 4.ª série)." },
+    pushups:      { series: ["—"], note:"8 Nov: não feito.", next:"3×10 se houver tempo." },
+    seatedrow:    { series: ["—"], note:"8 Nov: não feito. Última: 34 kg (sem 20).", next:"S3: 4×10 a 34 kg." },
+    latpull:      { series: ["32kg×12","32kg×12","32kg×12"], note:"8 Nov: pega invertida, sem desconforto.", next:"S3: 34 kg." },
+    shoulderpress:{ series: ["7.5kg×10","7.5kg×10","7.5kg×10"], note:"8 Nov: \"controlado\".", next:"S3: 7,5 kg; testar 10 kg na S3 se sobrar margem." },
+    facepull:     { series: ["—"], note:"Sem registo.", next:"Leve; regista a carga." },
+    biceps:       { series: ["7.5kg×12","7.5kg×12","7.5kg×12"], note:"8 Nov: \"controlado\".", next:"7,5 kg." },
+    triceps:      { series: ["14kg×12","14kg×12","14kg×12"], note:"8 Nov: S3 \"últimas reps difíceis\".", next:"14 kg." },
   }
 };
 
 const SESSIONS = {
   forca: {
-    title: "Força Pernas · Reintrodução",
-    day: "Quarta, 4 Nov (meia S2)",
-    note: "REINTRODUÇÃO — primeira força de pernas desde a sem 18 (a de 28 Out não se fez). Cargas a 50-60%, 2 reps em reserva no mínimo, descida controlada e subida rápida. Faz de manhã; a corrida fácil fica para a tarde. Objetivo: reacordar o padrão sem DOMS; o bloco pesado (4×5) começa na semana 2.",
+    title: "Força Pernas · Moderada",
+    day: "Quarta, 11 Nov (meia S3)",
+    note: "MODERADA — subida de carga pequena porque sábado é o treino-teste. Séries de 5: descida controlada (2 s), subida rápida, 2 reps em reserva. Descanso 2-3 min. De manhã; corrida fácil à tarde.",
     groups: [
       {
         name: "Pernas — Principais", color: "#fbbf24",
         exercises: [
-          { id:"squat", name:"Squat (Barra)", sets:3, reps:"6",
-            tip:"Barra nas costas, pés à largura dos ombros. Desce controlado (2 s) até paralelo, sobe com intenção rápida. Descanso 2 min.",
-            ref:"Sem 18: 40/50/50 kg×8.",
-            sug:"→ 3×6 a 35-40 kg. Se a barra voar e não houver desconforto, a S3 pode ir a 40 kg." },
+          { id:"squat", name:"Squat (Barra)", sets:3, reps:"5",
+            tip:"Barra nas costas, pés à largura dos ombros. Desce 2 s até paralelo, sobe com intenção explosiva. Descanso 2-3 min.",
+            ref:"8 Nov: 35/35/40 kg×6 — confortável/controlado.",
+            sug:"→ 3×5 a 40-42,5 kg." },
           { id:"hipthrust", name:"Hip Thrust (Máquina)", sets:3, reps:"8",
-            tip:"Pausa 1 s em cima, aperta o glúteo. Amplitude completa, sem arquear a lombar.",
-            ref:"Sem 18: 4×10 a 30 kg.",
-            sug:"→ 3×8 a 20-25 kg." },
-          { id:"legpress", name:"Leg Press (Máquina)", sets:2, reps:"10",
-            tip:"Pés a meio da plataforma, não bloqueia os joelhos. Descida controlada.",
-            ref:"Sem 18: 3×12 a 52 kg.",
-            sug:"→ 2×10 a 35-40 kg." },
+            tip:"Pausa 1 s em cima, aperta o glúteo. Sem arquear a lombar.",
+            ref:"8 Nov: 3×10 a 23 kg (fez mais 2 reps que o pedido).",
+            sug:"→ 3×8 a 27-30 kg." },
+          { id:"legpress", name:"Leg Press (Máquina)", sets:2, reps:"8",
+            tip:"Pés a meio da plataforma, não bloqueia os joelhos.",
+            ref:"8 Nov: 39 kg×10 \"fácil\", 45 kg×10 \"confortável\".",
+            sug:"→ 2×8 a 50 kg." },
         ]
       },
       {
         name: "Gémeos + Core", color: "#60a5fa",
         exercises: [
           { id:"calfstand", name:"Calf Raises Standing", sets:3, reps:"12",
-            tip:"Sobe ao máximo, desce 3 s abaixo da linha neutra. Gémeos limpos desde a maratona: mantém assim.",
-            ref:"Sem 18: 4×15 a 20 kg.",
-            sug:"→ 3×12 a 10-12 kg." },
-          { id:"plank", name:"Prancha Frontal", sets:2, reps:"45–60seg", noWeight:true,
+            tip:"Sobe ao máximo, desce 3 s abaixo da linha neutra.",
+            ref:"8 Nov: 3×12 a 7,5 kg.",
+            sug:"→ 3×12 a 10 kg." },
+          { id:"plank", name:"Prancha Frontal", sets:2, reps:"60seg", noWeight:true,
             tip:"Antebraços no chão, corpo em linha reta. Core ativo, respira.",
-            ref:"Sem 18: 3×60s.",
-            sug:"→ 2×45-60s." },
+            ref:"8 Nov: 2×60s.",
+            sug:"→ 2×60s." },
         ]
       }
     ]
   },
   upper: {
     title: "Upper Body",
-    day: "Domingo, 8 Nov (meia S2)",
-    note: "Moderado: volta perto das cargas normais, mas nada à falha. Opcional: a sessão a proteger é a de pernas de quarta. Lat pull SEMPRE com pega invertida (ombro).",
+    day: "Domingo, 15 Nov (meia S3)",
+    note: "Opcional, depois do recovery. Prioridade: bench, seated row, lat pull (PEGA INVERTIDA) e shoulder press. Braços e face pull só se sobrar tempo.",
     groups: [
       {
         name: "Peito — Empurrar", color: "#f97316",
         exercises: [
-          { id:"bench", name:"Bench Press", sets:4, reps:"8–10",
+          { id:"bench", name:"Bench Press", sets:4, reps:"10",
             tip:"Pega ligeiramente mais larga que os ombros, cotovelos a ~45°, descida de 2 s.",
-            ref:"Sem 19: 4×10 a 40 kg · Sem 20: 4×10 a 30 kg.",
-            sug:"→ 35 kg. Se sobrar margem na S4, anota para voltar a 40 kg na S2." },
+            ref:"8 Nov: 3×10 a 35 kg, últimas reps desafiantes.",
+            sug:"→ 4×10 a 35 kg." },
           { id:"pushups", name:"Push-Ups", sets:3, reps:"10", noWeight:true,
             tip:"Cotovelos a 45°, corpo em linha. Paras com 2-3 reps em reserva.",
-            ref:"Sem 19: 3×12.",
-            sug:"→ 3×10." },
+            ref:"8 Nov: não feito.",
+            sug:"→ 3×10 se houver tempo." },
         ]
       },
       {
@@ -240,12 +239,12 @@ const SESSIONS = {
         exercises: [
           { id:"seatedrow", name:"Seated Row (Máquina)", sets:4, reps:"10",
             tip:"Costas erguidas, puxa para o abdómen, cotovelos rentes ao tronco, pausa 1 s.",
-            ref:"Sem 19: 39 kg · Sem 20: 34 kg.",
-            sug:"→ 34-37 kg." },
+            ref:"8 Nov: não feito. Sem 20: 34 kg.",
+            sug:"→ 4×10 a 34 kg." },
           { id:"latpull", name:"Lat Pull Down (pega invertida)", sets:3, reps:"12",
-            tip:"PEGA INVERTIDA (reverse grip), à largura dos ombros. Puxa até ao queixo, ligeiro lean-back, controla a subida.",
-            ref:"Sem 19: 32/34/36 kg, reverse grip, zero desconforto.",
-            sug:"→ 32-34 kg." },
+            tip:"PEGA INVERTIDA (reverse grip), à largura dos ombros. Puxa até ao queixo, controla a subida.",
+            ref:"8 Nov: 3×12 a 32 kg, sem desconforto.",
+            sug:"→ 34 kg." },
         ]
       },
       {
@@ -253,12 +252,12 @@ const SESSIONS = {
         exercises: [
           { id:"shoulderpress", name:"Shoulder Press (Halteres)", sets:3, reps:"10",
             tip:"Halteres ao nível das orelhas, core ativo, descida controlada.",
-            ref:"Sem 19: 10 kg (S3 perto da falha) · Sem 20: 7,5 kg.",
-            sug:"→ 7,5-10 kg, sem chegar à falha." },
+            ref:"8 Nov: 3×10 a 7,5 kg, controlado.",
+            sug:"→ 7,5 kg; 10 kg na S3 se sobrar margem." },
           { id:"facepull", name:"Face Pull (Cabo)", sets:3, reps:"15",
             tip:"Cabo alto com corda, puxa para o rosto, cotovelos altos e para fora. Lento.",
-            ref:"Sem registo recente.",
-            sug:"→ Leve. Regista a carga para ficar referência." },
+            ref:"Sem registo.",
+            sug:"→ Leve. Regista a carga." },
         ]
       },
       {
@@ -266,11 +265,11 @@ const SESSIONS = {
         exercises: [
           { id:"biceps", name:"Bíceps Curls (Halteres)", sets:3, reps:"12",
             tip:"Alternado, cotovelos fixos, descida de 2 s.",
-            ref:"Sem 20: 7,5 kg (2 séries).",
-            sug:"→ 7,5 kg, 3 séries." },
+            ref:"8 Nov: 3×12 a 7,5 kg.",
+            sug:"→ 7,5 kg." },
           { id:"triceps", name:"Tríceps Extension", sets:3, reps:"12",
             tip:"Haltere atrás da cabeça ou cabo com pega em V. Cotovelo fixo.",
-            ref:"Sem 20: 3×12 a 14 kg, \"confortável\".",
+            ref:"8 Nov: 3×12 a 14 kg, últimas reps difíceis.",
             sug:"→ 14 kg." },
         ]
       }
@@ -282,13 +281,13 @@ let currentSession = 'forca';
 let state = {};
 
 function initState() {
-  const saved = localStorage.getItem('gym_state_meia_s02_v1');
+  const saved = localStorage.getItem('gym_state_meia_s03_v1');
   if (saved) { try { state = JSON.parse(saved); return; } catch(e) {} }
   state = { forca: {}, upper: {} };
 }
 
 function saveState() {
-  try { localStorage.setItem('gym_state_meia_s02_v1', JSON.stringify(state)); } catch(e) {}
+  try { localStorage.setItem('gym_state_meia_s03_v1', JSON.stringify(state)); } catch(e) {}
 }
 
 function resetSession() { document.getElementById('resetModal').classList.add('open'); }
